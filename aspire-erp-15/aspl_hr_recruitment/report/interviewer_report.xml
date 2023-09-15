@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_applicants_interviewer_report_pivot" model="ir.ui.view">
+        <field name="name">Interviewer report: Pivot</field>
+        <field name="model">int.feedbacks</field>
+        <field name="arch" type="xml">
+            <pivot string="Interviewer Report" sample="1" display_quantity="1">
+                <field name="interviewer_id" type="row"/>
+                <field name="job_opening_id" type="col"/>
+                <field name="interview_date"/>
+            </pivot>
+        </field>
+    </record>
+    
+    <record id='hr_applicants_interviewer_report_action' model='ir.actions.act_window'>
+        <field name="name">Interviewer Report</field>
+        <field name="res_model">int.feedbacks</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_applicants_interviewer_report_pivot"/>
+        <field name="context">{"search_default_current_month":1}</field>
+    </record>
+
+    <record id="view_interviewer_activity" model="ir.ui.view">
+        <field name="name">interviewer.activity.search</field>
+        <field name="model">int.feedbacks</field>
+        <field name="arch" type="xml">
+            <search string="Search Interviewer Activity">
+                <!-- <field name="applicant_id"/> -->
+                <field name="interviewer_id"/>
+                <field name="job_opening_id"/>
+                    <separator/>
+                    <filter string="Applicant" name="applicant_ids"/>
+                    <filter string="Interviewer" name="interviewer_ids"/>
+                    <filter string="Job Openings" name="job_opening_idss"/>
+                    <filter string="Current Month" name="current_month" 
+                            domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')),('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <separator/>
+                    
+                    <group expand="0" name="group_by" string="Group By">
+                        <!-- <filter name="applicant_id" string="Applicant" domain="[]"
+                                context="{'group_by' : 'applicant_id'}"/> -->
+                        <filter name="job_opening_id" string="Job Opening" domain="[]"
+                                context="{'group_by' : 'job_opening_id'}"/>
+                        <filter name="interviewer_id" string="Interviewer" domain="[]" 
+                                context="{'group_by' : 'interviewer_id'}"/>
+                        <filter name="interview_date" string="Interviw Date" domain="[]" 
+                            context="{'group_by' : 'interview_date'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
+
+    <menuitem action="hr_applicants_interviewer_report_action"
+              parent="hr_recruitment.report_hr_recruitment"
+              sequence="114"
+              id="hr_applicants_interviewer_report_menu"
+    />
+
+</odoo>

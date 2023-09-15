@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="project_tags_bug" model="projectt.tags">
+            <field name="tags">Bug</field>
+        </record>
+        <record id="project_tags_support" model="projectt.tags">
+            <field name="tags">Support</field>
+        </record>
+        <record id="project_tags_task" model="projectt.tags">
+            <field name="tags">Task</field>
+        </record>
+        
+    </data>
+</odoo>

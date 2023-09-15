@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.cron" id="ir_cron_currency_rates_update">
+        <field name="name">Currency Rates Update Everyday</field>
+        <field name="interval_number">4</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="state">code</field>
+        <field name="doall" eval="False" />
+        <field
+            name="model_id" ref="model_res_currency"
+        />
+        <field name="code">model.cron_currency_update()</field>
+    </record>
+
+    <record id="currency_extension_form" model="ir.ui.view">
+      <field name="name">currency.extension.form</field>
+      <field name="model">res.currency</field>
+      <field name="inherit_id" ref="base.view_currency_form"/>
+      <field name="arch" type="xml">
+            <xpath expr="//field[@name = 'company_id']" position="after">
+                <field name="current_company_currency"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

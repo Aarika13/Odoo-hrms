@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_menu_wizard,access.invoice_menu_wizard,model_invoice_menu_wizard,,1,1,1,1
+access_invoice_template_data,access.invoice_template_data,model_invoice_template_data,,1,1,1,1
+access_invoice_pricing_details,access.invoice_pricing_details,model_invoice_pricing_details,,1,1,1,1
+access_invoice_date_format,access.invoice_date_format,model_invoice_date_format,,1,1,1,1
+access_payment_swift_details,access.payment_swift_details,model_payment_swift_details,,1,1,1,1
+access_product_gst_code,access.product_gst_code,model_product_gst_code,,1,1,1,1
+access_timesheet_product_change,access.timesheet_product_change,model_timesheet_product_change,,1,1,1,1

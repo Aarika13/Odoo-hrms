@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <data noupdate="1">
+
+        <record model="mail.activity.type" id="schedule_interview">
+                <field name="name">Interview Scheduled</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+
+        <record model="mail.activity.type" id="first_interview">
+                <field name="name">First Interview</field>
+                <field name="res_model">hr.applicant</field>
+                <field name="suggested_next_type_ids" eval="[(6, 0, [ref('schedule_interview')])]"/>
+        </record>
+
+        <record model="mail.activity.type" id="second_interview">
+                <field name="name">Second Interview</field>
+                <field name="res_model">hr.applicant</field>
+                <field name="suggested_next_type_ids" eval="[(6, 0, [ref('schedule_interview')])]"/>
+        </record>
+
+        <record model="mail.activity.type" id="third_interview">
+                <field name="name">Third Interview</field>
+                <field name="res_model">hr.applicant</field>
+                <field name="suggested_next_type_ids" eval="[(6, 0, [ref('schedule_interview')])]"/>
+        </record>
+
+
+        <record model="mail.activity.type" id="initial_applicant">
+                <field name="name">New</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+
+        <record model="mail.activity.type" id="screened_applicant">
+                <field name="name">Screened</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+
+        <record model="mail.activity.type" id="shortlisted_applicant">
+                <field name="name">Shortlisted</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+
+        <record model="mail.activity.type" id="offered_applicant">
+                <field name="name">Offered</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+
+        <record model="mail.activity.type" id="joined_applicant">
+                <field name="name">Joined</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+
+        <record model="mail.activity.type" id="documentation">
+                <field name="name">Documentation</field>
+                <field name="res_model">hr.applicant</field>
+        </record>
+        
+
+    </data>
+</odoo>    

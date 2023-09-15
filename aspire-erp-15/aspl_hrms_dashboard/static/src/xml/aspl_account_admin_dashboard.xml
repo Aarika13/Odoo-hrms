@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="AccountDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_hr_dashboard">
+            </div>
+        </div>
+    </t>
+    <t t-name="LoginEmployeeDetails">
+        <link rel="stylesheet" href="/aspl_hrms_dashboard/static/src/css/aspl_account_admin_dashboard.css"/>
+    </t>
+
+
+<!--    My Manager Dashboard-->
+    <t t-name="ManagerDashboard">
+        <div class="employee_dashboard_main">
+            <div class="row main-section">
+                <div class="col-sm-12 col-lg-3 col-md-6 p-0">
+                    <div class="graph_view mx-2">
+                        <div class="text-color hr-chart-1">
+                            <div class="oh-card-body pb-0">
+                                <p class="stat-head">Employee Salary Range</p>
+                            </div>
+                            <div class="emp_graph"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3 col-md-6 p-0 h-100">
+                    <div class="graph_view mr-2">
+                        <div class="text-color hr-chart-1">
+                            <div class="oh-card-body pb-0 h-100">
+                                <p class="stat-head">Employee Average salary based on Experience</p>
+                            </div>
+                            <div class="exp_salary_graph"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3 col-md-6 p-0">
+                    <div class="graph_view">
+                        <div class="text-color hr-chart-1">
+                            <div class="oh-card-body pb-0 h-100">
+                                <p class="stat-head">Pending Invoices</p>
+                            </div>
+                            <div class="account_invoices">
+                                <div class="empty_graph_data_invoice"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-3 col-md-6 p-0">
+                    <div class="graph_view mx-2">
+                        <div class="text-color hr-chart-1">
+                            <div class="oh-card-body pb-0 h-100">
+                                <p class="stat-head">Pending Bills</p>
+                            </div>
+                            <div class="account_bills">
+                                <div class="empty_graph_data_bill"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row main-section">
+                <div class="col-sm-12 col-lg-6 p-0">
+                    <div class="graph_view mx-2">
+                        <div class="text-color hr-chart-1">
+                            <div class="oh-card-body pb-0 h-100">
+                                <p class="stat-head">Earning V/S Expense Chart of Year 2022</p>
+                            </div>
+                            <div class="earning_expense_chart"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+
+    <t t-name="EmployeeDashboard">
+
+    </t>
+
+    <t t-name="EmployeeWarningAccount">
+        <div>
+            <p>Error : Could not find employee linked to user</p>
+            <p>Please contact system admin for the setup</p>
+        </div>
+    </t>
+
+</templates>

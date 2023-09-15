@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_applicants_per_hire_report_pivot" model="ir.ui.view">
+        <field name="name">Applicants Per Hire report: Pivot</field>
+        <field name="model">applicants.per.hire</field>
+        <field name="arch" type="xml">
+            <pivot string="Applicants Per Hire" sample="1">
+                <field name="job_opening_id" type="row"/>
+                <field name="appl_per_hire" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="view_applicants_per_hire_report_Tree" model="ir.ui.view">
+        <field name="name">Applicants Per Hire report: Tree</field>
+        <field name="model">applicants.per.hire</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name = "job_opening_id"></field>
+                <field name = "appl_per_hire"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_applicants_per_hire_report_graph" model="ir.ui.view">
+        <field name="name">Applicants Per Hire report: Graph</field>
+        <field name="model">applicants.per.hire</field>
+        <field name="arch" type="xml">
+            <graph string="Applicants Per Hire" sample="1" disable_linking="1">
+                <field name="appl_per_hire" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <record id='hr_applicants_per_hire_report_action' model='ir.actions.act_window'>
+        <field name="name">Applicants Per Hire Report</field>
+        <field name="res_model">applicants.per.hire</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+
+    <menuitem action="hr_applicants_per_hire_report_action"
+              parent="hr_recruitment.report_hr_recruitment"
+              sequence="112"
+              id="hr_applicants_per_hire_report_menu"
+    />
+
+</odoo>

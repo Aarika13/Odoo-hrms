@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/repos/aspire/!svn/ver/2654/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/security
+END
+ir.model.access.csv
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/aspire/!svn/ver/2159/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/security/ir.model.access.csv
+END
+ir_rule.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/repos/aspire/!svn/ver/2654/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/security/ir_rule.xml
+END

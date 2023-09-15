@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="inherit_view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <!-- <field name="customer" invisible="1"/> -->
+                    <field name="pan_no"/>
+                    <field name="currency" widget="selection"/><!-- attr="{'required': [('customer', '=', True)]}"-->
+                    <field name="payment_detial"/> <!-- attr="{'required': [('customer', '=', True)]}"-->
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="string">GST/VAT</attribute>
+                    <attribute name="required">0</attribute> 
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="account_view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='accounting']" position="inside">
+                    <group>
+                        <group string="Sale" name="acc_sale">
+                            <field name="property_payment_term_id" widget="selection"/>
+                            <field name="credit" groups="base.group_no_one"/>
+                        </group>
+                        <group string="Taxes" name="taxe_entries" groups="account.group_account_invoice">                        
+                            <field name="tax_ids" widget="many2many_tags" domain="[('company_id','=',company_id)]"/>
+                        </group>
+                            <!-- <group string="Purchase" name="acc_purchase">
+                                <field name="property_supplier_payment_term_id" widget="selection"/>
+                                <field name="debit" groups="base.group_no_one"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group> -->
+                        <!-- <group string="Fiscal Information" name="fiscal_information">
+                            <field name="property_account_position_id" widget="selection"/>
+                        </group> -->
+                    </group>
+                </xpath> 
+            </field>
+        </record>
+    </data>
+</odoo>

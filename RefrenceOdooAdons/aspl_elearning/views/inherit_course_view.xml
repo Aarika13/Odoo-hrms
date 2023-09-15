@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="inherit_course_view" model="ir.ui.view">
+            <field name="name">E-Learning - Extended Course View</field>
+            <field name="model">slide.channel</field>
+            <field name="inherit_id" ref="mass_mailing_slides.slide_channel_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_mass_mailing_attendees']" position="after">
+                    <button name="%(aspl_elearning.action_add_content_playlist)d" type="action" string="Add Playlist" class="oe_highlight"/>
+                    <button name="action_publish_all_content" type="object" string="Publish Content" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

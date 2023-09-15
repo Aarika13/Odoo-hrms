@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+     <!--wizard "Generate Invoice" form view-->
+     <record id="view_invoice_menu_wizard_form" model="ir.ui.view">
+        <field name="name">invoice.menu.wizard.form</field>
+        <field name="model">invoice.menu.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field invisible="1" name="state" />
+                <sheet states="draft">
+                    <group string="Invoice Template Information" attrs="{'invisible':[('state', '!=', 'draft')]}">
+                        <field name="invoice_tmpl"/>
+                        <div colspan="2" class="text-muted" style="padding-left:35px;">or</div>
+                        <field name="tmpl_name"/>
+                    </group>
+                    <group string="Invoice Information" attrs="{'invisible':[('state', '!=', 'draft')]}">
+                        <field name="company_id"  invisible="0"/>
+                        <field name="account_ids" widget="many2many_tags" domain="[('partner_id','=?',partner_id),('company_id.id','=',company_id)]"/>
+                    </group>
+                    <group attrs="{'invisible':[('state', '!=', 'draft')]}">
+                        <group>
+                            <field name="partner_id" domain="[('customer_rank','&gt;', 0),('type','in',('invoice','contact'))]" options="{'no_create_edit': True,'no_create': True, 'no_open': True}"/> <!--('customer','=',True),--><!--domain="[('company_id.id','=',company_id)]"-->
+                            <!-- <field name="gst_treatment"/> -->               
+                            <label for="date_from" string="Timesheet Period"/>
+                            <!-- width="100%" -->
+                            <div><field name="date_from" style="width: 46%"/>  to  <field name="date_to" style="width: 46%"/>
+                            </div>   
+                            <field name="date_format"/>
+                        </group>
+                        <group>
+                            <field name="partner_bank_id"  groups="account.group_account_readonly,account.group_account_manager, account.group_account_user,account.group_account_invoice"/>
+                            <field name="invoice_line_type"/>
+                            <label for="not_approve_ts" string="Consider not approved"/><br/>
+                            <label for="not_approve_ts" string="Timesheet lines"/>
+                            <field name="not_approve_ts" nolabel="1"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible':[('state', '!=', 'draft')]}">
+                        <group>
+                            <field name="discount_type"/>
+                            
+
+                        </group>
+                            
+                        <group>
+                            <field name="discount_rate"/>
+                            <!-- <field name="lut_number_id" options="{'no_open': True, 'no_create': True}"/> -->
+                        </group>
+                    </group>
+                </sheet>
+                
+                <group attrs="{'invisible':[('state', '!=', 'invoice')]}">
+                    <sheet> <!--attrs="{'invisible':[('marital', '!=', 'married')]}"-->
+                    <!-- <notebook>
+                        <page name="emp_wise" string="Employee Wise"> -->
+                            <h3>Invoice Pricing Details</h3>
+                            <field name="invoice_pricing">
+                                <tree editable="bottom" string="Invoice Pricing">
+                                    <field name="user_id" />
+                                    <field name="product_id" options="{'no_create': True,'no_open':True}" readonly="1"/>
+                                    <field name="emp_total_hr"/>
+                                    <field name="price"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </group>  
+
+                <group attrs="{'invisible':[('state', '!=', 'invoice2')]}">
+                <sheet>          
+                        <!-- </page>
+                        <page name="product_wise" string="Product Wise" > -->
+                            <h3>Invoice Pricing Details</h3>
+                            <field name="invoice_pricing2">
+                                <tree editable="bottom" string="Invoice Pricing">
+                                    <field name="product_id" options="{'no_create': True,'no_open':True}" readonly="1"/>
+                                    <field name="emp_total_hr"/>
+                                    <field name="quantity"/>
+                                    <field name="price"/>
+                                </tree>
+                            </field>
+                        <!-- </page>
+                    </notebook> -->
+                </sheet>
+                </group> 
+
+                <!-- <sheet states="invoice2" string="Invoice Pricing" attrs="{'invisible':[('state', '=', 'draft')]}">
+                    <h3>Invoice Pricing Details</h3>
+                    <field name="invoice_pricing2">
+                        <tree editable="bottom" string="Invoice Pricing">
+                            <field name="product_id"/>
+                            <field name="emp_total_hr"/>
+                            <field name="quantity"/>
+                            <field name="price"/>
+                        </tree>
+                    </field>
+                </sheet> -->
+
+                <footer>
+                    <button string="Back" class="btn-primary" attrs="{'invisible':[('state', '=', 'draft')]}" type="object" name="action_previous_state"/>
+                    <button name="enter_pricing_timesheet_invoice" type="object" string="Pricing Detail" class="btn-primary" attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                    <button name="create_invoices" string="Create Invoice" type="object" class="btn-primary" attrs="{'invisible':[('state', '=', 'draft')]}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+
+                    <!-- <button string="Back" class="btn-primary" type="object" name="action_previous" states="invoice,invoice2"/> -->
+                    <!-- <button name="create_invoices" string="Create Invoice" type="object" class="btn-primary" states="invoice,invoice2"/>
+                    <button string="Enter Pricing Details" type="object"  class="btn-primary" name="enter_pricing_details" states="draft"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/> -->
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--wizard "Generate Invoice" action-->
+    <record id="action_timesheet_invoice" model="ir.actions.act_window">
+        <field name="name">Generate Invoice</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.menu.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_invoice_menu_wizard_form"/>
+        <field name="target">new</field>
+        <!-- <field name = "context">{'default_state': 'draft'}</field> -->
+    </record>
+    <!-- <record id="action_timesheet_invoice" model="ir.actions.server">
+        <field name="name">Generate Invoice</field>
+        <field name="model_id" ref="model_invoice_menu_wizard"/>
+        <field name="binding_model_id" ref="model_invoice_menu_wizard"/>
+        <field name="binding_view_types">form</field>    
+    </record> -->
+
+    <menuitem action="action_timesheet_invoice" name="Generate Invoice" id="timesheet_invoice_wizard_menu" parent="account.menu_finance_receivables" sequence="5"/>
+
+    <record id="view_invoice_template_data_tree" model="ir.ui.view">
+        <field name="name">invoice.template.data.tree</field>
+        <field name="model">invoice.template.data</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice Template Data">
+                <field name="name"/>
+                <field name="account_ids"/>
+                <field name="invoice_line_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_invoice_template_data_form" model="ir.ui.view">
+     <field name="name">invoice.template.data.form</field>
+     <field name="model">invoice.template.data</field>
+     <field name="arch" type="xml">
+        <form string="Invoice Template Data">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="account_ids" widget="many2many_tags"/>
+                </group>
+                <group>
+                    <group>
+                        <!-- <field name="partner_id" domain="[('customer','=',True)]"/> -->
+                        <field name="invoice_line_type"/>
+                        <field name="date_format"/>
+                        <field name="partner_bank_id"/>
+                    </group>
+                    <group>
+                                <!-- <field name="wire_selection" options="{'no_create': True}"/>
+                                <field name="wire_info"/> -->
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_invoice_pricing_details_form" model="ir.ui.view">
+            <field name="name">invoice.pricing.details.form</field>
+            <field name="model">invoice.pricing.details</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="user_id"/>
+                        <field name="price"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

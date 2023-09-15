@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_available_equipment_filter_new" model="ir.ui.view">
+            <field name="name">Available Equipment filter</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="arch" type="xml">
+                <search string="Equipment">
+                    <field name="employee_id"/>
+                    <field name="stock_type"/>
+                    <separator/>
+                    <filter domain="[('employee_id','=', False),('stock_type','=','in_ward')]" name="Equipment"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_all_available_equipment_tree_view" model="ir.ui.view">
+            <field name="name">Available Equipment tree view</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Directory" create="false" delete="false" edit="false">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="serial_no"/>
+                    <field name="category_id"/>
+                    <field name="stock_type"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_available_equipment_directory_view">
+            <field name="name">Available Equipment</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_all_available_equipment_tree_view"/>
+            <field name="domain">[('employee_id','=', False),('stock_type','=','in_ward')]</field>
+            <field name="search_view_id" ref="view_available_equipment_filter_new"/>
+        </record>
+
+        <record model="ir.ui.view" id="company_Bank_view">
+            <field name="name">res.company.form.inherit.bank</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="code"/>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem action="action_available_equipment_directory_view"
+                  id="menu_available_equipment_directory_view"
+                  parent="maintenance.menu_maintenance_title"
+                  name="Available Equipments"
+                  groups="aspl_equipment.group_equipment_admin"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="RecruitmentDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_hr_dashboard">
+            </div>
+        </div>
+    </t>
+
+    <t t-name="RecruitmentDashboard">
+        <link rel="stylesheet" href="/aspl_hrms_dashboard/static/src/css/recruitment_dashboard.css"/>
+
+        <!-- ============== GLOBLE VARABLES ============== -->
+        <t t-set="is_string" t-value="1"/>
+        <t t-set="stages_id_count" t-value="0"/>
+        <!-- ============================================= -->
+
+        <div class="main_section_recruitment">
+
+            <div class="first_section_recruitment">
+                <!-- ***************************** PERSNAL ACIVITY BOXES ******************************* -->
+                <t t-set="saprate_activity" t-value="widget.login_employee['saprate_activity']"/>
+
+                <t t-foreach="saprate_activity" t-as="i">
+                    <div t-attf-class="#{i[0]} first_div_first_section_recruitment_personal_activity_boxes card text-center">
+                        <div class="card-body" style="height: 20px;border-radius: 17px;">
+                            <h5 class="card-title">
+                                <t t-esc="i[0]"/>
+                            </h5>
+                            <h4 class="card-number">
+                                <t t-esc="i[1]"/>
+                            </h4>
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+            <div class="second_section_recruitment">
+                <!-- **************************  TABLE OF RECRUTMENT ************************** -->
+                <t t-set="data_recrutment" t-value="widget.login_employee['loop']"/>
+                <t t-set="stages" t-value="widget.login_employee['stages']"/>
+
+                <div class="first_div_second_section_recruitment_table_recrutment">
+                    <div class="heading_table">Job Opening Summary</div>
+                    <table class="table table-borderless">
+                        <thead style="background:#71639e">
+                            <tr>
+                                <th scope="col" style="border-top:0px !important;"></th>
+                                <t t-foreach = "stages" t-as="i">
+                                    <th class="table_head" scope="col">
+                                        <t t-esc = "i"/>
+                                    </th>
+                                </t>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="data_recrutment == '' ">
+                                <td>
+                                        NO RECORD
+                                </td>
+                            </t>
+                            <t t-else="">
+                                <t t-foreach = "data_recrutment" t-as="i">
+                                    <tr>
+                                        <t t-foreach = "data_recrutment[i]" t-as="j">
+                                            <t t-if="is_string == 1">
+                                                <td class="bold">
+                                                    <t t-esc = "data_recrutment[i][j]" />
+                                                </td>
+                                                <t t-set="is_string" t-value="0"/>
+                                            </t>
+                                            <t t-else="">
+                                                <td t-attf-class="table_data_job_applications #{data_recrutment[i][0] + '_' + stages[stages_id_count]}">
+                                                    <t t-esc = "data_recrutment[i][j]" />
+                                                </td>
+                                                <t t-set="stages_id_count" t-value="stages_id_count+1"/>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                    <t t-set="is_string" t-value="1"/>
+                                    <t t-set="stages_id_count" t-value="0"/>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ************************** TABLE OF ACTIVITY ************************** -->
+                <t t-if="widget.is_main_hr == true">
+                    <t t-set="data_of_activity" t-value="widget.login_employee['dict_of_activity']"/>
+                    <t t-set="data_of_activity_types" t-value="widget.login_employee['activity_types']"/>
+
+                    <div class="second_div_second_section_recruitment_table_activity ">
+
+                        <t t-if="data_of_activity_types == '' ">
+                            <div class="heading_table" style="padding-bottom:6px;">Activity Table</div>
+                            <div style="margin: 8px 79px;">
+                                       No Pending Activities
+                            </div>
+                        </t>
+                        <t t-else="">
+
+                            <div class="heading_table">Activities</div>
+                            <table class="table table-borderless">
+                                <thead style="background:#71639e">
+                                    <tr>
+                                        <th scope="col" style="border-top:0px !important;"></th>
+                                        <t t-foreach = "data_of_activity_types" t-as="i">
+                                            <th class="table_head" scope="col" style="border-top:0px !important;">
+                                                <t t-esc = "i"/>
+                                            </th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach = "data_of_activity" t-as="i">
+                                        <tr>
+                                            <t t-foreach = "data_of_activity[i]" t-as="j">
+                                                <t t-if="is_string == 1">
+                                                    <td class="bold">
+                                                        <t t-esc = "data_of_activity[i][j]" />
+                                                    </td>
+                                                    <t t-set="is_string" t-value="0"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <td t-attf-class="table_data_candidates_activity #{data_of_activity[i][0] + '_' + data_of_activity_types[stages_id_count]}">
+                                                        <t t-esc = "data_of_activity[i][j]" />
+                                                    </td>
+                                                    <t t-set="stages_id_count" t-value="stages_id_count+1"/>
+                                                </t>
+                                            </t>
+                                        </tr>
+                                        <t t-set="is_string" t-value="1"/>
+                                        <t t-set="stages_id_count" t-value="0"/>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                </t>
+            </div>
+
+            <div class="third_section_recruitment">
+                <div class="first_div_third_section_recruitment_recruitment_bar_chart">
+                    <div class="heading_table" style="padding-bottom:6px;">Recruitment Cost</div>
+                    <div class="recruitment_cost_graph"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </t>
+
+    <t t-name="EmployeeWarningRecruitment">
+        <div>
+            <p>Error : Could not find employee linked to user</p>
+            <p>Please contact system admin for the setup</p>
+        </div>
+    </t>
+
+</templates>

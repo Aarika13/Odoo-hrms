@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_nomination_tree" model="ir.ui.view">
+            <field name="name">hr.employee.nomination.tree</field>
+            <field name="model">nomination.detail</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nomination_id"/>
+                    <field name="family_member"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_employee_nomination_form" model="ir.ui.view">
+            <field name="name">hr.employee.nomination.form</field>
+            <field name="model">nomination.detail</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group string="Nomination Detail">
+                        <group>
+                            <field name="employee" on_change="onchange_member(employee)"
+                                   context="{'employee': active_id}"/>
+                            <field name="nomination_id"/>
+                            <field name="family_member" options='{"no_open": True, "no_create": True}'/>
+                            <field name="mental"/>
+                            <field name="minor"/>
+                        </group>
+                        <group>
+                        </group>
+                        <group attrs="{'invisible': [('mental', '=', False),('minor', '=',False)]}">
+                            <field name="guardian_name"/>
+                            <field name="guardian_relation"/>
+                            <field name="same_address"/>
+                            <label for="home_street" string="Address"
+                                   attrs="{'invisible': [('same_address', '=', True)]}"/>
+                            <div attrs="{'invisible': [('same_address', '=', True)]}">
+                                <field name="home_street" placeholder="Street"/>
+                                <field name="home_landmark" placeholder="Landmark"/>
+                                <field name="home_city" placeholder="City"/>
+                                <field name="home_pcode" placeholder="Pin code"/>
+                                <field name="home_state" placeholder="State"/>
+                                <field name="home_county" placeholder='Country'/>
+                            </div>
+                            <field name="home_phone" attrs="{'invisible': [('same_address', '=', True)]}"/>
+                            <field name="home_mobile" attrs="{'invisible': [('same_address', '=', True)]}"/>
+                            <field name="email" attrs="{'invisible': [('same_address', '=', True)]}"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="inherit_account_analytic_line_for_invoice" model="ir.ui.view">
+            <field name="name">Account - Extended account analytic line</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="product_type" readonly="True" options="{'no_open':True}"/>
+                    <field name="display_name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_task_inherit_activity_data">
+                <field name="name">project.task.inherit.activity</field>
+                <field name="model">project.task</field>
+                <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+                <field eval="2" name="priority" />
+                <field name="arch" type="xml">
+                     <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='name']" position="after">
+                        <field name="display_name" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                        <field name="product_type" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='employee_id']" position="attributes">
+                        <attribute name="domain">[('with_organization', '=', True)]</attribute>
+                    </xpath>
+                </field>
+        </record>
+
+
+        <record id="project_product_page" model="ir.ui.view">
+            <field name="name">project.product.page</field>
+            <field name="model">project.project</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='description']" position="after">
+                    <page name="product" string="Product">
+                        <group>
+                            <field name="product_id" widget="many2many_tags" placeholder="e.g. HRMS"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="change_product_action" model="ir.actions.server">
+            <field name="name">Change Product</field>
+            <field name="model_id" ref="model_account_analytic_line"/>
+            <field name="binding_model_id" ref="model_account_analytic_line"/>
+            <field name="binding_view_types">list,kanban</field>
+            <field name="state">code</field>
+            <field name="code">action = records.get_product()</field>
+        </record>
+ </data>
+</odoo>
+

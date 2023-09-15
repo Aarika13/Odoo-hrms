@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--<template id="attendance_report_css" inherit_id="report.assets_common">
+            <xpath expr="//link[@href='/report/static/src/css/report.css']" position="after">
+                <link href="/hr_attendance_aspire/static/src/css/attendanceSummary.css" rel="stylesheet"/>
+                <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans"/>
+            </xpath>
+        </template>-->
+
+        <template id="attendance_summary_report">
+            <div class="page custom-font">
+                <table style="width:100%" class="sectionTable">
+                    <thead>
+                        <tr style="height:45px;">
+                            <th>
+                                <span style="margin-left:8px;">S.No</span>
+                            </th>
+                            <th>
+                                <span style="margin-left:8px;">Employee No</span>
+                            </th>
+                            <th>
+                                <span style="margin-left:8px;">Name</span>
+                            </th>
+                            <th>
+                                <span style="margin-left:8px;">Total Time</span>
+                            </th>
+                            <th>
+                                <span style="margin-left:8px;">Break Time</span>
+                            </th>
+                            <th>
+                                <span style="margin-left:8px;">Net Time</span>
+                            </th>
+                            <th>
+                                <span style="margin-left:8px;">Total Breaks</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="get_data_from_report" t-as="obj">
+                            <tr style="page-break-inside: avoid;height:25px;">
+                                <td style="padding-top:3px;">
+                                    <span style="margin-left:8px;">
+                                        <t t-esc="obj['no']"/>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="margin-left:8px;">
+                                        <t t-esc="obj['emp_code']"/>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="margin-left:8px;">
+                                        <t t-esc="obj['emp_name']"/>
+                                    </span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span style="margin-right:10px;">
+                                        <t t-esc="obj['summary']['total_time']"/>
+                                    </span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span style="margin-right:10px;">
+                                        <t t-esc="obj['summary']['break_time']"/>
+                                    </span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span style="margin-right:10px;">
+                                        <t t-esc="obj['summary']['net_time']"/>
+                                    </span>
+                                </td>
+                                <td style="text-align:right;">
+                                    <span style="margin-right:30px;">
+                                        <t t-esc="obj['summary']['total_break']"/>
+                                    </span>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="header custom-font">
+                <ul class="text-center">
+                    <t t-foreach="get_company_info" t-as="cpObj">
+                        <li t-if="cpObj['name']">
+                            <span style="font-size:30px;">
+                                <strong>
+                                    <t t-esc="cpObj['name']"/>
+                                </strong>
+                            </span>
+                        </li>
+                        <li t-if="cpObj['street']">
+                            <span><t t-esc="cpObj['street']"/>,
+                            </span>
+                            <span><t t-esc="cpObj['street2']"/>,
+                            </span>
+                            <span>
+                                <t t-esc="cpObj['city']"/>
+                                -
+                            </span>
+                            <span>
+                                <t t-esc="cpObj['zip']"/>
+                            </span>
+                        </li>
+                        <li>
+                            <t t-set="info" t-value="get_header_info"/>
+                            Attendance Summary Report From
+                            <t t-esc="info['start_date']"/>
+                            To
+                            <t t-esc="info['end_date']"/>
+                        </li>
+                    </t>
+                </ul>
+            </div>
+
+            <div class="footer text-center custom-font">
+                Created On:
+                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d, %b %Y %H:%M')"/>
+            </div>
+        </template>
+    </data>
+</odoo>

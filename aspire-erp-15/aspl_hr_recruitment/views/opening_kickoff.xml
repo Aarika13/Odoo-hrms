@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+            <record id="view_opening_kickoff_filter" model="ir.ui.view">
+                <field name="name">hr.opening.kickoff.search</field>
+                <field name="model">opening.kickoff</field>
+                <field name="arch" type="xml">
+                    <search string="Opening Kick-off">
+                        <field name="name" string="Opening Kick-off"/>
+                        <field name="owner_id" string="Owner"/>
+                        <field name="active" string="Active" invisible="1"/>
+                        <filter name="priority" string="High Priority" domain="[('priority', '=', 1)]"/>
+                        <separator/>
+                        <filter name="archieve" string="Archieve" domain="[('active', '=', True)]"/>
+                        <filter name="unarchieve" string="Unarchieve" domain="[('active', '=', False)]"/>
+                        <separator/>
+                        <filter name="active_data" string="Active" domain="[('stage_id', '!=', 'refuse')]"/>
+                        <filter name="refused" string="Refuse" domain="[('stage_id', '=', 'refuse')]"/>
+                        <filter string="My Team" name="my_team" domain="['|', ('owner_id', '=', uid), ('owner_id.employee_id.parent_id.user_id', '=', uid)]" help="Opening of people you are manager of"/>
+                        <group expand="0" string="Group By">
+                            <filter string="Priority" name="priority" domain="[]"
+                                    context="{'group_by': 'priority'}"/>
+                        </group>
+                    </search>
+                </field>
+            </record>
+            
+            <record id="view_opening_kickoff_tree" model="ir.ui.view">
+                <field name="name">opening.kickoff.tree</field>
+                <field name="model">opening.kickoff</field>
+                <field name="arch" type="xml">
+                    <tree string="Opening kickoff" sample="1">
+                        <field name="name"/>
+                        <field name="owner_id" widget="many2one_avatar_user"/>
+                        <field name="priority" widget="priority"/>
+                        <field name="opened_date"/>
+                        <field name="expected_end_date"/>
+                        <field name="categ_req_ids" widget="many2many_tags"
+                            options="{'color_field': 'color', 'no_create_edit': True}"/>
+                        <field name="no_of_recruitment"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record model="ir.ui.view" id="view_opening_kickoff_view">
+                <field name="name">opening.kickoff.view</field>
+                <field name="model">opening.kickoff</field>
+                <field name="arch" type="xml">
+                    <form string="Job Opening">
+                        <field name="approver_true" invisible='1'/>
+                        <field name="available_opening" invisible='1'/>
+                        <header>
+                            <button string="Submit" name="submit_button" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('approve','refuse','submit'))]}"/>
+                            <button string="Approve" name="approve_button" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', 'in', ('approve','refuse','draft')),('approver_true', '=', False)]}"/>
+                            <button string="Create Job Application" name="create_job_application" class="oe_highlight" type="object" attrs="{'invisible': ['|','|',('stage_id', 'in', ('submit','draft','refuse')),('approver_true', '=', False),('available_opening','=',True)]}"/>
+                            <button string="Refuse" name="refuse_button" type="object"  attrs="{'invisible': ['|','|',('stage_id', 'in', ('draft','refuse')),('approver_true', '=', False),('available_opening','=',True)]}"/>
+                            <button string="Draft" name="draft_button" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', '!=','submit'),('approver_true', '=', True)]}"/>
+                            <field name="stage_id" widget="statusbar"/>
+                        </header>
+                        <sheet>
+                        <widget name="web_ribbon" title="Approved" bg_color="bg-success"
+                            attrs="{'invisible': ['|',('stage_id', 'in', 'draft'),('stage_id', 'in', 'submit')]}"/>
+                        <widget name="web_ribbon" title="Refused" bg_color="bg-danger"
+                            attrs="{'invisible': ['|','|',('stage_id', 'in', 'draft'),('stage_id', 'in', 'submit'),('stage_id', 'in', 'approve')]}"/>
+                            <div class="oe_title">
+                                            <label for="name" class="oe_edit_only"/>
+                                            <h1>
+                                                <field name="name" placeholder="e.g. Odoo Developer" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                            </h1>
+                                        </div>
+                                        <group col="2">
+                                            <group>
+                                                <field name="categ_req_ids" string="Skills" widget="many2many_tags" required="1"
+                                                        options="{'color_field': 'color', 'no_create_edit': True,'no_create': True}" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                                <field name="minimum_exp" options="{'type':'number','step':1}" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                                <field name="maximum_exp" options="{'type':'number','step':1}" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                                <field name="priority" required="1" widget="priority" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                            </group>
+                                            <group name="recruitment_details">
+                                                <field name="opened_date" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                                <field name="expected_end_date" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                                <field name="no_of_recruitment" required="1" options="{'type':'number','step':1}" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                                <field name="approver" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                            </group>
+                                    </group>     
+                                    <group col="2">
+                                            <field name="description" required="1" attrs="{'readonly':[('stage_id','!=','draft')]}"/>
+                                    </group>
+     
+                        </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids" options="{'open_attachments': True}"/>
+                        </div>
+                    </form>
+                    </field>
+            </record>
+
+            <record id="action_opening_kickoff" model="ir.actions.act_window">
+                <field name="name">Opening Kickoff</field>
+                <field name="res_model">opening.kickoff</field>
+                <field name="view_mode">tree,form</field>
+                <field name="search_view_id" ref="view_opening_kickoff_filter"/>
+                <field name="context">{'search_default_active_data': 1}</field>
+                <field name="help" type="html">
+                    <p class="o_view_nocontent_smiling_face">
+                        Ready to recruit more efficiently?
+                    </p>
+                    <p>
+                        Let's Kickoff Opening.
+                    </p>
+                </field>
+            </record>
+
+        <menuitem name="Opening Kick-offs"
+                        parent="hr_recruitment.menu_crm_case_categ0_act_job"
+                        id="menu_opening_kickoff"
+                        action="action_opening_kickoff"
+                        sequence="3"/>
+</odoo>        

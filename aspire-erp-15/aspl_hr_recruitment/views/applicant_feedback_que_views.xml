@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Applicant Feedback Question Form View-->
+        <record id="applicant_feedback_que_view_form" model="ir.ui.view">
+            <field name="name">applicant.feedback.que.form</field>
+            <field name="model">applicant.feedback.que</field>
+            <field name="arch" type="xml">
+                <form string="Applicant Feedback Question">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Applicant Feedback Question List View-->
+        <record id="view_applicant_feedback_que_tree" model="ir.ui.view">
+            <field name="name">applicant.feedback.que.tree</field>
+            <field name="model">applicant.feedback.que</field>
+            <field name="arch" type="xml">
+                <tree string="Applicant Feedback Question">
+                    <field name="name"/>
+                    <field name="active" invisible="0"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_applicant_feedback_que" model="ir.actions.act_window">
+            <field name="name">Applicant Feedback Question</field>
+            <field name="res_model">applicant.feedback.que</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Ready to recruit more efficiently?
+                </p>
+                <p>
+                    Let's create a Applicant feedback Question.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_applicant_feedback_que"
+                name="Applicant Feedback Question"
+                parent="hr_recruitment.menu_hr_recruitment_configuration"
+                action="action_applicant_feedback_que"
+        />
+    </data>
+</odoo>

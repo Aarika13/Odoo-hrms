@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <menuitem id="hr_attendance.menu_hr_attendance_root" name="Attendances" sequence="90"
+                  groups="group_admin_user,group_employee_user,group_manager_user"
+                  web_icon="hr_attendance,static/description/icon.png"/>
+
+        <menuitem action="hr_attendance.open_view_attendance" id="hr_attendance.menu_open_view_attendance"
+                  parent="hr_attendance.menu_hr_attendance_root" sequence="20"
+                  groups="group_admin_user,group_employee_user,group_manager_user"/>
+
+        <menuitem name="Reports" parent="hr_attendance.menu_hr_attendance_root" sequence="99"
+                  id="hr_attendance.menu_hr_attendance_report"
+                  groups="group_admin_user,group_employee_user,group_manager_user">
+        </menuitem>
+
+        <menuitem name="Configuration" parent="hr_attendance.menu_hr_attendance_root"
+                  id="hr_attendance.menu_hr_attendance_config" sequence="100" groups="group_admin_user"
+                  action="hr_attendance.open_view_attendance_reason"/>
+
+        <menuitem action="hr_attendance.open_view_attendance" id="view_attendance_recods" name="Attendances"
+                  parent="hr_attendance.menu_open_view_attendance" sequence="50">
+        </menuitem>
+
+
+        <menuitem action="action_attendance_biometric_file_view" id="menu_biometric_file_status"
+                  parent="hr_attendance.menu_hr_attendance_root" sequence="10" groups="group_admin_user">
+        </menuitem>
+
+        <!--Copied in the respective files of  views-->
+        <!--<menuitem id="menu_attendance_summary" name="Summary"
+                  parent="hr_attendance.menu_hr_attendance_root" sequence="40"
+                  groups="group_employee_user,group_manager_user,group_admin_user">
+        </menuitem>
+
+        <menuitem name="Daily Summary" parent="menu_attendance_summary" id="attendance_dailySummary_menu" sequence="91"
+                  action="action_attendance_dailySummary_view"
+                  groups="group_employee_user,group_manager_user,group_admin_user">
+        </menuitem>
+
+        <menuitem name="Monthly Summary" parent="menu_attendance_summary" id="attendance_monthlySummary_menu"
+                  sequence="92" action="action_attendance_monthlySummary_view"
+                  groups="group_employee_user,group_manager_user,group_admin_user"/>-->
+
+
+    </data>
+</odoo>

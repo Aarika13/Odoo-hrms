@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Application Activity Logs Form View -->
+        <record id="applicant_activity_view_form" model="ir.ui.view">
+            <field name="name">applicant.activity.form</field>
+            <field name="model">applicant.activity</field>
+            <field name="arch" type="xml">
+                <form string="Application Activity Logs">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="track_date"/>
+                                <field name="user_id"/>
+                                <field name="applicant_id"/>
+                            </group>
+                            <group>
+                                <field name="activity"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Application Activity List View -->
+        <record id="view_applicant_activity_tree" model="ir.ui.view">
+            <field name="name">applicant.activity.tree</field>
+            <field name="model">applicant.activity</field>
+            <field name="arch" type="xml">
+                <tree string="Application Activity Logs">
+                    <field name="track_date"/>
+                    <field name="user_id"/>
+                    <field name="applicant_id" widget="Many2one"/>
+                    <field name="activity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_applicant_activity" model="ir.ui.view">
+            <field name="name">applicant.activity.search</field>
+            <field name="model">applicant.activity</field>
+            <field name="arch" type="xml">
+                <search string="Search Application Activity">
+                    <field name="applicant_id" filter_domain="[('applicant_id', 'ilike', self)]"/>
+                    <field name="user_id" string="User" filter_domain="[('user_id', 'ilike', self)]"/>
+                    <separator/>
+                    <filter string="Date" name="year" date="create_date" default_period="this_year"/>
+                    <filter string="Current Month" name="current_month" 
+                            domain="[('create_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')),('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <separator/>
+                    <!--<separator/>
+                    <filter string="In Application" name="in_application" domain="[('in_application', '=', True)]"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>-->
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="activity" string="Activity" domain="[]"
+                                context="{'group_by' : 'activity'}"/>
+                        <!-- <filter name="applicant_id" string="Application" domain="[]"
+                                context="{'group_by' : 'applicant_id'}"/> -->
+                        <filter name="user_id" string="User" domain="[]" context="{'group_by' : 'user_id'}"/>
+                        <filter name="track_date" string="Date" context="{'group_by': 'track_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_applicant_activity" model="ir.actions.act_window">
+            <field name="name">Application Activity Logs</field>
+            <field name="res_model">applicant.activity</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_applicant_activity"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Candidates in your address book
+                </p>
+                <p>
+                    Odoo helps you to easily track all activities related to a Candidates.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_applicant_activity"
+                name="Application Activity Logs"
+                parent="hr_recruitment.menu_hr_recruitment_configuration"
+                action="action_applicant_activity"
+        />
+    </data>
+</odoo>

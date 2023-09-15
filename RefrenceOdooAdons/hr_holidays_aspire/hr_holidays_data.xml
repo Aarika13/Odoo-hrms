@@ -1,0 +1,541 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <delete model="hr.holidays.status" search="[('id', 'in',
+            [ref('hr_holidays.holiday_status_cl'),ref('hr_holidays.holiday_status_sl'),ref('hr_holidays.holiday_status_comp'),ref('hr_holidays.holiday_status_unpaid')])]"/>
+
+            <!-- Planned leave -->
+            <record model="hr.holidays.status" id="holiday_status_pl">
+                <field name="name" eval="'Planned leave'"/>
+                <field name="sequence">1</field>
+                <field name="color_name">black</field>
+                <field name="no_leave">1</field>
+                <field name="add_interval">monthly</field>
+            </record>
+
+            <!-- Unplanned leave -->
+            <record model="hr.holidays.status" id="holiday_status_unpl">
+                <field name="name">Unplanned Leaves</field>
+                <field name="sequence">2</field>
+                <field name="color_name">black</field>
+                <field name="no_leave">4</field>
+                <field name="add_interval">yearly</field>
+            </record>
+
+            <!-- Holiday leave -->
+            <record model="hr.holidays.status" id="holiday_status_holiday">
+                <field name="name">Floating Holiday</field>
+                <field name="sequence">3</field>
+                <field name="color_name">lavender</field>
+                <field name="no_leave">2</field>
+                <field name="add_interval">yearly</field>
+            </record>
+
+            <!--Maternity Leave-->
+            <record model="hr.holidays.status" id="holiday_status_maternity">
+                <field name="name">Maternity Leaves</field>
+                <field name="sequence">4</field>
+                <field name="limit">True</field>
+                <field name="color_name">brown</field>
+            </record>
+
+            <!--Loss of pay Leave -->
+            <record model="hr.holidays.status" id="holiday_status_lop">
+                <field name="name">Loss Of Pay</field>
+                <field name="sequence">5</field>
+                <field name="limit">True</field>
+                <field name="color_name">red</field>
+            </record>
+
+            <!--Compensation Leave -->
+            <record model="hr.holidays.status" id="holiday_status_compensation">
+                <field name="name">Compensation Leave</field>
+                <field name="sequence">6</field>
+                <field name="color_name">black</field>
+            </record>
+
+            <!-- Run schedualr notification -->
+            <record id="run_schedular" model="mail.template">
+                <field name="name">Leave Request</field>
+                <field name="model_id" ref="model_hr_holidays_status"/>
+                <field name="subject">Execute Add leave schedualr </field>
+                <field name="email_from">hr@aspiresoftware.in</field>
+                <field name="email_to">hr@aspiresoftware.in</field>
+                <field name="user_signature" eval="0"/>
+                <field name="body_html"><![CDATA[<p>Hi,</p>
+                <p> Leave grant scheduler has been executed successfully. Kindly check leave balance(s). Please contact system administrator in case of any issues.</p>
+
+                <p>Regards,<br/>
+                Human Resource</p>
+                ]]></field>
+            </record>
+            <!-- End -->
+
+            <!-- Templates for Leave Request -->
+            <record id="leave_request" model="mail.template">
+                <field name="name">Leave Request</field>
+                <field name="model_id" ref="model_hr_holidays"/>
+                <field name="subject">Leave Application from ${object.employee_id.name} [${object.employee_id.employee_no}].</field>
+                <field name="email_from">${object.employee_id.work_email or ''}</field>
+                <field name="email_to">${object.employee_id.parent_id.work_email or ''}</field>
+                <field name="user_signature" eval="0"/>
+                <field name="body_html"><![CDATA[
+                    <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+    <!-- HEADER -->
+    <table class="head-wrap" style="border-bottom: 1px solid #ddd; width: 100%; padding: 5px; background: #d6e4e7; border-collapse: collapse; border-spacing: 0;">
+        <tbody>
+            <tr>
+                <td class="header" style="padding: 5px;">
+                    <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                        <div class="content"><img style="display: table-cell; vertical-align: inherit;" src="https://aspiresoftware.in/images/odoo_images/logo.png" alt=""></div>
+                        </div> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- /HEADER -->
+        <!-- BODY -->
+
+        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+            <tbody>
+                <tr>
+                    <td bgcolor="#FFFFFF">
+                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+
+                                <table width="100% ">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">Hi,</h3>
+                                                <p class="lead" style="font-size: 16px;"> ${object.employee_id.name} [${object.employee_id.employee_no}] has applied for a leave application.</p>
+                                                                <!-- <p><img src="https://aspiresoftware.in/images/odoo_images/leave.png" alt="" width="100%" height="300"></p> -->
+                                                                    <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">Following are the applied leave details </p>
+                                                                    <table class="info" style="font-weight: normal; font-size: 14px; line-height: 1.6;border-collapse: collapse;border-spacing: 0;
+                                                                    width: 100%; border: 1px solid #ddd;" width="100% ">
+
+                                                                    <tbody>
+                                                                        <tr style="background-color: #f5f5f5; ">
+                                                                            <td style=" padding: 8px"><strong>Leave type : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.holiday_status_id.name} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #fff; ">
+                                                                            <td style=" padding: 8px"><strong>From Date : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.date_from.split(' ')[0]} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #f5f5f5; ">
+                                                                            <td style=" padding: 8px"><strong>To Date : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.date_to.split(' ')[0]} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #fff; ">
+                                                                            <td style=" padding: 8px"><strong>Reason : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.name or ''} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #f5f5f5; ">
+                                                                            <td style=" padding: 8px"><strong>From Session : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.from_session} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #fff; ">
+                                                                            <td style=" padding: 8px"><strong>To Session : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.to_session} </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <br>
+                                                                <p><img src="https://aspiresoftware.in/images/odoo_images/logo.png"></p>
+                                                                    <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><strong>Asha Rathod | Sr. HR Executive</strong></p>
+                                                                    <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; ">Cell: +91-635-308-6224 | Desk: +91-79-2640-9959</p>
+                                                                    <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><a style="color: #2ba6cb; " href="mailto:hr@aspiresoftware.in " target="_blank " rel="noopener
+                                                                        ">hr@aspiresoftware.in</a> | <a style="color: #2ba6cb; " href="www.aspiresoftware.in " target="_blank " rel="noopener ">www.aspiresoftware.in </a></p>
+                                                                        <ul style="list-style: none; margin: 5px 0 0; padding: 0; ">
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA "> <img src="https://share1.cloudhq-mkt3.net/0e3c382e8c.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.google.com/url?q=https://www.facebook.com/aspiresoftware&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNGUOcuCXbtDoMuuXkmc8V9sKr35eQ "> <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; ">
+                                                                                <a href="https://twitter.com/aspiresoftware2 "> <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.linkedin.com/company/aspire-software-solutions "> <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w
+                                                                                "> <img src="https://share1.cloudhq-mkt3.net/44addf5641.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.pinterest.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/280a83b5d5.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.instagram.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/77827ec6f1.png"> </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <br></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    ]]></field>
+                                </record>
+
+                                <!-- Templates for approving leave -->
+                                <record id="leave_approve" model="mail.template">
+                                    <field name="name">Leave Approved</field>
+                                    <field name="model_id" ref="model_hr_holidays"/>
+                                    <field name="subject">Your Leave Application has been Accepted.</field>
+                                    <field name="email_from">${object.employee_id.parent_id.work_email or ''}</field>
+                                    <field name="email_to">${object.employee_id.work_email or ''}</field>
+                                    <field name="user_signature" eval="0"/>
+                                    <field name="body_html"><![CDATA[
+                                        <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+    <!-- HEADER -->
+    <table class="head-wrap" style="border-bottom: 1px solid #ddd; width: 100%; padding: 5px; background: #d6e4e7; border-collapse: collapse; border-spacing: 0;">
+        <tbody>
+            <tr>
+                <td class="header" style="padding: 5px;">
+                    <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                        <div class="content"><img style="display: table-cell; vertical-align: inherit;" src="
+                            https://aspiresoftware.in/images/odoo_images/logo.png" alt=""></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- /HEADER -->
+        <!-- BODY -->
+
+        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+            <tbody>
+                <tr>
+                    <td bgcolor="#FFFFFF">
+                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+
+                                <table width="100% ">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">Hi ${object.employee_id.name} [${object.employee_id.employee_no}],</h3>
+                                                <p class="lead" style="font-size: 16px;">Your leave application has been accepted.</p>
+                                            <!-- <p><img src="
+                                                https://aspiresoftware.in/images/odoo_images/leave.png" alt="" width="100%" height="300"></p> -->
+                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">Following are the applied leave details </p>
+                                                <table class="info" style="font-weight: normal; font-size: 14px; line-height: 1.6;border-collapse: collapse;border-spacing: 0;
+                                                width: 100%; border: 1px solid #ddd;" width="100% ">
+
+                                                <tbody>
+                                                    <tr style="background-color: #f5f5f5; ">
+                                                        <td style=" padding: 8px"><strong>Leave type : </strong> </td>
+                                                        <td style=" padding: 8px">${object.holiday_status_id.name} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #fff; ">
+                                                        <td style=" padding: 8px"><strong>From Date : </strong> </td>
+                                                        <td style=" padding: 8px">${object.date_from.split(' ')[0]} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #f5f5f5; ">
+                                                        <td style=" padding: 8px"><strong>To Date : </strong> </td>
+                                                        <td style=" padding: 8px">${object.date_to.split(' ')[0]} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #fff; ">
+                                                        <td style=" padding: 8px"><strong>Reason : </strong> </td>
+                                                        <td style=" padding: 8px">${object.name or ''} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #f5f5f5; ">
+                                                        <td style=" padding: 8px"><strong>From Session : </strong> </td>
+                                                        <td style=" padding: 8px">${object.from_session} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #fff; ">
+                                                        <td style=" padding: 8px"><strong>To Session : </strong> </td>
+                                                        <td style=" padding: 8px">${object.to_session} </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <br>
+                                            <p><img src="
+                                                https://aspiresoftware.in/images/odoo_images/logo.png"></p>
+                                                <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><strong>Asha Rathod | Sr. HR Executive</strong></p>
+                                                <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; ">Cell: +91-635-308-6224 | Desk: +91-79-2640-9959</p>
+                                                <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><a style="color: #2ba6cb; " href="mailto:hr@aspiresoftware.in " target="_blank " rel="noopener
+                                                    ">hr@aspiresoftware.in</a> | <a style="color: #2ba6cb; " href="www.aspiresoftware.in " target="_blank " rel="noopener ">www.aspiresoftware.in </a></p>
+                                                    <ul style="list-style: none; margin: 5px 0 0; padding: 0; ">
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA "> <img src="https://share1.cloudhq-mkt3.net/0e3c382e8c.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.google.com/url?q=https://www.facebook.com/aspiresoftware&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNGUOcuCXbtDoMuuXkmc8V9sKr35eQ "> <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; ">
+                                                            <a href="https://twitter.com/aspiresoftware2 "> <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.linkedin.com/company/aspire-software-solutions "> <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w
+                                                            "> <img src="https://share1.cloudhq-mkt3.net/44addf5641.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.pinterest.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/280a83b5d5.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.instagram.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/77827ec6f1.png "> </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                                    ]]></field>
+                                </record>
+
+                                <!-- Templates for refusing leave -->
+                                <record id="leave_refuse" model="mail.template">
+                                    <field name="name">Leave Refused</field>
+                                    <field name="model_id" ref="model_hr_holidays"/>
+                                    <field name="subject">Your Leave Applicationas been Refused.</field>
+                                    <field name="email_from">${object.employee_id.parent_id.work_email or ''}</field>
+                                    <field name="email_to">${object.employee_id.work_email or ''}</field>
+                                    <field name="user_signature" eval="0"/>
+                                    <field name="body_html"><![CDATA[
+                                        <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+    <!-- HEADER -->
+    <table class="head-wrap" style="border-bottom: 1px solid #ddd; width: 100%; padding: 5px; background: #d6e4e7; border-collapse: collapse; border-spacing: 0;">
+        <tbody>
+            <tr>
+                <td class="header" style="padding: 5px;">
+                    <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                        <div class="content"><img style="display: table-cell; vertical-align: inherit;" src="
+                            https://aspiresoftware.in/images/odoo_images/logo.png" alt=""></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- /HEADER -->
+        <!-- BODY -->
+
+        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+            <tbody>
+                <tr>
+                    <td bgcolor="#FFFFFF">
+                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+
+                                <table width="100% ">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">Hi ${object.employee_id.name} [${object.employee_id.employee_no}],</h3>
+                                                <p class="lead" style="font-size: 16px;">Your leave application has been rejected.</p>
+                                            <!-- <p><img src="
+                                                https://aspiresoftware.in/images/odoo_images/leave.png" alt="" width="100%" height="300"></p> -->
+                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">Following are the applied leave details </p>
+                                                <table class="info" style="font-weight: normal; font-size: 14px; line-height: 1.6;border-collapse: collapse;border-spacing: 0;
+                                                width: 100%; border: 1px solid #ddd;" width="100% ">
+
+                                                <tbody>
+                                                    <tr style="background-color: #f5f5f5; ">
+                                                        <td style=" padding: 8px"><strong>Leave type : </strong> </td>
+                                                        <td style=" padding: 8px">${object.holiday_status_id.name} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #fff; ">
+                                                        <td style=" padding: 8px"><strong>From Date : </strong> </td>
+                                                        <td style=" padding: 8px">${object.date_from.split(' ')[0]} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #f5f5f5; ">
+                                                        <td style=" padding: 8px"><strong>To Date : </strong> </td>
+                                                        <td style=" padding: 8px">${object.date_to.split(' ')[0]} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #fff; ">
+                                                        <td style=" padding: 8px"><strong>Reason : </strong> </td>
+                                                        <td style=" padding: 8px">${object.name or ''} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #f5f5f5; ">
+                                                        <td style=" padding: 8px"><strong>From Session : </strong> </td>
+                                                        <td style=" padding: 8px">${object.from_session} </td>
+                                                    </tr>
+                                                    <tr style="background-color: #fff; ">
+                                                        <td style=" padding: 8px"><strong>To Session : </strong> </td>
+                                                        <td style=" padding: 8px">${object.to_session} </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <br>
+                                            <p><img src="
+                                                https://aspiresoftware.in/images/odoo_images/logo.png"></p>
+                                                <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><strong>Asha Rathod | Sr. HR Executive</strong></p>
+                                                <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; ">Cell: +91-635-308-6224 | Desk: +91-79-2640-9959</p>
+                                                <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><a style="color: #2ba6cb; " href="mailto:hr@aspiresoftware.in " target="_blank " rel="noopener
+                                                    ">hr@aspiresoftware.in</a> | <a style="color: #2ba6cb; " href="www.aspiresoftware.in " target="_blank " rel="noopener ">www.aspiresoftware.in </a></p>
+                                                    <ul style="list-style: none; margin: 5px 0 0; padding: 0; ">
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA "> <img src="https://share1.cloudhq-mkt3.net/0e3c382e8c.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.google.com/url?q=https://www.facebook.com/aspiresoftware&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNGUOcuCXbtDoMuuXkmc8V9sKr35eQ "> <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; ">
+                                                            <a href="https://twitter.com/aspiresoftware2 "> <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.linkedin.com/company/aspire-software-solutions "> <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w
+                                                            "> <img src="https://share1.cloudhq-mkt3.net/44addf5641.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.pinterest.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/280a83b5d5.png "> </a>
+                                                        </li>
+                                                        <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                            <a href="https://www.instagram.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/77827ec6f1.png "> </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                                    ]]></field>
+                                </record>
+
+                                <!-- Templates for leave notification -->
+                                <record id="leave_notify" model="mail.template">
+                                    <field name="name">Leave Notification</field>
+                                    <field name="subject">Leave Approve Notification from ${object.employee_id.name} [${object.employee_id.employee_no}].</field>
+                                    <field name="email_from">${object.employee_id.work_email}</field>
+                                    <field name="email_to">${object.employee_id.parent_id.work_email}</field>
+                                    <field name="model_id" ref="model_hr_holidays"/>
+                                    <field name="user_signature" eval="0"/>
+                                    <field name="body_html"><![CDATA[
+                                        <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+    <!-- HEADER -->
+    <table class="head-wrap" style="border-bottom: 1px solid #ddd; width: 100%; padding: 5px; background: #d6e4e7; border-collapse: collapse; border-spacing: 0;">
+        <tbody>
+            <tr>
+                <td class="header" style="padding: 5px;">
+                    <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                        <div class="content"><img style="display: table-cell; vertical-align: inherit;" src="https://aspiresoftware.in/images/odoo_images/logo.png" alt=""></div>
+                        </div> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- /HEADER -->
+        <!-- BODY -->
+
+        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+            <tbody>
+                <tr>
+                    <td bgcolor="#FFFFFF">
+                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+
+                                <table width="100% ">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">Hi,</h3>
+                                                <p class="lead" style="font-size: 16px;"> ${object.employee_id.name} [${object.employee_id.employee_no}] has applied for a leave application.</p>
+                                                                <!-- <p><img src="https://aspiresoftware.in/images/odoo_images/leave.png" alt="" width="100%" height="300"></p> -->
+                                                                    <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">Following are the applied leave details </p>
+                                                                    <table class="info" style="font-weight: normal; font-size: 14px; line-height: 1.6;border-collapse: collapse;border-spacing: 0;
+                                                                    width: 100%; border: 1px solid #ddd;" width="100% ">
+
+                                                                    <tbody>
+                                                                        <tr style="background-color: #f5f5f5; ">
+                                                                            <td style=" padding: 8px"><strong>Leave type : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.holiday_status_id.name} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #fff; ">
+                                                                            <td style=" padding: 8px"><strong>From Date : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.date_from.split(' ')[0]} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #f5f5f5; ">
+                                                                            <td style=" padding: 8px"><strong>To Date : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.date_to.split(' ')[0]} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #fff; ">
+                                                                            <td style=" padding: 8px"><strong>Reason : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.name or ''} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #f5f5f5; ">
+                                                                            <td style=" padding: 8px"><strong>From Session : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.from_session} </td>
+                                                                        </tr>
+                                                                        <tr style="background-color: #fff; ">
+                                                                            <td style=" padding: 8px"><strong>To Session : </strong> </td>
+                                                                            <td style=" padding: 8px">${object.to_session} </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <br>
+                                                                <p><img src="https://aspiresoftware.in/images/odoo_images/logo.png"></p>
+                                                                    <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><strong>Asha Rathod | Sr. HR Executive</strong></p>
+                                                                    <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; ">Cell: +91-635-308-6224 | Desk: +91-79-2640-9959</p>
+                                                                    <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6; "><a style="color: #2ba6cb; " href="mailto:hr@aspiresoftware.in " target="_blank " rel="noopener
+                                                                        ">hr@aspiresoftware.in</a> | <a style="color: #2ba6cb; " href="www.aspiresoftware.in " target="_blank " rel="noopener ">www.aspiresoftware.in </a></p>
+                                                                        <ul style="list-style: none; margin: 5px 0 0; padding: 0; ">
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA"> <img src="https://share1.cloudhq-mkt3.net/0e3c382e8c.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.google.com/url?q=https://www.facebook.com/aspiresoftware&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNGUOcuCXbtDoMuuXkmc8V9sKr35eQ"> <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; ">
+                                                                                <a href="https://twitter.com/aspiresoftware2 "> <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.linkedin.com/company/aspire-software-solutions "> <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w
+                                                                                "> <img src="https://share1.cloudhq-mkt3.net/44addf5641.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.pinterest.com/aspiresoftware/ "> <img src="https://share1.cloudhq-mkt3.net/280a83b5d5.png"> </a>
+                                                                            </li>
+                                                                            <li style="float: left; margin: 0 5px 0 0; display: inline-block; ">
+                                                                                <a href="https://www.instagram.com/aspiresoftware/"> <img src="https://share1.cloudhq-mkt3.net/77827ec6f1.png"> </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <br></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    ]]></field>
+                                </record>
+                            </data>
+                        </openerp>

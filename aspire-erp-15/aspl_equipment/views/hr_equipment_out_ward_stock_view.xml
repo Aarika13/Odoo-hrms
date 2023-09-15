@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_equipment_filter_new" model="ir.ui.view">
+            <field name="name">Out Word Equipment</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="arch" type="xml">
+                <search string="Equipment">
+                    <field name="maintenance_stock_type"/>
+                    <separator/>
+                    <filter domain="[('maintenance_stock_type','=',True)]" string="Out Word" name="Equipment"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_all_equipment_tree_view" model="ir.ui.view">
+            <field name="name">HR All Equipment tree view</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Directory" create="false" delete="false" edit="false">
+                    <field name="name"/>
+                    <field name="maintenance_stock_type" invisible="1"/>
+                    <field name="serial_no"/>
+                    <field name="category_id"/>
+                    <field name="stock_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_equipment_directory_view">
+            <field name="name">Outward Equipment</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="hr_all_equipment_tree_view"/>
+            <field name="domain">[('maintenance_stock_type','=',True)]</field>
+            <field name="search_view_id" ref="view_equipment_filter_new"/>
+        </record>
+
+        <menuitem action="action_equipment_directory_view"
+                  id="menu_equipment_directory_view"
+                  parent="maintenance.menu_maintenance_title"
+                  name="Outward Equipments"
+                  groups="aspl_equipment.group_equipment_admin"
+        />
+
+    </data>
+</odoo>

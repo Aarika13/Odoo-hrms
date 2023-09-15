@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="bank_details_tree" model="ir.ui.view">
+        <field name="name">Bank Accounts</field>
+        <field name="model">res.partner.bank</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bank_id"/>
+                <field name="acc_number"/>
+                <field name="partner_id"/>
+                <field name="bank_bic"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- <record id="bank_details_forms" model="ir.ui.view">
+        <field name="name">bank.details.forms</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="l10n_us.view_partner_bank_form_inherit_l10n_us"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='aba_routing']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="bank_details_form" model="ir.ui.view">
+        <field name="name">bank.details.form</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='sequence']" position="before">
+                    <field name="bank_id"/>
+                    <field name="acc_number" required="1"/>
+                    <field name="bank_bic"/>
+                    <field name="company_id" readonly="True"/>
+            </xpath>
+            <xpath expr="//field[@name='sequence']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='acc_type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='acc_number']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='acc_holder_name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='active']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id='bank_details_action' model='ir.actions.act_window'>
+        <field name="name">Bank Accounts</field>
+        <field name="res_model">res.partner.bank</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id"/>
+    </record>
+
+    <menuitem action="bank_details_action"
+              parent="account.account_banks_menu"
+              sequence="2"
+              id="hr_applicants_interviewer_report_menu"
+    />
+
+    <menuitem id="account.menu_action_account_bank_journal_form" active="False"/>
+
+
+
+        <!-- <record id="view_company_partner_bank_form" model="ir.ui.view">
+            <field name="name">company.res.partner.bank.form</field>
+            <field name="model">res.partner.bank</field>
+            <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="mode">primary</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="bank_details_tree" model="ir.ui.view">
+        <field name="name">Add Bank Accounts</field>
+        <field name="model">res.partner.bank</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="bank_id"/>
+                    <field name="acc_number"/>
+                    <field name="bank_bic"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='bank_details_action' model='ir.actions.act_window'>
+            <field name="name">Add Bank Accounts</field>
+            <field name="res_model">res.partner.bank</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="bank_details_tree"/>
+        </record>
+
+        <record id="action_new_bank_setting" model="ir.actions.server">
+            <field name="name">Add Bank Accounts</field>
+            <field name="model_id" ref="model_res_company"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.setting_init_bank_account_action()
+            </field>
+        </record> -->
+
+    </data>
+</odoo>

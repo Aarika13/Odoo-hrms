@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="paperformat_leavereport" model="report.paperformat">
+			<field name="name">Leave report</field>
+			<field name="default" eval="True"/>
+			<field name="format">custom</field>
+			<field name="page_height">216</field>
+			<field name="page_width">350</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">20</field>
+			<field name="margin_left">15</field>
+			<field name="margin_right">15</field>
+			<field name="header_spacing">30</field>
+			<field name="dpi">90</field>
+		</record>
+	</data>
+</odoo>

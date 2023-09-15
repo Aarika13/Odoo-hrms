@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action Rule Form View -->
+        <record id="notifier_view_form" model="ir.ui.view">
+            <field name="name">notifier.form</field>
+            <field name="model">notifier.action</field>
+            <field name="arch" type="xml">
+                <form string="Action Rule">
+                    <sheet>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="model_id" on_change="onchange_model_id(model_id, context)" required="1"/>
+                                <field name="model" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Conditions">
+                                <group>
+                                    <field name="kind" required="1"/>
+                                    <field name="filter_id"
+                                           domain="[('model_id','=',model), ('user_id', '=', False)]"
+                                           context="{'default_model_id': model}"/>
+                                    <field name="trg_date_id" required="1"/>
+                                    <label for="trg_date_range" string="Delay After Trigger Date"
+                                           attrs="{'invisible': [('trg_date_id','=',False)]}"/>
+                                    <div attrs="{'invisible': [('trg_date_id','=',False)]}">
+                                        <field name="trg_date_range" class="oe_inline"/>
+                                        <field name="trg_date_range_type" class="oe_inline"
+                                               attrs="{'required': [('trg_date_id','!=',False)]}"/>
+                                    </div>
+                                    <field name="template_id" required="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action Rule Tree View -->
+        <record id="notifier_tree_view" model="ir.ui.view">
+            <field name="name">notifier.tree.view</field>
+            <field name="model">notifier.action</field>
+            <field name="arch" type="xml">
+                <tree string="Action Rule">
+                    <field name="name"/>
+                    <field name="kind"/>
+                    <field name="model_id"/>
+                    <field name="filter_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Notifier Action-->
+        <record id="notifier_action_rule_act" model="ir.actions.act_window">
+            <field name="name">Notifier Actions</field>
+            <field name="res_model">notifier.action</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="notifier_tree_view"/>
+        </record>
+
+        <menuitem id="parent_notifier"
+                  parent="hr.menu_hr_root"
+                  name="Notifier" sequence='50'
+                  groups="hr.group_hr_manager"
+        /><!-- groups="base.group_hr_user" -->
+
+        <menuitem id="notifier_menu"
+                  parent="parent_notifier"
+                  action="notifier_action_rule_act"
+                  groups="hr.group_hr_manager"
+                  sequence="10"/>
+    </data>
+</odoo>

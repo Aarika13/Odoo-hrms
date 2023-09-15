@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<odoo>
+    <data> 
+
+        <record id="ir_cron_employee_payslip_queue" model="ir.cron">
+            <field name="name">Payroll: Employee Payslip Queue</field>
+            <field name="model_id" ref="model_hr_payslip_run"/>
+            <field name="state">code</field>
+            <field name="code">action = model._process_employee_payslip_queue()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall" />
+            <field eval="False" name="active"/>
+        </record>
+
+        <record id="employee_payslip_mail_templete" model="mail.template">
+            <field name="name">Employee Payslip Mail</field>
+            <field name="subject">{{object.name}}</field>
+            <field name="email_from">aspiresolutionsodoo@gmail.com</field>
+            <field name="email_to">{{ ctx.get('mail_to') }}</field>
+            <field name="model_id" ref="hr_payroll_community.model_hr_payslip"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 700px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                        <!-- HEADER -->
+                        <table class="head-wrap" style="width: 100%; padding: 5px; border-collapse: collapse; border-spacing: 0;">
+                            <tbody>
+                                <tr>
+                                    <td class="header" style="padding: 5px;">
+                                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                            <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                                <img t-attf-src="{{object.employee_id.company_id.logo_url}}" t-att-alt="object.employee_id.company_id.name" style="width:55%;margin-top:20ox;" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- /HEADER -->
+                        <!-- BODY -->
+
+                        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                            <tbody>
+                                <tr>
+                                    <td bgcolor="#FFFFFF">
+                                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                            <div class="content" style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                                <table width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                Dear <t t-out="object.employee_id.name"/>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">We are sending your payslip for the month Jun 2023 as an attachment with this mail.</p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">Note: This is an auto-generated mail. Please do not reply</p>  
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                    <br/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </field>
+            <field name="report_template"
+                   ref="payroll_reports.report_employee_payslip"/>
+        </record>
+
+     </data>
+</odoo>    

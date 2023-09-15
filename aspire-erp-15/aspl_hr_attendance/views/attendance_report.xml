@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <report id="Attendance_Summary"
+            string="Attendance Summary"
+            model="attendance.monthly.summary"
+            report_type="qweb-pdf"
+            file="hr_attendance_aspire.attendance_summary_report"
+            name="hr_attendance_aspire.attendance_summary_report"
+            menu="False"/>
+            
+        <record id="hr_attendance_aspire.Attendance_Summary" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="hr_attendance_aspire.paperformat_dailySummary"/>
+        </record>
+
+    </data>
+</odoo>

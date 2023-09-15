@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="HrDashboardMain">
+        <div class="oh_dashboards">
+            <div class="container-fluid o_hr_dashboard">
+            </div>
+        </div>
+    </t>
+
+    <t t-name="HrDashboard">
+        <link rel="stylesheet" href="/aspl_hrms_dashboard/static/src/css/hr_dashboard.css"/>
+
+        <div class="main_section_hr">
+
+            <div class="first_section_hr">
+
+                <!-- **************************  TABLE OF TODAYS LEAVE ************************** -->
+                <div class="first_div_first_section_hr_table_all_leavest">
+                    <div class="heading_table" style="padding-bottom:6px;">Employees On Leave</div>
+
+                    <t t-set="today_time_off_emp" t-value="widget.login_employee['today_time_off_emp']"/>
+
+                    <t t-if="today_time_off_emp == '' ">
+                        <div style="margin: 8px 79px;">
+                                        Bravo!! Everybody Is Present!!
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <table class="table table-borderless" style="margin-top:-3px;">
+                            <!-- <thead style="background:#71639e">
+                            <tr>
+                                <th class="table_head" scope="col" style="text-align:left;">Name</th>
+                                <th class="table_head" scope="col" style="text-align:left;">Type Of Leave</th>
+                                <th class="table_head" scope="col" style="text-align:left;">Today Leave Type</th>
+                            </tr>
+                        </thead> -->
+                            <tbody>
+
+                                <t t-foreach ="today_time_off_emp" t-as="i">
+                                    <tr class="table_data_todays_leave_row" style="text-align:left;">
+                                        <t t-foreach="i" t-as="j">
+                                            <td t-attf-class="table_data_todays_leave #{i[0] + '_' + i[1]}">
+                                                <t t-esc = "j" />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+
+                <!-- **************************  TABLE OF TODAYS EVENTS ************************** -->
+                <div class="second_div_first_section_hr_table_all_events">
+                    <div class="heading_table" style="padding-bottom:6px;">Events</div>
+
+                    <t t-set="upcoming_events" t-value="widget.login_employee['upcoming_events']"/>
+
+                    <t t-if="upcoming_events == '' ">
+                        <div style="margin: 8px 79px;">
+                                        No Events Today
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <table class="table table-borderless" style="margin-top:-3px;">
+                            <!-- <thead style="background:#71639e">
+                            <tr>
+                                <th class="table_head" scope="col" style="text-align:left;">Name</th>
+                                <th class="table_head" scope="col" style="text-align:left;">Event</th>
+                            </tr>
+                        </thead> -->
+                            <tbody>
+                                <t t-foreach = "upcoming_events" t-as="i">
+                                    <tr class="table_data_today_event" style="text-align:left;">
+                                        <t t-foreach="i" t-as="j">
+                                            <td>
+                                                <t t-esc = "j" />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+
+            </div>
+
+        </div>
+    </t>
+
+    <t t-name="EmployeeWarningHr">
+        <div>
+            <p>Error : Could not find employee linked to user</p>
+            <p>Please contact system admin for the setup</p>
+        </div>
+    </t>
+
+</templates>

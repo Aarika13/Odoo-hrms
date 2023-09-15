@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_add_timesheet_link" model="ir.cron">
+            <field name="name">Link Timesheet To Weekly Timesheet</field>
+            <field name="model_id" ref="model_hr_timesheet_sheet"/>
+            <field name="state">code</field>
+            <field name="code">model.link_timesheet_to_timesheet_sheet()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">4</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

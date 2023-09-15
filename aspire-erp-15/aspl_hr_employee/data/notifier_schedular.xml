@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="hr_holidays_attendance.hr_employee_view_form_inherit" model="ir.ui.view">
+            <field name="active">False</field>
+        </record>
+
+        <record id="ir_cron_notifier_action" model="ir.cron">
+            <field name="name">Check Notifier Action Rules</field>
+            <field name="model_id" ref="model_notifier_action" />
+            <field name="state">code</field>
+            <field name="code">model.check()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <!-- <field eval="'notifier.action'" name="model"/> -->
+            <!-- <field eval="'_check'" name="function"/> -->
+            <!-- <field eval="'(True,)'" name="args"/> -->
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="probation_end_date" model="notifier.action">
+            <field name="name">Probation End Date</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="field_hr_employee__probation_end_date"/>
+            <field name="trg_date_range">-7</field>
+            <field name="template_id" ref="probation_end_notification"/>
+        </record>
+
+        <record id="Training_end_date" model="notifier.action">
+            <field name="name">Training End Date</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="field_hr_employee__training_end_date"/>
+            <field name="trg_date_range">-7</field>
+            <field name="template_id" ref="training_end_notification"/>
+        </record>
+
+        <record id="notice_stage_filter" model="ir.filters">
+            <field name="name">[('emp_state','=','left')]</field>
+            <field name="model_id">hr.employee</field>
+        </record>
+
+        <record id="appraisal_date" model="notifier.action">
+            <field name="name">Appraisal due on</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="field_hr_employee__appraisal_date"/>
+            <field name="trg_date_range">-7</field>
+            <field name="template_id" ref="appraisal_date_notification"/>
+        </record>
+
+        <record id="birth_date_notifier" model="notifier.action">
+            <field name="name">Birth Date</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="hr.field_hr_employee__birthday"/>
+            <field name="trg_date_range">0</field>
+            <field name="template_id" ref="birth_day_notification"/>
+        </record>
+
+        <record id="2_year_complete_notifier" model="notifier.action">
+            <field name="name">2 Year Complete</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="field_hr_employee__join_date"/>
+            <field name="trg_date_range">-7</field>
+            <field name="template_id" ref="2_year_complete_notification"/>
+        </record>
+
+        <record id="5_year_complete_notifier" model="notifier.action">
+            <field name="name">5 Year Complete</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="field_hr_employee__join_date"/>
+            <field name="trg_date_range">-7</field>
+            <field name="template_id" ref="5_year_complete_notification"/>
+        </record>
+
+        <record id="10_year_complete_notifier" model="notifier.action">
+            <field name="name">10 Year Complete</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id" ref="field_hr_employee__join_date"/>
+            <field name="trg_date_range">-7</field>
+            <field name="template_id" ref="10_year_complete_notification"/>
+        </record>
+
+        <!-- <record id="notice_period_notifier" model="notifier.action">
+            <field name="name">Notice Period End Date</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="active">True</field>
+            <field name="trg_date_id"></field>
+            <field name="trg_date_range">-7</field>
+            <field name="filter_id" ref="notice_stage_filter"/>
+            <field name="template_id" ref="birth_day_notification"/>
+        </record> -->
+
+         <record id="birthday_image_record" model="ir.attachment">
+            <field name="name">birthday.png</field>
+            <field name="type">binary</field>
+            <field name="public">true</field>
+            <field name="datas" type="base64" file="aspl_hr_employee/static/src/img/birthday.png"/>
+        </record>
+         <record id="2_work_anniversary_image_record" model="ir.attachment">
+            <field name="name">2_work_anniversary.png</field>
+            <field name="type">binary</field>
+            <field name="public">true</field>
+            <field name="datas" type="base64" file="aspl_hr_employee/static/src/img/2_work_anniversary.png"/>
+        </record>
+         <record id="5_work_anniversary_image_record" model="ir.attachment">
+            <field name="name">5_work_anniversary.png</field>
+            <field name="type">binary</field>
+            <field name="public">true</field>
+            <field name="datas" type="base64" file="aspl_hr_employee/static/src/img/5_work_anniversary.png"/>
+        </record>
+         <record id="10_work_anniversary_image_record" model="ir.attachment">
+            <field name="name">10_work_anniversary.png</field>
+            <field name="type">binary</field>
+            <field name="public">true</field>
+            <field name="datas" type="base64" file="aspl_hr_employee/static/src/img/10_work_anniversary.png"/>
+        </record>
+
+    </data>
+</odoo>

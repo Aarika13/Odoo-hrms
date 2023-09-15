@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_interviewer_report" model="ir.ui.view">
+                    <field name="name">interviewer.report.tree</field>
+                    <field name="model">int.feedbacks</field>
+                    <field name="arch" type="xml">
+                        <tree string="Interviewers Report">
+                            <field name="interviewer_id"/>
+                            <field name="job_opening_id"  widget="Many2one"/>
+                            <field name="applicant_id"  widget="Many2one"/>
+                        </tree>
+                    </field>
+                </record>
+    </data>
+</odoo>

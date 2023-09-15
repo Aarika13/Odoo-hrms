@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_individual_from_inherit" model="ir.ui.view">
+        <field name="name">res.partner.individual.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[2]" position="after">
+                <field name="type"/>
+                <filter string="Company Contact" domain="[('type', '=', 'contact')]"
+                            name="company_contact"/>
+                <separator/>
+                <filter string="Without Parent" domain="[('parent_id', '=', False)]"
+                            name="without_parent"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="view_res_partner_email_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.form</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form" position="inside">-->
+<!--                <header>-->
+<!--                    <button name="action_send_email" string="Send Email" type="object" class="oe_highlight"/>-->
+<!--                </header>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="view_id" ref="base.view_res_partner_filter"/>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,search</field>
+        <field name="domain">[('is_company','=',False),('parent_id', '=', False)]</field>
+        <field name="context">{'search_default_type_person':True,'search_default_without_parent':True}</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+    </record>
+
+
+</odoo>

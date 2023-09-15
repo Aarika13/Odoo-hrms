@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_hr_employee_button_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='emp_state']" position="before">
+                <button name="action_hr_test_wizard" string="Wizard" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="after">
+                <!--left, notice period-->
+                <widget name="web_ribbon" title="Left" bg_color="bg-danger"
+                        attrs="{'invisible': ['|','|','|','|',('emp_state', '=', 'training'),
+                        ('emp_state','=','new'),('emp_state','=','probation'),
+                        ('emp_state','=','confirmed'),('emp_state','=','on_notice')]}"/>
+                <widget name="web_ribbon" title="On Notice" bg_color="bg-danger"
+                        attrs="{'invisible': ['|','|','|','|',('emp_state', '=', 'training'),
+                        ('emp_state','=','new'),('emp_state','=','probation'),
+                        ('emp_state','=','confirmed'),('emp_state','=','left')]}"/>
+                 <!--if_new-->
+                <widget name="web_ribbon" title="New" bg_color="bg-info"
+                        attrs="{'invisible': ['|','|','|','|',('emp_state','=','on_notice'),
+                        ('emp_state','=','left'),('emp_state', '=', 'training'),
+                        ('emp_state','=','probation'),('emp_state','=','confirmed')]}"/>
+                <!-- as trainee-->
+                <widget name="web_ribbon" title="Trainee" bg_color="bg-info"
+                        attrs="{'invisible': ['|','|','|','|',('emp_state','=','on_notice'),
+                        ('emp_state','=','left'),('emp_state','=','new'),
+                        ('emp_state','=','probation'),('emp_state','=','confirmed')]}"/>
+                <!--confirmed-->
+                <widget name="web_ribbon" title="Confirmed" bg_color="bg-success"
+                        attrs="{'invisible': ['|','|','|','|',('emp_state','=','on_notice'),
+                        ('emp_state','=','left'),('emp_state','=','new'),
+                        ('emp_state','=','probation'),('emp_state','=','training')]}"/>
+                <!--probation-->
+                <widget name="web_ribbon" title="Probation" bg_color="bg-info"
+                        attrs="{'invisible': ['|','|','|','|',('emp_state','=','on_notice'),
+                        ('emp_state','=','left'),('emp_state','=','new'),
+                        ('emp_state','=','confirmed'),('emp_state','=','training')]}"/>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

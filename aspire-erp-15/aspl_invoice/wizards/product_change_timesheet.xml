@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="Timesheet_product_change" model="ir.ui.view">
+        <field name="name">Timesheet_product_change</field>
+        <field name="model">timesheet.product.change</field>
+        <field name="arch" type="xml">
+            <form string="Timesheet Product">
+                <group>
+                    <group>
+                        <field name="product_id" widget="radio" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                    </group>
+                </group>
+                
+                <footer>
+                    <button name="change_timesheet_product" string="Change Product" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="action_view_timesheet_product_change_wizard" model="ir.actions.act_window">
+        <field name="name">Timesheet Product Change</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">timesheet.product.change</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="Timesheet_product_change"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

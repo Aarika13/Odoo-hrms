@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="custom_css" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script src="/hr_attendance_aspire/static/src/js/datetime_timezone.js"></script>
+                <!-- <script src="/hr_attendance_aspire/static/src/js/approve_attendance_wfh_manager.js"></script> -->
+                <!-- <script src="/hr_attendance_aspire/static/src/js/approve_attendance_wfh_admin.js"></script> -->
+                <script src="/hr_attendance_aspire/static/src/js/approve_attendance_corrections_admin.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

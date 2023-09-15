@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mail_template_preview_view_form_inherit" model="ir.ui.view">
+            <field name="name">mail.template.preview.view.form.inherit</field>
+            <field name="model">mail.template.preview</field>
+            <field name="inherit_id" ref="mail.mail_template_preview_view_form"/>
+            <field name="arch" type="xml">
+                <field name="email_cc" position="after">
+                    <field name="email_bcc" placeholder="Add Bcc contacts (comma-separated)"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

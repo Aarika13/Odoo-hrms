@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--         <record id="hr_company_a_s_s" model="res.company">-->
+        <!--            <field name="name">Aspire Software Solution</field>-->
+        <!--        </record>-->
+        <!--<record id="hr_company_a_s_p_l" model="res.company">
+            <field name="name">Aspire Softserv Pvt Ltd</field>
+        </record>
+        <record id="hr_company_a_tech" model="res.company">
+            <field name="name">Aspire Tech Lab</field>
+        </record>
+        <record id="hr_company_rock_tech" model="res.company">
+            <field name="name">Rock Tech Lab</field>
+        </record>-->
+    </data>
+</odoo>

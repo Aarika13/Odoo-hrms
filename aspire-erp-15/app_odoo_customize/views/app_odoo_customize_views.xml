@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- some odoo version not support, please remove this if you are using odoo9 -->
+    <template id="replace_login" name="Login Layout" inherit_id="web.login_layout">
+        <xpath expr="//a[@target='_blank']" position="replace">
+            <a href="https://www.aspiresoftware.in" target="_blank">Powered by
+                <span>Aspire Software Solution</span>
+            </a>
+        </xpath>
+    </template>
+
+    <template id="brand_promotion" inherit_id="website.brand_promotion">
+        <xpath expr="//t[@t-call='web.brand_promotion_message']" position="replace">
+        </xpath>
+    </template>
+</odoo>

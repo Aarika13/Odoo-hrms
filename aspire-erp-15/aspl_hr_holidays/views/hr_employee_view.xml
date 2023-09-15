@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Add employee leave detail in the Employee Information view-->
+        <record id="view_own_employee_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr.own.employee.form.inherited</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="aspl_hr_employee.view_own_employee_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='document']" position="after">
+                    <page name="leave_detail" string="Leave Detail">
+                        <group string="Leave" name="leave">
+                            <label for="remaining_leaves"/>
+                            <div>
+                                <field name="remaining_leaves" class="oe_inline"/>
+                                days
+                            </div>
+                            <label for="remaining_unplanned_leaves"/>
+                            <div>
+                                <field name="remaining_unplanned_leaves" class="oe_inline"/>
+                                days
+                            </div>
+                            <label for="remaining_floating_leaves"/>
+                            <div>
+                                <field name="remaining_floating_leaves" class="oe_inline"/>
+                                days
+                            </div>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_own_employee_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherited.aspl_employee</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="aspl_hr_employee.view_hr_employee_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='short_notice_div']" position="after">
+                    <field name="leave_in_notice" class="oe_inline" readonly="1"
+                                            string="Leave in notice period"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

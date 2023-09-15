@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="company_calender_view">
+            <field name="name">res.company.form.inherit.calender</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[5]" position="after">
+                    <page string="Working Calender">
+                        <group col="16">
+                            <group>
+                            </group>
+                            <group>
+                                <label string="Mon" />
+                            </group>
+                            <group>
+                                <label string="Tue" />
+                            </group>
+                            <group>
+                                <label string="Wed" />
+                            </group>
+                            <group>
+                                <label string="Thu" />
+                            </group>
+                            <group>
+                                <label string="Fri" />
+                            </group>
+                            <group>
+                                <label string="Sat" />
+                            </group>
+                            <group>
+                                <label string="Sun" />
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group col="16">
+                            
+                            <group>
+                                <label string="Week 1" />
+                            </group>
+                            <group>
+                                <field name="W1Mon" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W1Tue" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W1Wed" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W1Thu" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W1Fri" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W1Sat" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W1Sun" nolabel="1"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group col="16">
+                            
+                            <group>
+                                <label string="Week 2" />
+                            </group>
+                            <group>
+                                <field name="W2Mon" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W2Tue" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W2Wed" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W2Thu" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W2Fri" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W2Sat" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W2Sun" nolabel="1"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group col="16">
+                            
+                            <group>
+                                <label string="Week 3" />
+                            </group>
+                            <group>
+                                <field name="W3Mon" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W3Tue" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W3Wed" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W3Thu" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W3Fri" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W3Sat" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W3Sun" nolabel="1"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group col="16">
+                            
+                            <group>
+                                <label string="Week 4" />
+                            </group>
+                            <group>
+                                <field name="W4Mon" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W4Tue" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W4Wed" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W4Thu" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W4Fri" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W4Sat" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W4Sun" nolabel="1"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group col="16">
+                            
+                            <group>
+                                <label string="Week 5" />
+                            </group>
+                            <group>
+                                <field name="W5Mon" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W5Tue" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W5Wed" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W5Thu" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W5Fri" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W5Sat" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W5Sun" nolabel="1"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group col="16">
+                            
+                            <group>
+                                <label string="Week 6" />
+                            </group>
+                            <group>
+                                <field name="W6Mon" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W6Tue" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W6Wed" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W6Thu" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W6Fri" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W6Sat" nolabel="1"/>
+                            </group>
+                            <group>
+                                <field name="W6Sun" nolabel="1"/>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

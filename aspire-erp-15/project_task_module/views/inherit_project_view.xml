@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="project_module_view_form" model="ir.ui.view">
+            <field name="name">project.module.view.form</field>
+            <field name="model">project.module</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="project_id" invisible="1"/>
+                                <field name="name" placeholder="E.g: HRMS"/>
+                                <field name="description"/>  
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="project_module_view_tree" model="ir.ui.view">
+            <field name="name">project.module.view.tree</field>
+            <field name="model">project.module</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="project_module_all" model="ir.actions.act_window">
+            <field name="name">Modules</field>
+            <field name="res_model">project.module</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_project_id': active_id}</field>
+            <field name="domain">[('project_id', '=', active_id)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                No module found. Let's create one!
+                </p><p>
+                Track major progress points that must be reached to achieve success.
+                </p>
+            </field>
+        </record>
+        
+        
+        <record model="ir.ui.view" id="view_project_module_inherit">
+            <field name="name">project.module.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[hasclass('oe_stat_button')]" position="after">
+                    <button class="oe_stat_button" type="action" name="%(project_task_module.project_module_all)d" icon="fa-bars">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="module_count" nolabel="1"/>
+                            </span>
+                            <span class="o_stat_text">
+                                Modules
+                            </span>
+                        </div>
+                    </button>
+                </xpath>
+                
+            </field>
+        </record>
+
+        
+    </data>
+</odoo>

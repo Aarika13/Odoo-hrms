@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- *********** FORM VIEW ************ -->
+    <record id="view_projectt_tags_form" model="ir.ui.view">
+        <field name="name">projectt.tags.form</field>
+        <field name="model">projectt.tags</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                        <group >
+                            <field  name="tags"></field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- *********** Tree VIEW ************ -->
+    <record id="view_projectt_tags_tree" model="ir.ui.view">
+        <field name="name">projectt.tags.tree</field>
+        <field name="model">projectt.tags</field>
+        <field name="arch" type="xml">
+            
+            <tree sample="1">
+                <field  name="tags"></field>
+            </tree>
+        </field>
+    </record>
+    
+
+
+
+
+    <record id="action_projectt_tags" model="ir.actions.act_window">
+        <field name="name">Projectt</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">projectt.tags</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+                Create  Your First Tags !!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id = "menu_projectt_tags"
+        name = "Projectt Tags"
+        action ="action_projectt_tags"
+        parent = "project.menu_project_config"
+        sequence = "0" />
+</odoo>

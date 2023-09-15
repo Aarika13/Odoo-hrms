@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Job Opening Report Form-->
+        <record id="job_opening_report_view_form" model="ir.ui.view">
+            <field name="name">job.opening.report.form</field>
+            <field name="model">job.opening.report</field>
+            <field name="arch" type="xml">
+                <form string="Job Opening Report">
+                    <group>
+                        <group>
+                            <field name="template_id" options="{'no_create_edit':True ,'no_create': True}"/>
+                            <field name="date_from" required="1"/>
+                            <field name="date_to" required="1"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <!--<field name="recruiters_ids" widget="many2many_tags"/>-->
+                            <field name="recruiter_id" options="{'no_create_edit':True ,'no_create': True}"/>
+                            <field name="job_opening_ids" widget="many2many_tags"
+                                   options="{'no_create_edit':True ,'no_create': True}"/>
+                            <field name="company_id" options="{'no_create_edit':True ,'no_create': True}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_excel" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="job_opening_report_action" model="ir.actions.act_window">
+            <field name="name">Job Opening Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">job.opening.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="job_opening_report_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                id="menu_job_opening_report"
+                name="Job Opening Report"
+                parent="hr_recruitment.report_hr_recruitment"
+                sequence="100"
+                action="job_opening_report_action"
+        />
+
+        <!--<record model="ir.ui.view" id="export_file_excel_form">
+            <field name="name">export.file.excel.form</field>
+            <field name="model">export.file.excel</field>
+            <field name="arch" type="xml">
+                <form string="Excel Report">
+                    <group>
+                        <group>
+                            <field name="file" readonly="1" filename="file_name"/>
+                        </group>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Cancel" name="cancel" special="cancel" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_export_file_excel" model="ir.actions.act_window">
+            <field name="name">Excel Report</field>
+            <field name="res_model">export.file.excel</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>-->
+
+    </data>
+</odoo>

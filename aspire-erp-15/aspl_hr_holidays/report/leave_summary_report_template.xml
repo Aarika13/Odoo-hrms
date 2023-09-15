@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="leave_report_css" inherit_id="report.assets_common">
+			<xpath expr="//link[@href='/report/static/src/css/report.css']" position="after">
+				<link href="/hr_holidays_aspire/static/css/leave_report_css.css" rel="stylesheet"/>
+				<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Proxima+Nova"/>
+			</xpath>
+		</template>
+		<template id="last_month_leave_summary_report_view">
+			<t t-call="report.html_container">
+				<div class="page">
+					<t t-call="hr_holidays_aspire.header_report"/>
+					<div class="row">
+						<div align="center">
+							<t t-set="info" t-value="get_header_info"/>
+							<table style="width:100%" class="custom-font"
+								   t-if="info['reportType'] not in ('unapplied')">
+								<thead>
+									<tr>
+										<th>
+											Sr No
+										</th>
+										<th>
+											Employee No
+										</th>
+										<th>
+											Name
+										</th>
+										<th>
+											Manager No
+										</th>
+										<th>
+											Manager Name
+
+										</th>
+										<th t-if="info['reportType'] not in ('unapplied')">
+											Leave Type
+										</th>
+										<th>
+											From
+										</th>
+										<th>
+											To
+										</th>
+										<th>
+											Days
+										</th>
+										<th t-if="info['reportType'] not in ('unapplied')">
+											Reason
+										</th>
+										<th t-if="info['reportType'] not in ('unapplied')">
+											Applied Date
+										</th>
+
+										<th t-if="info['reportType'] not in ('toapprove','unapplied')">
+											Approved Date
+										</th>
+										<th t-if="info['reportType'] not in ('unapplied')">
+											State
+										</th>
+										<th t-if="info['reportType'] not in ('toapprove','unapplied')">
+											Approver
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="get_data_from_report" t-as="data">
+										<tr>
+											<td style="width:35px; text-align:right;">
+												<span>
+													<t t-esc="data['no']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:left;">
+												<span>
+													<t t-esc="data['empid']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:left;">
+												<span>
+													<t t-esc="data['name']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:left;">
+												<span>
+													<t t-esc="data['managerno']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:left;">
+												<span>
+													<t t-esc="data['managrename']"/>
+												</span>
+											</td>
+											<td style="width:110px; text-align:left;"
+												t-if="info['reportType'] not in ('unapplied')">
+												<span>
+													<t t-esc="data['status']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:right;">
+												<span>
+													<t t-esc="data['datefrom']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:right;">
+												<span>
+													<t t-esc="data['dateto']"/>
+												</span>
+											</td>
+											<td style="width:40px; text-align:right;">
+												<span>
+													<t t-esc="data['days']"/>
+												</span>
+											</td>
+											<td style="text-align:left;" t-if="info['reportType'] not in ('unapplied')">
+												<span>
+													<t t-esc="data['reason']"/>
+												</span>
+											</td>
+											<td style="width:115px; text-align:right;"
+												t-if="info['reportType'] not in ('unapplied')">
+												<span>
+													<t t-esc="data['applieddate']"/>
+												</span>
+											</td>
+											<td style="width:100px; text-align:right;"
+												t-if="info['reportType'] not in ('toapprove','unapplied')">
+												<span>
+													<t t-if="data['state'] == 'validate'">
+														<t t-esc="data['approveddate']"/>
+													</t>
+												</span>
+											</td>
+											<td style="width:80px; text-align:left;"
+												t-if="info['reportType'] not in ('unapplied')">
+												<span>
+													<t t-if="data['state'] == 'validate'">
+														Approved
+
+													</t>
+													<t t-if="data['state'] == 'confirm'">
+
+														To Approve
+													</t>
+												</span>
+											</td>
+											<td style=" width:100px; text-align:left;"
+												t-if="info['reportType'] not in ('toapprove','unapplied')">
+												<span>
+													<t t-if="data['state'] == 'validate'">
+														<t t-esc="data['approver']"/>
+													</t>
+												</span>
+											</td>
+										</tr>
+									</t>
+								</tbody>
+							</table>
+
+							<table style="width:70%" class="custom-font" t-if="info['reportType'] in ('unapplied')">
+								<thead>
+									<tr>
+										<th style="width:50px;">
+											Sr No
+										</th>
+										<th tyle="width:50px;">
+											Employee No
+										</th>
+										<th>
+											Name
+										</th>
+										<th>
+											Manager No
+										</th>
+										<th>
+											Manager Name
+
+										</th>
+
+										<th>
+											From
+										</th>
+										<th>
+											To
+										</th>
+										<th>
+											Days
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="get_data_from_report" t-as="data">
+										<tr>
+											<td style="width:50px; text-align:right;">
+												<span>
+													<t t-esc="data['no']"/>
+												</span>
+											</td>
+											<td style="text-align:left;">
+												<span>
+													<t t-esc="data['empid']"/>
+												</span>
+											</td>
+											<td style=" text-align:left;">
+												<span>
+													<t t-esc="data['name']"/>
+												</span>
+											</td>
+											<td style=" text-align:left;">
+												<span>
+													<t t-esc="data['managerno']"/>
+												</span>
+											</td>
+											<td style=" text-align:left;">
+												<span>
+													<t t-esc="data['managrename']"/>
+												</span>
+											</td>
+											<td style=" text-align:right;">
+												<span>
+													<t t-esc="data['datefrom']"/>
+												</span>
+											</td>
+											<td style=" text-align:right;">
+												<span>
+													<t t-esc="data['dateto']"/>
+												</span>
+											</td>
+											<td style="width:40px; text-align:right;">
+												<span>
+													<t t-esc="data['days']"/>
+												</span>
+											</td>
+										</tr>
+									</t>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="footer custom-font">
+					<t t-call="hr_holidays_aspire.footer_report"/>
+				</div>
+			</t>
+		</template>
+		<template id="header_report">
+			<div style="text-align:center; font-family:Proxima Nova" class="custom-font">
+				<t t-foreach="get_company_info" t-as="o">
+					<span style="font-size:30px;">
+						<strong>
+							<span>
+								<t t-esc="o['name']"/>
+							</span>
+						</strong>
+					</span>
+					<br/>
+					<div style="line-height: 70%;">
+						<span><t t-esc="o['street']"/>,
+						</span>
+						<span><t t-esc="o['street2']"/>,
+						</span>
+						<span>
+							<t t-esc="o['city']"/>
+							-
+						</span>
+						<span>
+							<t t-esc="o['zip']"/>
+						</span>
+					</div>
+				</t>
+				<h4>
+					<t t-set="info" t-value="get_header_info"/>
+					Leave Summary Report From
+					<t t-esc="info['startDate']"/>
+					To
+					<t t-esc="info['endDate']"/>
+					<!-- of leave Type <t t-esc="info['leaveType']"/> -->
+				</h4>
+			</div>
+		</template>
+		<template id="footer_report">
+			<div style="text-align:left; font-family:" class="custom-font">
+				Created On:
+				<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d, %b %Y %H:%M')"/>
+				<br/>
+				<p style="text-align:right;">Page
+					<span class="page"/>
+					of
+					<span class="topage"/>
+				</p>
+			</div>
+		</template>
+
+		<report id="last_month_leave_summary_report"
+				string="Leave Report"
+				model="hr.leave"
+				report_type="qweb-pdf"
+				name="hr_holidays_aspire.last_month_leave_summary_report_view"
+				file="hr_holidays_aspire.last_month_leave_summary_report_view"
+				menu="False"/>
+	</data>
+</odoo>

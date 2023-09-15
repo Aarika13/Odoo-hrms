@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- List View -->
+    <record model="ir.ui.view" id="view_task_enhancement_module_tree">
+        <field name="name">project.task.enhancement.module.tree</field>
+        <field name="model">project.task</field> 
+        <field name="inherit_id" ref="project.view_task_tree2" />
+        <field eval="2" name="priority" />
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field name="module_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="view_task_enhancement_module_form">
+        <field name="name">project.task.enhancement.module.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field eval="2" name="priority" />
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field
+                    name="module_id"
+                    domain="[('project_id', '=', project_id)]"
+                    option="{'no_create_edit': True}"
+                    context="{'default_project_id': project_id}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record model="ir.ui.view" id="view_task_enhancement_module_kanban">
+        <field name="name">project.task.enhancement.module.kanban</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_record_body')]" position="inside">
+                <t t-if="record.module_id.raw_value"> 
+                <span class="o_value">
+                    <field name="module_id"  widget="badge"/>
+                </span> 
+                </t>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record model="ir.ui.view" id="view_task_enhancement_search_module_form">
+        <field name="name">project.task.enhancement.module.search.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form" />
+        <field name="arch" type="xml">
+            <filter name="group_create_date" position="after">
+                <separator />
+                <filter
+                    string="Module"
+                    name="module_ids"
+                    context="{'group_by':'module_id',
+                              'default_order':'sequence'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

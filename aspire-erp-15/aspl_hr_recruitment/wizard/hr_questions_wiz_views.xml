@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- HR Questions Skills Form wizard-->
+        <record id="hr_questions_wiz_view_form" model="ir.ui.view">
+            <field name="name">hr.questions.wiz.form</field>
+            <field name="model">hr.questions.wiz</field>
+            <field name="arch" type="xml">
+                <form string="HR Questions">
+                    <field name="questions_ids" nolabel="1">
+                        <tree string="HR Questions" create="0" delete="0" editable="bottom">
+                            <field name="name" readonly="1" force_save="1"/>
+                            <field name="ans"/>
+                        </tree>
+                    </field>
+                    <footer>
+                        <button name="update_que_ans" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="applicant_hr_questions_wiz_action" model="ir.actions.act_window">
+            <field name="name">HR Questions</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.questions.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="hr_questions_wiz_view_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

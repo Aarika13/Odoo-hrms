@@ -1,0 +1,1028 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Job Opening sequence -->
+        <record id="job_opening_seq" model="ir.sequence">
+            <field name="name">Job Opening Sequence</field>
+            <field name="code">job.opening</field>
+            <field name="padding">5</field>
+        </record>
+
+    
+        <record id="company_logo_data" model="ir.attachment">
+            <field name="name">aspire-logo.png</field>
+            <field name="type">binary</field>
+            <field name="datas" type="base64" file="aspl_hr_recruitment/static/description/src/img/aspire-logo.png"/>
+            <field name="public">true</field>
+        </record>
+        <record id="interview_schedule_face_to_face" model="ir.attachment">
+            <field name="name">interview_schedule_face_to_face.png</field>
+            <field name="type">binary</field>
+            <field name="datas" type="base64" file="aspl_hr_recruitment/static/description/src/img/interview_schedule_face_to_face.png"/>
+            <field name="public">true</field>
+        </record>
+        <record id="interview_schedule_Telephonic" model="ir.attachment">
+            <field name="name">interview_schedule_Telephonic.png</field>
+            <field name="type">binary</field>
+            <field name="datas" type="base64" file="aspl_hr_recruitment/static/description/src/img/interview_schedule_Telephonic.png"/>
+            <field name="public">true</field>
+        </record>
+
+        <!-- Automated action for Applicant Activity Creation -->
+        <!-- <record id="create_application_activity" model="base.automation">
+            <field name="name">Applicant Activity</field>
+            <field name="model_id" ref="mail.model_mail_tracking_value"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="filter_domain">["&amp;",["mail_message_id.model","ilike","hr.applicant"],["field.name","ilike","Stage"]]
+            </field>
+            <field name="code">record.create_applicant_activity()</field>
+        </record> -->
+
+        <!-- Automated action for Applicant Activity Creation -->
+        <!--<record id="update_candidates" model="base.automation">
+            <field name="name">Update Candidates Skill as per Application</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="trigger">on_write</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="filter_domain">[["stage_id.name","=","Offered"]]</field>
+            <field name="trigger_field_ids" eval="[(4,ref('hr_recruitment.field_hr_applicant__stage_id'))]"/>
+            <field name="code">record.update_candidate_skill()</field>
+        </record>-->
+
+        <!-- Automated action for Applicant Skills update-->
+        <!--<record id="update_application_skills" model="base.automation">
+            <field name="name">Update Skills on Application from Feedbacks</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="trigger">on_create_or_write</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="trigger_field_ids" eval="[(4,ref('aspl_hr_recruitment.field_hr_applicant__feedbacks_ids'))]"/>
+            <field name="code">record.update_applicant_skill()</field>
+        </record>-->
+
+        <!--<record id="update_application_skills_from_feedbacks" model="base.automation">
+            <field name="name">Update Skills by feedbacks</field>
+            <field name="model_id" ref="aspl_hr_recruitment.model_int_feedbacks_skill"/>
+            <field name="trigger">on_create_or_write</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">record.update_skills()</field>
+        </record>-->
+
+        <!-- Template for scheduling interview -->
+        <record id="interview_schedule" model="mail.template">
+            <field name="name">Interview Schedule</field>
+            <field name="subject">Interview Schedule</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="email_from">{{object.user_id.employee_id.work_email}}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <t t-set="attach_id" t-value="object.get_attach_id()"/>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                            <!-- <img t-attf-src="record.get('company_logo')"  /> -->
+                                            <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[1] }}/datas" style="width:55%;margin-top:20ox;" t-att-alt="object.company_id.name" ></img>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Dear
+                                                                <t t-out="object.partner_name">Candidate</t>
+                                                            </h3>
+                                                            <p class="lead" style="font-size: 16px;">Thanks for applying
+                                                                for
+                                                                <strong>
+                                                                    <t t-out="object.job_id.name">Respected Job
+                                                                        Name
+                                                                    </t>
+                                                                </strong>
+                                                                at
+                                                                Aspire.
+                                                            </p>
+                                                            
+                                                            <t t-if="object.telephonic == False">
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                    <t t-if="ctx.get('interview_round') == 'First Interview'">
+                                                                        We glad to inform you that, your profile has been
+                                                                        shortlisted for the interview process. You would
+                                                                        require
+                                                                        to come down for a personal interview at our office.
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        We glad to inform you that, your profile has been
+                                                                        shortlisted for the interview process. You would
+                                                                        require
+                                                                        to come down for a personal interview at our office.
+                                                                    </t>
+                                                                </p>
+                                                                <br/>
+                                                                <p>
+                                                                    <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[2] }}/datas" style="height:242px;width:430px"/>
+                                                                </p>
+                                                                <br/>
+                                                            </t>
+                                                            <t t-if="object.telephonic == True">
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                    <t t-if="ctx.get('interview_round') == 'First Interview'">
+                                                                        We glad to inform you that, your profile has been
+                                                                        shortlisted for the interview process. So please be
+                                                                        ready for an interview on given time.
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        We glad to inform you that, your profile has been
+                                                                        shortlisted for the interview process. So please be
+                                                                        ready for an interview on given time.
+                                                                    </t>    
+                                                                </p>
+                                                                <br/>
+                                                                <p>
+                                                                    <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[3] }}/datas" alt="" style="height:242px;width:430px"/>
+                                                                </p>
+                                                                <br/>
+                                                            </t>
+                                                            <table class="info"
+                                                                   style="background-color: #f5f5f5; padding: 15px 15px;"
+                                                                   width="100% ">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <p style="margin: 0 0 5px 0; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                                <strong>Date:</strong>
+                                                                                <t t-out="object.interview_date">
+                                                                                    Interview Date
+                                                                                </t>
+                                                                            </p>
+                                                                            <p style="margin: 0 0 5px 0; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                                <strong>Day:</strong>
+                                                                                <t t-out="object.interview_day">
+                                                                                    Interview Day
+                                                                                </t>
+                                                                            </p>
+                                                                            <p style="margin: 0 0 5px 0; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                                <strong>Time:</strong>
+                                                                                <t t-out="object.interview_time">
+                                                                                    Interview Time
+                                                                                </t>
+                                                                            </p>
+                                                                            <t t-if="object.telephonic == True and object.interview_type">
+                                                                                <p style="margin: 0 0 5px 0; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                                    <strong>Interview Type:</strong>
+                                                                                    <t t-out="object.interview_type">
+                                                                                        Interview Type
+                                                                                        <strong>Other Instructions :</strong>
+                                                                                    </t>
+                                                                                </p>
+                                                                            </t>
+
+                                                                            <t t-if="object.telephonic == False">
+                                                                                <p style="margin: 0 0 5px 0; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                                    <strong>Interview Venue:</strong>
+                                                                                    <t t-out="object.work_location_id.address_id.name"/> <t t-if="object.work_location_id.address_id.street"><t t-out="object.work_location_id.address_id.street"/>,</t>
+                                                                                    <t t-if="object.work_location_id.address_id.street2"> <t t-out="object.work_location_id.address_id.street2"/>,</t> <t t-out="object.work_location_id.address_id.city"/> - <t t-out="object.work_location_id.address_id.zip"/>
+
+                                                                                </p>
+                                                                                <br/>
+                                                                                <a style="margin: 0 0 5px 0; font-weight: normal; font-size: 14px; line-height: 1.6; color: #2ba6cb;"
+                                                                                   t-attf-href="{{object.work_location_id.gmap_url}}">
+                                                                                    Google Map Link
+                                                                                </a>
+                                                                            </t>
+
+                                                                            <t t-if="object.telephonic == True and object.interview_type_message">
+                                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                                    <strong>Other Instructions :</strong>
+                                                                                    <t t-out="object.interview_type_message">
+                                                                                        Interview Type Message
+                                                                                    </t>
+                                                                                </p>
+                                                                            </t>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <t t-if="object.telephonic == False">
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                    You are requested to bring your updated resume and
+                                                                    one
+                                                                    passport size photo along with you for the
+                                                                    interview.
+                                                                </p>
+                                                            </t>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Please confirm your presence by responding to this email
+                                                                or contact me to reschedule the interview in case the
+                                                                above time does not suit you. You can find my contact
+                                                                details in my signature.
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                We look forward to seeing you.
+                                                            </p>
+                                                            <br/>
+                                                            
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <strong><t t-out="object.user_id.employee_id.name"/> | <t t-out="object.user_id.employee_id.job_title"/></strong>
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Cell: <t t-out="object.user_id.employee_id.work_phone"></t> | Desk: +917946025309 
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <a style="color: #2ba6cb;"
+                                                                   t-attf-href="mailto:{{object.user_id.employee_id.work_email}}" target="_blank"
+                                                                   rel="noopener"><t t-out="object.user_id.employee_id.work_email"/>
+                                                                </a>
+                                                                <a style="color: #2ba6cb;" t-attf-href="{{object.company_id.website}}"
+                                                                   target="_blank" rel="noopener"><t t-out="object.company_id.website"/>
+                                                                </a>
+                                                            </p>
+                                                            <ul style="list-style: none; margin: 5px 0 0; padding: 0;">
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/0e3c382e8c.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_facebook}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0;">
+                                                                    <a t-attf-href="{{object.company_id.social_twitter}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_linkedin}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/44addf5641.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.pinterest.com/aspiresoftware/">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/280a83b5d5.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_instagram}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868978-1583142.png" style="width:20px"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 10px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_youtube}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-youtube-85-226402.png" style="width:23px;"/>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <!-- Templates for refusing applicants Reason:- Rejected in interview  -->
+        <record id="applicant_refuse_2" model="mail.template">
+            <field name="name">Application refused - Rejected in interview</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="subject">Application refused</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="email_from">{{object.user_id.employee_id.work_email}}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}" t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;" />
+                                        </div>  
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Dear <t t-out="object.partner_name">Applicant</t>,
+                                                            </h3>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Thank you for showing interest in our company and
+                                                                sharing your application. After your interview(s) at our
+                                                                organization, we reached on a feedback that your
+                                                                candidature does not match with our needs. Should there
+                                                                be in matching requirement in the future, we will be
+                                                                happy to contact you.
+                                                            </p>
+                                                            <p>
+                                                                <img src="https://aspiresoftware.in/images/odoo_images/rejected.png"
+                                                                     alt="" width="100%" height="300"/>
+                                                            </p>
+
+                                                            
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <strong><t t-out="object.user_id.employee_id.name"/> | <t t-out="object.user_id.employee_id.job_title"/></strong>
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Cell: <t t-out="object.user_id.employee_id.work_phone"></t> | Desk: +917946025309 
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <a style="color: #2ba6cb;"
+                                                                   t-attf-href="mailto:{{object.user_id.employee_id.work_email}}" target="_blank"
+                                                                   rel="noopener"><t t-out="object.user_id.employee_id.work_email"/>
+                                                                </a>
+                                                                |
+                                                                <a style="color: #2ba6cb;" t-attf-href="{{object.company_id.website}}"
+                                                                   target="_blank" rel="noopener"><t t-out="object.company_id.website"/>
+                                                                </a>
+                                                            </p>
+                                                            <ul style="list-style: none; margin: 5px 0 0; padding: 0;">
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/skype.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_facebook}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0;">
+                                                                    <a t-attf-href="{{object.company_id.social_twitter}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_linkedin}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/twitter.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.pinterest.com/aspiresoftware/">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/pinterest.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_instagram}}">
+                                                                       <img src="https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868978-1583142.png" style="width:20px"/>
+                                                                    </a>
+                                                                </li>
+
+                                                                <li style="float: left; margin: 0 10px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_youtube}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-youtube-85-226402.png" style="width:23px;"/>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+
+        <!-- Templates to notify employee referral about Application accepted. -->
+        <record id="employee_accepted_notify" model="mail.template">
+            <field name="name">Application accepted</field>
+            <field name="subject">Thank You</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+            <field name="email_from">{{object.user_id.employee_id.work_email}}</field>
+            <field name="partner_to">{{ object.partner_id and object.partner_id.id }}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}" t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100% ">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Dear <t t-out="object.partner_id.name">
+                                                                Applicant</t>,
+                                                            </h3>
+
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                We would like to inform you that your referenced
+                                                                applicant
+                                                                <strong>
+                                                                    <t t-out="object.partner_name">Applicant</t>
+                                                                </strong>
+                                                                is
+                                                                selected.
+                                                            </p>
+                                                            <p>
+                                                                <img src="https://aspiresoftware.in/images/odoo_images/skype.png"
+                                                                     alt="" width="100%" height="300"/>
+                                                            </p>
+
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Thank you for your precious time and effort.
+                                                            </p>
+
+                                                            <br/>
+                                                            
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <strong><t t-out="object.user_id.employee_id.name"/> | <t t-out="object.user_id.employee_id.job_title"/></strong>
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Cell: <t t-out="object.user_id.employee_id.work_phone"></t> | Desk: +917946025309 
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <a style="color: #2ba6cb;"
+                                                                   t-attf-href="mailto:{{object.user_id.employee_id.work_email}}" target="_blank"
+                                                                   rel="noopener"><t t-out="object.user_id.employee_id.work_email"/>
+                                                                </a>
+
+                                                                <a style="color: #2ba6cb;" t-attf-href="{{object.company_id.website}}"
+                                                                   target="_blank" rel="noopener"><t t-out="object.company_id.website"/>
+                                                                </a>
+                                                            </p>
+                                                            <ul style="list-style: none; margin: 5px 0 0; padding: 0;">
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/skype.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_facebook}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0;">
+                                                                    <a t-attf-href="{{object.company_id.social_twitter}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_linkedin}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/twitter.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.pinterest.com/aspiresoftware/">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/pinterest.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_instagram}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868978-1583142.png" style="width:20px"/>
+                                                                    </a>
+                                                                </li>
+
+                                                                <li style="float: left; margin: 0 10px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_youtube}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-youtube-85-226402.png" style="width:23px;"/>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <!-- Templates for refusing applicants Reason - Didn’t turn up-->
+        <record id="applicant_refuse_1" model="mail.template">
+            <field name="name">Application refused - Didn't turn up</field>
+            <field name="subject">Application refused</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="email_from">{{object.user_id.employee_id.work_email}}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}" t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Dear <t t-out="object.partner_id.name">
+                                                                Applicant</t>,
+                                                            </h3>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                We thank you for your interest in our company and for
+                                                                your application, Unfortunately you are failed to turn
+                                                                up for interview because of any reason at our
+                                                                organization, we are sorry to inform you that you are
+                                                                not qualify to appear in interview.
+                                                            </p>
+                                                            <p>
+                                                                <img src="https://aspiresoftware.in/images/odoo_images/absent.png"
+                                                                     alt="" width="100%" height="300"/>
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note:</strong>
+                                                                In future if you want to appear for interview contact on
+                                                                below mention contact.
+                                                            </p>
+                                                            <br/>
+
+                                                            
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong><t t-out="object.user_id.employee_id.name"/> | <t t-out="object.user_id.employee_id.job_title"/></strong>
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Cell: <t t-out="object.user_id.employee_id.work_phone"></t> | Desk: +917946025309 
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <a style="color: #2ba6cb;"
+                                                                   t-attf-href="mailto:{{object.user_id.employee_id.work_email}}" target="_blank"
+                                                                   rel="noopener"><t t-out="object.user_id.employee_id.work_email"/>
+                                                                </a>
+                                                                |
+                                                                <a style="color: #2ba6cb;" t-attf-href="{{object.company_id.website}}"
+                                                                   target="_blank" rel="noopener"><t t-out="object.company_id.website"/>
+                                                                </a>
+                                                            </p>
+                                                            <ul style="list-style: none; margin: 5px 0 0; padding: 0;">
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/skype.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_facebook}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0;">
+                                                                    <a t-attf-href="{{object.company_id.social_twitter}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_linkedin}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/twitter.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.pinterest.com/aspiresoftware/">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/pinterest.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_instagram}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868978-1583142.png" style="width:20px"/>
+                                                                    </a>
+                                                                </li>
+
+                                                                <li style="float: left; margin: 0 10px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_youtube}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-youtube-85-226402.png" style="width:23px;"/>
+                                                                    </a>
+                                                                </li>  
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <!-- Templates for refusing applicants Reason:- Didn’t Clear Test -->
+        <record id="applicant_refuse_3" model="mail.template">
+            <field name="name">Application refused - Didn;t Clear Test</field>
+            <field name="subject">Application refused</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="email_from">{{object.user_id.employee_id.work_email}}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}" t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Dear <t t-out="object.partner_name">Applicant</t>,
+                                                            </h3>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                We thank you for your interest in our company and for
+                                                                your application. Unfortunately you didn’t reach to the
+                                                                passing marks in test you appeared in our organization.
+                                                                Sorry to inform you that you are not eligible
+                                                                to appear for interview at our organization.
+                                                            </p>
+                                                            <p>
+                                                                <img src="https://aspiresoftware.in/images/odoo_images/failed.png"
+                                                                     alt="" width="100%" height="300"/>
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <strong>Note:</strong>
+                                                                You will be eligible for interview again at our
+                                                                organization after 6 months.
+                                                            </p>
+
+                                                            <br/>
+                                                            
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <strong><t t-out="object.user_id.employee_id.name"/> | <t t-out="object.user_id.employee_id.job_title"/></strong>
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Cell: <t t-out="object.user_id.employee_id.work_phone"></t> | Desk: +917946025309
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <a style="color: #2ba6cb;"
+                                                                   t-attf-href="mailto:{{object.user_id.employee_id.work_email}}" target="_blank"
+                                                                   rel="noopener"><t t-out="object.user_id.employee_id.work_email"/>
+                                                                </a>
+                                                                |
+                                                                <a style="color: #2ba6cb;" t-attf-href="{{object.company_id.website}}"
+                                                                   target="_blank" rel="noopener"><t t-out="object.company_id.website"/>
+                                                                </a>
+                                                            </p>
+                                                            <ul style="list-style: none; margin: 5px 0 0; padding: 0;">
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/skype.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_facebook}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0;">
+                                                                    <a t-attf-href="{{object.company_id.social_twitter}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_linkedin}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/twitter.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.pinterest.com/aspiresoftware/">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/pinterest.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_instagram}}">
+                                                                       <img src="https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868978-1583142.png" style="width:20px"/>
+                                                                    </a>
+                                                                </li>
+
+                                                                <li style="float: left; margin: 0 10px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_youtube}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-youtube-85-226402.png" style="width:23px;"/>
+                                                                    </a>
+                                                                </li>  
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <!-- Templates Application refused - Not matching with requirement. -->
+
+        <record id="applicant_refuse_not_matching_requirement" model="mail.template">
+            <field name="name">Application refused - Not matching with requirement</field>
+            <field name="subject">Application - Not matching with requirement</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="email_from">{{object.user_id.employee_id.work_email}}</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"  style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}" t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;" />
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h3 style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Dear <t t-out="object.partner_name">Applicant</t>,
+                                                            </h3>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Thank you for showing interest in our company and
+                                                                sharing your application. In resume Screeing , we
+                                                                reached on a feedback that your profile does not match
+                                                                with our requirements at this moment.
+                                                            </p>
+                                                            <p>
+                                                                <img src="https://aspiresoftware.in/images/odoo_images/rejected.png"
+                                                                     alt="" width="100%" height="300"/>
+                                                            </p>
+
+                                                            
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <strong><t t-out="object.user_id.employee_id.name"/> | <t t-out="object.user_id.employee_id.job_title"/></strong>
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                Cell: <t t-out="object.user_id.employee_id.work_phone"></t> | Desk: +917946025309 
+                                                            </p>
+                                                            <p style="margin: 0px; font-weight: normal; font-size: 14px; line-height: 1.6;">
+                                                                <a style="color: #2ba6cb;"
+                                                                   t-attf-href="mailto:{{object.user_id.employee_id.work_email}}" target="_blank"
+                                                                   rel="noopener"><t t-out="object.user_id.employee_id.work_email"/>
+                                                                </a>
+                                                                |
+                                                                <a style="color: #2ba6cb;" t-attf-href="{{object.company_id.website}}"
+                                                                   target="_blank" rel="noopener"><t t-out="object.company_id.website"/>
+                                                                </a>
+                                                            </p>
+                                                            <ul style="list-style: none; margin: 5px 0 0; padding: 0;">
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://is.gd/un2WZj&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNHp-wjG12BdxvbbNeM0SamdJy5QgA">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/skype.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_facebook}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/1d52497af7.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0;">
+                                                                    <a t-attf-href="{{object.company_id.social_twitter}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/ef63fac777.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_linkedin}}">
+                                                                        <img src="https://share1.cloudhq-mkt3.net/09d547ed91.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.google.com/url?q=https://plus.google.com/u/0/%2BAspireSoftwareSolutionsAhmedabad/&amp;source=gmail&amp;ust=1548822142933000&amp;usg=AFQjCNEFyUAFSdeFo96qkLGB7aeTFPW04w">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/twitter.png"/>
+                                                                    </a>
+                                                                </li>
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a href="https://www.pinterest.com/aspiresoftware/">
+                                                                        <img src="https://aspiresoftware.in/images/odoo_images/pinterest.png"/>
+                                                                    </a>
+                                                                </li> -->
+                                                                <li style="float: left; margin: 0 5px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_instagram}}">
+                                                                       <img src="https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868978-1583142.png" style="width:20px"/>
+                                                                    </a>
+                                                                </li>
+
+                                                                <li style="float: left; margin: 0 10px 0 0; display: inline-block;">
+                                                                    <a t-attf-href="{{object.company_id.social_youtube}}">
+                                                                        <img src="https://cdn.iconscout.com/icon/free/png-512/free-youtube-85-226402.png" style="width:23px;"/>
+                                                                    </a>
+                                                                </li> 
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <!-- Create employee job position-->
+        <!-- <record id="job_ase" model="hr.job">
+            <field name="name">Associate Software Engineer</field>
+            <field name="department_id" ref="aspl_hr_recruitment.department_software"/>
+        </record>
+
+        <record id="job_se" model="hr.job">
+            <field name="name">Software Engineer</field>
+            <field name="department_id" ref="aspl_hr_recruitment.department_software"/>
+        </record>
+
+        <record id="job_sse" model="hr.job">
+            <field name="name">Senior Software Engineer</field>
+            <field name="department_id" ref="aspl_hr_recruitment.department_software"/>
+        </record>
+
+        <record id="job_pl" model="hr.job">
+            <field name="name">Project Leader</field>
+            <field name="department_id" ref="aspl_hr_recruitment.department_software"/>
+        </record>
+
+        <record id="job_pm" model="hr.job">
+            <field name="name">Project Manager</field>
+            <field name="department_id" ref="aspl_hr_recruitment.department_software"/>
+        </record>
+
+        <record id="job_dmh" model="hr.job">
+            <field name="name">Delivery Manager / Head</field>
+            <field name="department_id" ref="aspl_hr_recruitment.department_software"/>
+        </record> -->
+        <!-- End of employee job position-->
+    </data>
+</odoo>

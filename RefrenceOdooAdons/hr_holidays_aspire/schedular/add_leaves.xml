@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <!-- add noupdate true on svn-->
+  <data noupdate="1">
+        <record id="ir_cron_mail_gateway_action1" model="ir.cron">
+            <field name="name">Carry Forward leave in year 2016</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">hr.holidays</field>
+            <field name="function">leaves_forward_old_policy</field>
+            <field name="active">True</field>
+            <field name="args">()</field>
+        </record>
+        
+        <record id="ir_cron_mail_gateway_action2" model="ir.cron">
+            <field name="name">Add and carry forward leave schedular</field>
+            <field name="priority">2</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">hr.holidays</field>
+            <field name="function">leave_schedular</field>
+            <field name="active">False</field>
+            <field name="args">()</field>
+        </record>
+        
+        <record id="ir_cron_mail_gateway_action3" model="ir.cron">
+            <field name="name">Approve leave notification</field>
+            <field name="priority">3</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">hr.holidays</field>
+            <field name="function">approve_leave_notification_schedular</field>
+            <field name="active">True</field>
+            <field name="args">()</field>
+        </record>
+    </data>
+</openerp>

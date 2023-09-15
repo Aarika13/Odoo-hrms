@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Transfer Application-->
+        <record id="transfer_to_application_view_form" model="ir.ui.view">
+            <field name="name">transfer.to.application.form</field>
+            <field name="model">transfer.to.application</field>
+            <field name="arch" type="xml">
+                <form string="Move To Application">
+                    <sheet>
+                        <group>
+                            <field name="job_opening_id" required="1" options="{'no_create':1}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="transfer_to_application" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="move_to_application_action" model="ir.actions.act_window">
+            <field name="name">Move To Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transfer.to.application</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="transfer_to_application_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!--Aspire Transfer Application-->
+        <record id="aspire_transfer_to_application_view_form" model="ir.ui.view">
+            <field name="name">aspire.transfer.to.application.form</field>
+            <field name="model">aspire.transfer.to.application</field>
+            <field name="arch" type="xml">
+                <form string="Move To Application">
+                    <sheet>
+                        <group>
+                            <field name="job_opening_id" required="1" options="{'no_create':1}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="aspire_transfer_to_application" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="aspire_move_to_application_action" model="ir.actions.act_window">
+            <field name="name">Aspire Move To Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">aspire.transfer.to.application</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="aspire_transfer_to_application_view_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

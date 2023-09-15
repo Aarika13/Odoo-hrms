@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="inherit_account_analytic" model="ir.ui.view">
+            <field name="name">inherit.account.analytic.account.list</field>
+            <field name="model">account.analytic.account</field>
+            <!--<field name="groups_id"
+                   eval="[(4, ref('hr_timesheet_aspire.group_timesheet_manager')),(4, ref('hr_timesheet_aspire.group_hr_timesheet_user'))]"/>-->
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_list"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='debit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='balance']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='credit']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="analytic.view_account_analytic_account_form" model="ir.ui.view">
+            <field name="name">analytic.analytic.account.form</field>
+            <field name="model">account.analytic.account</field>
+            <field name="arch" type="xml">
+                <form string="Analytic Account" groups="hr_timesheet_aspire.group_timesheet_admin">
+                    <sheet string="Analytic Account">
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="action"
+                                    name="%(analytic.account_analytic_line_action)d"
+                                    icon="fa-usd" string="Cost/Revenue" widget="statinfo"/>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline" placeholder="e.g. Project XYZ"/>
+                            </h1>
+                        </div>
+                        <div name="project"/>
+                        <group name="main">
+                            <group>
+                                <!--<field name="account_type" invisible="1"/>-->
+                                <field name="partner_id"/>  <!--domain="[('customer', '=', True)]"-->
+                            </group>
+                            <group>
+                                <field name="code"/>
+                                <!--<field name="tag_ids" widget="many2many_tags"/>-->
+                                <field name="company_id"/>
+                                <field name="currency_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

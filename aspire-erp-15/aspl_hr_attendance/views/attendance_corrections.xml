@@ -1,0 +1,127 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <!--Correction Form View-->
+        <record id="correction_view_form" model="ir.ui.view">
+            <field name="name">correction Form</field>
+            <field name="model">attendance.corrections</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Submit" class="oe_highlight oe_read_only" name="submit"
+                                type="object" attrs="{'invisible': [('work_state','not in',('new'))]}"/>
+                        <button string="Approve" class="oe_highlight oe_read_only" name="approve"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state','not in',('to_submit')),('logged_in_user','=',True)]}"
+                                groups="hr_attendance.group_hr_attendance_manager"
+                        />
+                        <button string="Reject" class="oe_highlight oe_read_only" name="reject"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state','in',('new','rejected')),('logged_in_user','=',True)]}"
+                                groups="hr_attendance.group_hr_attendance_manager"
+                        />
+                        <button string="Set to Draft" class="oe_highlight oe_read_only" name="set_to_default"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state', 'in', ('considered','new')),('logged_in_user','=',False)]}"
+                        />
+                        <field name="work_state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <!-- Replaced groups as per Odoo 15 default attendance groups"-->
+                                <field name="employee_id"
+                                       groups="hr_attendance.group_hr_attendance_manager"
+                                       options='{"no_open": True , "no_quick_create" : True , "no_create_edit": True}'/>
+                                <field name="in_time"
+                                       attrs="{'readonly': ['|',('work_state', '=', 'considered'),('work_state', '=', 'to_submit')]}"/>
+                                <field name="out_time"
+                                       attrs="{'readonly': ['|',('work_state', '=', 'considered'),('work_state', '=', 'to_submit')]}"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="logged_in_user" invisible="1"/>
+                                <field name="attendance_id" invisible="1"/>
+                                <field name="total_time" widget="float_time"/>
+                                <field name="note"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Correction Tree View-->
+        <record id="correction_view_tree" model="ir.ui.view">
+            <field name="name">correction Tree</field>
+            <field name="model">attendance.corrections</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="work_state == 'approved'" decoration-danger="work_state == 'rejected'">
+                    <field name="employee_id"/>
+                    <field name="in_time"/>
+                    <field name="out_time"/>
+                    <field name="total_time" widget="float_time"/>
+                    <field name="work_state" widget="statusbar" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Correction Action-->
+        <record id="action_correction_view" model="ir.actions.act_window">
+            <field name="name">Correction</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">attendance.corrections</field>
+            <field name="context">{"search_default_corrections":1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Corrections Search view-->
+        <record model="ir.ui.view" id="view_hr_attendance_correction_filter">
+            <field name="name">view_hr_attendance_correction_filter</field>
+            <field name="model">attendance.corrections</field>
+            <field name="arch" type="xml">
+                <search string="Hr Attendance Correction Search">
+                    <field name="work_state"/>
+                    <field name="in_time"/>
+                    <filter string="Current Month" name="current_month"
+                            domain="[('in_time','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')),('in_time','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Last Month" name="last_month"
+                            domain="[('in_time','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('in_time','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Last Two Month" name="last_two_month"
+                            domain="[('in_time','&gt;=',(context_today()-relativedelta(months=2)).strftime('%%Y-%%m-01')),('in_time','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <separator/>
+                    <filter string="To Approve" name="toSubmit" domain="[('work_state', '=', 'to_submit')]"/>
+                    <filter string="New" name="new" domain="[('work_state', '=', 'new')]"/>
+                    <filter string="Error" name="approved" domain="[('work_state', '=', 'approved')]"/>
+                    <filter string="Considered" name="considered" domain="[('work_state', '=', 'considered')]"/>
+                    <filter string="Rejected" name="rejected" domain="[('work_state', '=', 'rejected')]"/>
+                    <filter string="Corrections" name="corrections"
+                            domain="[('work_state', 'in', ('new','to_submit','rejected'))]"/>
+                </search>
+            </field>
+        </record>
+
+        <!--Multiple Correction Approval Action-->
+        <record id="model_attendance_corrections_action_approve" model="ir.actions.server">
+            <field name="name">Approve Corrections</field>
+            <field name="model_id" ref="aspl_hr_attendance.model_attendance_corrections"/>
+            <field name="binding_model_id" ref="aspl_hr_attendance.model_attendance_corrections"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_attendance_corrections()</field>
+            <field name="groups_id" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+
+        <!--Correction Request Menu-->
+        <menuitem action="action_correction_view"
+                  id="menu_correction"
+                  name="Correction Request"
+                  parent="hr_attendance.menu_hr_attendance_root"
+                  sequence="20"
+        />
+
+    </data>
+</odoo>

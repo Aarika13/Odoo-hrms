@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="work_from_home_mail_employee_template" model="mail.template">
+            <field name="name">Work From Home of Employee</field>
+            <field name="subject">Work From Home - {{object.employee_id.name}} - {{ctx.get('total_time')}} hours</field>
+            <field name="email_from">{{object.employee_id.work_email}}</field>
+            <field name="email_to">{{ctx.get('mail_to')}}</field>
+            <field name="email_cc">{{ctx.get('mail_cc')}}</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+
+                        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                            <tbody>
+                                <tr>
+                                    <td bgcolor="#FFFFFF">
+                                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+                                                <table width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;"><t t-out="object.employee_id.name"></t> [<t t-out="object.employee_id.employee_no"></t>] has applied for a work from home.</p>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Following are the work from home details</p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Check In : <t t-out="object.start_date"></t></p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;"> Check Out : <t t-out="object.end_date"></t></p>
+                                                                <!-- <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">From Date :  <t t-out="object.request_date_from"></t></p> -->
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Duration : <t t-esc="ctx.get('total_time')"></t> hours</p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Work Summary : <t t-out="object.work_summary"></t></p>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Regards, <t t-out="object.employee_id.name"></t></p>
+                                                                <br/>
+                                                                <div style="margin: 16px 0px 16px 0px;">
+                                                                    <a t-attf-href="{{ ctx.get('approvePageURL') }}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                        View Detail 
+                                                                    </a>
+                                                            
+                                                                </div>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Note : This is an auto-generated mail. Please do not reply</p>
+
+                                                            </td>  
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <br/></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+            </field>
+        </record>
+
+        <record id="work_from_home_mail_approver_template" model="mail.template">
+            <field name="name">Approve/Reject of Work From Home</field>
+            <field name="subject">Work From Home - {{object.employee_id.name}} - {{ctx.get('total_time')}} hours</field>
+            <field name="email_from">{{object.employee_id.parent_id.work_email}}</field>
+            <field name="email_to">{{ctx.get('mail_to')}}</field>
+            <field name="email_cc">{{ctx.get('mail_cc')}}</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+
+                        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                            <tbody>
+                                <tr>
+                                    <td bgcolor="#FFFFFF">
+                                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+                                                <table width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Hello, <t t-out="object.employee_id.name"></t> [<t t-out="object.employee_id.employee_no"></t>]</p>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Your work from home has been <t t-out="object.work_state"></t> by <t t-out="object.employee_id.parent_id.name"></t>.</p>
+                                                                <br/>
+                                                                <div style="margin: 16px 0px 16px 0px;">
+                                                                    <a t-attf-href="{{ ctx.get('approvePageURL') }}"
+                                                                        style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                        View Detail </a>
+                                                                </div>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Note : This is an auto-generated mail. Please do not reply</p>
+
+                                                            </td>  
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <br/></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </field>
+        </record>
+
+        <record id="application_work_from_home_mail_employee_template" model="mail.template">
+            <field name="name">Application Of Work From Home</field>
+            <field name="subject">Application For Work From Home - {{object.employee_id.name}} - {{object.total_day}} days</field>
+            <field name="email_from">{{object.employee_id.work_email}}</field>
+            <field name="email_to">{{ctx.get('mail_to')}}</field>
+            <field name="email_cc">{{ctx.get('mail_cc')}}</field>
+            <field name="model_id" ref="model_application_work_from_home"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+
+                        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                            <tbody>
+                                <tr>
+                                    <td bgcolor="#FFFFFF">
+                                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+                                                <table width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;"><t t-out="object.employee_id.name"></t> [<t t-out="object.employee_id.employee_no"></t>] has applied for a Work From Home.</p>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Following are the work from home details</p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Start Date : <t t-out="object.start_date"></t></p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;"> End Date : <t t-out="object.end_date"></t></p>
+                                                                <!-- <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">From Date :  <t t-out="object.request_date_from"></t></p> -->
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Duration : <t t-out="object.total_day"></t> days</p>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Reason : <t t-out="object.reason"></t></p>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Regards, <t t-out="object.employee_id.name"></t></p>
+                                                                <br/>
+                                                                
+                                                                <div style="margin: 16px 0px 16px 0px;">
+                                                                    <a t-attf-href="{{ ctx.get('approvePageURL') }}"
+                                                                        style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                        View Detail </a>
+                                                                    
+                                                                </div>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Note : This is an auto-generated mail. Please do not reply</p>
+
+                                                            </td>  
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <br/></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </field>
+        </record>
+
+
+        <record id="application_work_from_home_mail_approver_template" model="mail.template">
+            <field name="name">Approve/Reject of Application Of Work From Home</field>
+            <field name="subject">Application For Work From Home - {{object.employee_id.name}} - {{object.total_day}} days</field>
+            <field name="email_from">{{object.employee_id.parent_id.work_email}}</field>
+            <field name="email_to">{{ctx.get('mail_to')}}</field>
+            <field name="email_cc">{{ctx.get('mail_cc')}}</field>
+            <field name="model_id" ref="model_application_work_from_home"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+
+                        <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                            <tbody>
+                                <tr>
+                                    <td bgcolor="#FFFFFF">
+                                        <div class="container" style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                            <div class="content" style="padding: 10px; max-width: 600px; margin: 0 auto; display: block;">
+                                                <table width="100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Hello, <t t-out="object.employee_id.name"></t> [<t t-out="object.employee_id.employee_no"></t>]</p>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Your Application has been <t t-out="object.work_state"></t> by <t t-out="object.employee_id.parent_id.name"></t>.</p>
+                                                                <br/>
+                                
+                                                                <div style="margin: 16px 0px 16px 0px;">
+                                                                    <a t-attf-href="{{ ctx.get('approvePageURL') }}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                                        View Detail
+                                                                    </a>
+                                                                </div>
+                                                                <br/>
+                                                                <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 0.5;">Note : This is an auto-generated mail. Please do not reply</p>
+
+                                                            </td>  
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <br/></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </field>
+        </record>
+    </data>
+</odoo>    

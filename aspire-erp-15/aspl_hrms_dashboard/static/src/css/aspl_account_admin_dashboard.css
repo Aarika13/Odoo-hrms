@@ -1,0 +1,138 @@
+.text-align {
+  margin-left: 16px;
+}
+
+.oh-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row.main-section {
+    margin: 0px !important;
+}
+
+.hr-chart-1 {
+    margin: 15px 0px;
+    background: #fff;
+    padding: 0px !important;
+        padding-top: 0px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, box-shadow;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+    padding-top: 3px !important;
+    border-radius: 10px;
+}
+
+.graph_view .legend {
+    margin-bottom: -60px !important;
+    display: inline-block;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+}
+.hr-chart-1{
+    margin: 15px 0px;
+    margin-top: 0.5rem !important;
+    background: #fff;
+    padding: 0px !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform, box-shadow;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+}
+.hr-chart-1:hover{
+    transform: translateY(-2px) translateZ(0) !important;
+    box-shadow: 0 10px 10px 0 rgba(62, 57, 107, 0.12), 0 0 0 transparent !important;
+}
+.stat-head {
+    text-align: left !important;
+    font-weight: 300;
+    font-size: 15px;
+    padding-top: 10px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+    width: 100%;
+}
+.emp_graph {
+    height: auto;
+    padding-bottom: 65px;
+    text-align: center !important;
+}
+.exp_salary_graph {
+    height: auto;
+    padding-bottom: 65px;
+    text-align: center !important;
+}
+.account_invoices {
+    height: auto;
+    padding-bottom: 65px;
+    text-align: center !important;
+}
+.empty_graph_data_invoice, .empty_graph_data_bill {
+    font-size: 16px;
+    height: auto;
+    padding-bottom: 40px;
+    text-align: center !important;
+    color: Green;
+}
+.account_bills {
+    height: auto;
+    padding-bottom: 65px;
+    text-align: center !important;
+}
+.earning_expense_chart {
+    height: auto;
+    padding-bottom: 65px;
+    text-align: center !important;
+}
+.oh_dashboards {
+    background-color: #f8faff !important;
+    padding: 0px !important;
+
+}
+
+.legend td, .legend .legend_col{
+    padding: 3px;
+    vertical-align:bottom;
+}
+.legendFreq, .legendPerc{
+    text-align: right;
+    width: 50px;
+}
+
+body .text-color {
+    color: #00438b;
+}
+.slice {
+    stroke: #fff;
+    stroke-width: 0px;
+}
+
+/* Leave graph */
+
+path {  stroke: #fff; }
+path:hover {  opacity:0.9; }
+rect:hover {  fill:#934da5; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+    border-collapse: collapse;
+    border-spacing: 0px;
+    display: inline-block;
+}
+
+.oh_dashboards{
+    padding-top :15px;
+    background-color: #f8faff !important;
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_equipment_admin" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="implied_ids" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>
+            <field name="category_id" ref="base.module_category_manufacturing_maintenance"/>
+        </record>
+
+        <function name="archive_rule" model="ir.rule"/>
+
+        <record model="ir.rule" id="equipment_own_rule">
+            <field name="name">Rule for Equipment</field>
+            <field name="model_id" ref="model_maintenance_equipment"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4 , ref('maintenance.group_equipment_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="equipment_own_rule_admin">
+            <field name="name">Rule for Equipment for Admin</field>
+            <field name="model_id" ref="model_maintenance_equipment"/>
+            <field name="global" eval="False"/>
+            <!--<field name="domain_force">[('employee_id.user_id','=',user.id)]</field>-->
+            <field name="groups" eval="[(4 , ref('aspl_equipment.group_equipment_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="request_own_rule">
+            <field name="name">Rule for Request</field>
+            <field name="model_id" ref="model_maintenance_request"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4 , ref('maintenance.group_equipment_manager'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record model="ir.rule" id="request_own_rule_admin">
+            <field name="name">Rule for Request for Admin</field>
+            <field name="model_id" ref="model_maintenance_request"/>
+            <field name="global" eval="False"/>
+            <!--<field name="domain_force">[('employee_id.user_id','=',user.id)]</field>-->
+            <field name="groups" eval="[(4 , ref('aspl_equipment.group_equipment_admin'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+    </data>
+</odoo>

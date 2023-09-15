@@ -1,0 +1,265 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <!--Attendance WFH form view-->
+        <record id="attendance_work_from_home_view_form" model="ir.ui.view">
+            <field name="name">Attendance Work From Home form</field>
+            <field name="model">attendance.work.from.home</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Submit" class="oe_highlight oe_read_only" name="submit_work_from_home"
+                                type="object" attrs="{'invisible': [('work_state','not in',('new'))]}"/>
+                        <button string="Approve" class="oe_highlight oe_read_only" name="approve"
+                                type="object"
+                                groups="hr_attendance.group_hr_attendance_manager,hr_attendance.group_hr_attendance_user"
+                                attrs="{'invisible': ['|',('work_state','not in',('to_submit')),('logged_in_user','=',True)]}"
+                        />
+                        <button string="Reject" class="oe_highlight oe_read_only" name="reject"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state','in',('new','rejected')),('logged_in_user','=',True)]}"
+                                groups="hr_attendance.group_hr_attendance_manager,hr_attendance.group_hr_attendance_user"/>
+                        <button string="Set to Draft" class="oe_highlight oe_read_only" name="set_to_default"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state', 'in', ('considered','new')),('logged_in_user','=',False)]}"/>
+                        <field name="work_state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"
+                                       groups="hr_attendance.group_hr_attendance_manager"
+                                       options='{"no_open": True , "no_quick_create" : True , "no_create_edit": True}'/>
+                                <!--groups="hr_attendance_aspire.group_manager_user,hr_attendance_aspire.group_admin_user" -->
+                                <field name="start_date"
+                                       attrs="{'readonly': ['|',('work_state', '=', 'considered'),('work_state', '=', 'to_submit')]}"/>
+                                <field name="end_date"
+                                       attrs="{'readonly': ['|',('work_state', '=', 'considered'),('work_state', '=', 'to_submit')]}"/>
+                                <field name="record_status" invisible="1"/>
+                                <field name="total_time" widget="float_time"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="logged_in_user" invisible="1"/>
+                                <field name="attendance_id" invisible="1"/>
+                            </group>
+                            <group>    
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="work_summary"/>
+                                <field name="name" invisible="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="application_work_from_home_view_form" model="ir.ui.view">
+            <field name="name">Application Work From Home form</field>
+            <field name="model">application.work.from.home</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Submit" class="oe_highlight oe_read_only" name="submit_application_work_from_home"
+                                type="object" attrs="{'invisible': [('work_state','not in',('new'))]}"/>
+                        <button string="Approve" class="oe_highlight oe_read_only" name="application_approve"
+                                type="object"
+                                groups="hr_attendance.group_hr_attendance_manager,hr_attendance.group_hr_attendance_user"
+                                attrs="{'invisible': ['|',('work_state','not in',('to_submit')),('logged_in_user','=',True)]}"
+                        />
+                        <button string="Reject" class="oe_highlight oe_read_only" name="application_reject"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state','in',('new','rejected')),('logged_in_user','=',True)]}"
+                                groups="hr_attendance.group_hr_attendance_manager,hr_attendance.group_hr_attendance_user"/>
+                        <button string="Set to Draft" class="oe_highlight oe_read_only" name="application_set_to_default"
+                                type="object"
+                                attrs="{'invisible': ['|',('work_state', 'in', ('new','approved','rejected')),('logged_in_user','=',False)]}"/>
+                        <field name="work_state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id"
+                                       groups="hr_attendance.group_hr_attendance_manager"
+                                       options='{"no_open": True , "no_quick_create" : True , "no_create_edit": True}'/>
+                                <field name="type_of_wfh"/> 
+                                <field name="reason"/>     
+                                <!--groups="hr_attendance_aspire.group_manager_user,hr_attendance_aspire.group_admin_user" -->
+                                
+                            </group>
+                            <group>
+                                <field name="start_date"
+                                       attrs="{'readonly': [('work_state', '=', 'to_submit')]}"/>
+                                <field name="end_date"
+                                       attrs="{'readonly': [('work_state', '=', 'to_submit')]}"/>
+                                <field name="total_day"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="logged_in_user" invisible="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                
+                                <field name="name" invisible="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Attendance WFH Tree view-->
+        <record id="attendance_work_from_home_view_tree" model="ir.ui.view">
+            <field name="name">Attendance Work From Home Tree</field>
+            <field name="model">attendance.work.from.home</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="total_time" string="Duration" widget="float_time"/>
+                    <field name="work_state"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="record_status" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="application_work_from_home_view_tree" model="ir.ui.view">
+            <field name="name">Application Work From Home Tree</field>
+            <field name="model">application.work.from.home</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="total_day"/>
+                    <field name="work_state"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="name" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Attendance WFH Action-->
+        <record id="action_attendance_work_from_home_view" model="ir.actions.act_window">
+            <field name="name">Attendance Work From Home</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">attendance.work.from.home</field>
+            <field name="context">{"search_default_wfh":1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_application_work_from_home_view" model="ir.actions.act_window">
+            <field name="name">Application Work From Home</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">application.work.from.home</field>
+            <field name="context">{"search_default_toSubmit":1}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Attendance WFH Search View-->
+        <record model="ir.ui.view" id="view_hr_attendance_wfh_filter">
+            <field name="name">view_hr_attendance_wfh_filter</field>
+            <field name="model">attendance.work.from.home</field>
+            <field name="arch" type="xml">
+                <search string="Hr Attendance wfh Search">
+                    <field name="work_state"/>
+                    <field name="start_date"/>
+                    <filter string="Current Month" name="current_month"
+                            domain="[('start_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')),('start_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Last Month" name="last_month"
+                            domain="[('start_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('start_date','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Last Two Month" name="last_two_month"
+                            domain="[('start_date','&gt;=',(context_today()-relativedelta(months=2)).strftime('%%Y-%%m-01')),('start_date','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <separator/>
+                    <filter string="To Approve" name="toSubmit" domain="[('work_state', '=', 'to_submit')]"/>
+                    <filter string="New" name="new" domain="[('work_state', '=', 'new')]"/>
+                    <filter string="Error" name="approved" domain="[('work_state', '=', 'approved')]"/>
+                    <filter string="Considered" name="considered" domain="[('work_state', '=', 'considered')]"/>
+                    <filter string="Rejected" name="rejected" domain="[('work_state', '=', 'rejected')]"/>
+                    <filter string="WFH" name="wfh" domain="[('work_state', 'in', ('new','to_submit','rejected'))]"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_hr_attendance_application_wfh_filter">
+            <field name="name">view_hr_attendance_application_wfh_filter</field>
+            <field name="model">application.work.from.home</field>
+            <field name="arch" type="xml">
+                <search string="Hr Attendance wfh Search">
+                    <filter string="Current Month" name="current_month"
+                            domain="[('start_date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01')),('start_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Last Month" name="last_month"
+                            domain="[('start_date','&gt;=',(context_today()-relativedelta(months=1)).strftime('%%Y-%%m-01')),('start_date','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <filter string="Last Two Month" name="last_two_month"
+                            domain="[('start_date','&gt;=',(context_today()-relativedelta(months=2)).strftime('%%Y-%%m-01')),('start_date','&lt;',time.strftime('%%Y-%%m-01'))]"/>
+                    <separator/>
+                    <filter string="Work From Home" name="toSubmit" domain="[('work_state', 'in', ('to_submit','new'))]"/>
+                </search>
+            </field>
+        </record>
+
+        <!--Multiple WFH approve action-->
+        <record id="model_attendance_work_from_home_action_approve" model="ir.actions.server">
+            <field name="name">Approve WFH</field>
+            <field name="model_id" ref="aspl_hr_attendance.model_attendance_work_from_home"/>
+            <field name="binding_model_id" ref="aspl_hr_attendance.model_attendance_work_from_home"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_approve_wfh()</field>
+            <field name="groups_id" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+
+        <!--<record id="approve_attendance_wfh_list_view" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'attendance.work.from.home'" name="model"/>
+            <field name="name">Approve WFH</field>
+            <field eval="'ir.actions.server,%d'%approve_attendance_wfh" name="value"/>
+            <field eval="True" name="object"/>
+        </record>-->
+        <!--WFH Menu-->
+        <menuitem name="Work From Home"
+                  parent="hr_attendance.menu_hr_attendance_root"
+                  id="attendance_work_from_home_menu"
+                  sequence="95"
+        />
+        <menuitem name="WFH Application"
+                  parent="attendance_work_from_home_menu"
+                  id="application_work_from_home_view_data"
+                  action="action_application_work_from_home_view"
+                  sequence="5"
+        />
+        <menuitem name="Work From Home"
+                  parent="attendance_work_from_home_menu"
+                  id="attendance_work_from_home_menu_list_data"
+                  action="action_attendance_work_from_home_view"
+                  sequence="6"
+        />
+
+        <!--groups="group_employee_user,group_manager_user,group_admin_user"
+         parent="hr_attendance.menu_open_view_attendance"-->
+
+    </data>
+</odoo>

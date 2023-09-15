@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="attendance_history_cron" model="ir.cron">
+            <field name="name">Attendance History Cron</field>
+            <field name="model_id" ref="model_attendance_history"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.generate_attendance_history()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">0</field>
+    </record>
+
+</odoo>

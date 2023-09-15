@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_hr_payslip_run_form_inherit" model="ir.ui.view">
+            <field name="name">hr.payslip.run.form.inherit</field>
+            <field name="model">hr.payslip.run</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr_payroll_community.hr_payslip_run_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//form/header/button[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//form/header/button[1]" position="after">
+                    <button string="Compute Sheets" name="compute_all" type="object" states="draft"/>
+                    <button string="Bank Sheet" name="bank_sheet" type="object" class="btn-primary"/>
+                    <button string="Salary Statement" name="generate_excel_salary_statement" type="object"
+                            class="btn-primary"/>
+                    <button string="Generate Payslips" name="auto_genarate_payslip1" type="object" states="draft"
+                            class="btn-primary"/>
+                </xpath>
+
+                <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="company_id" required="1"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record model="ir.actions.server" id="action_file_generation">
+            <field name="name">Generate File</field>
+            <field name="model_id" ref="model_hr_payslip_run"/>
+            <field name="binding_model_id" ref="model_hr_payslip_run"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.generate_excel_file()
+            </field>
+        </record>
+    </data>
+</odoo>

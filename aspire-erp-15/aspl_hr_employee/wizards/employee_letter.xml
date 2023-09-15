@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="employee_letter_wizard" model="ir.ui.view">
+        <field name="name">employee_letter_wizard</field>
+        <field name="model">employee.letter.wizard</field>
+        <field name="arch" type="xml">
+            <form string="leave wizard">
+                <group>
+                    <group>
+                        <field name="emp_letter_type"/>
+                    </group>
+                </group>
+                <!-- <group>
+                    <group>
+                        <field name="test_emp" attrs="{'invisible': [('emp_letter_type','not in', ('appointment_letter','offer_letter_experience','offer_letter_trainee'))]}"/>
+                    </group>
+                </group> -->
+                <footer>
+                    <button name="generate_employee_letter" string="Generate Letter" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="action_view_employee_letter_wizard" model="ir.actions.act_window">
+        <field name="name">Employee Letter</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.letter.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="employee_letter_wizard"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

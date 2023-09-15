@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/aspire/!svn/ver/2944/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views
+END
+hr_add_holidays_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/aspire/!svn/ver/2598/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views/hr_add_holidays_view.xml
+END
+hr_leave_menu.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repos/aspire/!svn/ver/2654/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views/hr_leave_menu.xml
+END
+hr_holiday_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repos/aspire/!svn/ver/2944/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views/hr_holiday_view.xml
+END
+inherit_res_company.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/aspire/!svn/ver/2670/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views/inherit_res_company.xml
+END
+hr_employee_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/repos/aspire/!svn/ver/2704/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views/hr_employee_view.xml
+END
+hr_holidays_status_view.xml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/aspire/!svn/ver/2719/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/views/hr_holidays_status_view.xml
+END

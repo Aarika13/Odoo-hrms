@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="perm_emp_as_seq" model="ir.sequence">
+            <field name="name">Permanent Employee</field>
+            <field name="code">hr.permanent.employee.as</field>
+            <field name="prefix">11</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_as_seq" model="ir.sequence">
+            <field name="name">Consultant Aspire</field>
+            <field name="code">hr.consultant.as</field>
+            <field name="prefix">12</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="trainee_as_seq" model="ir.sequence">
+            <field name="name">Trainee</field>
+            <field name="code">hr.trainee.as</field>
+            <field name="prefix">13</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="temp_emp_as_seq" model="ir.sequence">
+            <field name="name">Temporary Employee</field>
+            <field name="code">hr.temporary.employee.as</field>
+            <field name="prefix">14</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="client_as_seq" model="ir.sequence">
+            <field name="name">Client</field>
+            <field name="code">hr.client.as</field>
+            <field name="prefix">15</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_other_as_seq" model="ir.sequence">
+            <field name="name">Consultant Other</field>
+            <field name="code">hr.consultant.other.as</field>
+            <field name="prefix">16</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="perm_emp_aspl_seq" model="ir.sequence">
+            <field name="name">Permanent Employee</field>
+            <field name="code">hr.permanent.employee.aspl</field>
+            <field name="prefix">21</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_aspl_seq" model="ir.sequence">
+            <field name="name">Consultant Aspire</field>
+            <field name="code">hr.consultant.aspl</field>
+            <field name="prefix">22</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="trainee_aspl_seq" model="ir.sequence">
+            <field name="name">Trainee</field>
+            <field name="code">hr.trainee.aspl</field>
+            <field name="prefix">23</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="temp_emp_aspl_seq" model="ir.sequence">
+            <field name="name">Temporary Employee</field>
+            <field name="code">hr.temporary.employee.aspl</field>
+            <field name="prefix">24</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="client_aspl_seq" model="ir.sequence">
+            <field name="name">Client</field>
+            <field name="code">hr.client.aspl</field>
+            <field name="prefix">24</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_other_aspl_seq" model="ir.sequence">
+            <field name="name">Consultant Other</field>
+            <field name="code">hr.consultant.other.aspl</field>
+            <field name="prefix">24</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+
+        <record id="perm_emp_rtl_seq" model="ir.sequence">
+            <field name="name">Permanent Employee</field>
+            <field name="code">hr.permanent.employee.rtl</field>
+            <field name="prefix">31</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_rtl_seq" model="ir.sequence">
+            <field name="name">Consultant Aspire</field>
+            <field name="code">hr.consultant.rtl</field>
+            <field name="prefix">32</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="trainee_rtl_seq" model="ir.sequence">
+            <field name="name">Trainee</field>
+            <field name="code">hr.trainee.rtl</field>
+            <field name="prefix">33</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="temp_emp_rtl_seq" model="ir.sequence">
+            <field name="name">Temporary Employee</field>
+            <field name="code">hr.temporary.employee.rtl</field>
+            <field name="prefix">34</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="client_rtl_seq" model="ir.sequence">
+            <field name="name">Client</field>
+            <field name="code">hr.client.rtl</field>
+            <field name="prefix">35</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_other_rtl_seq" model="ir.sequence">
+            <field name="name">Consultant Other</field>
+            <field name="code">hr.consultant.other.rtl</field>
+            <field name="prefix">36</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="perm_emp_atl_seq" model="ir.sequence">
+            <field name="name">Permanent Employee</field>
+            <field name="code">hr.permanent.employee.atl</field>
+            <field name="prefix">41</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_atl_seq" model="ir.sequence">
+            <field name="name">Consultant Aspire</field>
+            <field name="code">hr.consultant.atl</field>
+            <field name="prefix">42</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="trainee_atl_seq" model="ir.sequence">
+            <field name="name">Trainee</field>
+            <field name="code">hr.trainee.atl</field>
+            <field name="prefix">43</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="temp_emp_atl_seq" model="ir.sequence">
+            <field name="name">Temporary Employee</field>
+            <field name="code">hr.temporary.employee.atl</field>
+            <field name="prefix">44</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="client_atl_seq" model="ir.sequence">
+            <field name="name">Client</field>
+            <field name="code">hr.client.atl</field>
+            <field name="prefix">45</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+        <record id="consultant_other_atl_seq" model="ir.sequence">
+            <field name="name">Consultant Other</field>
+            <field name="code">hr.consultant.other.atl</field>
+            <field name="prefix">46</field>
+            <field name="padding">4</field>
+            <field name="number_increment">1</field>
+            <field name="active">TRUE</field>
+            <field name="company_id" eval="1"/>
+        </record>
+    </data>
+</odoo>

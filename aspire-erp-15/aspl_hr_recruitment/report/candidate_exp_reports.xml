@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="candidate_exp_view_tree" model="ir.ui.view">
+        <field name="name">Candidate Experience report: List</field>
+        <field name="model">candidate.exp</field>
+        <field name="arch" type="xml">
+            <tree string="Candidate Experience" create="false" delete="false">
+                <field name="opening_id"/>
+                <field name="recruiter_id"/>
+                <field name="rat_1"/>
+                <field name="rat_2"/>
+                <field name="rat_3"/>
+                <field name="rat_4"/>
+                <field name="rat_5"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--<record id="view_candidate_exp_report_pivot" model="ir.ui.view">
+        <field name="name">Candidate Experience report: Pivot</field>
+        <field name="model">candidate.exp</field>
+        <field name="arch" type="xml">
+            <pivot string="Candidate Experience" disable_linking="1" sample="1">
+                <field name="applicant_id" type="row"/>
+                <field name="candidate_feedback" type="measure"/>
+                <field name="rating" type="measure"/>
+            </pivot>
+        </field>
+    </record>-->
+
+    <!--<record id="view_candidate_exp_report_graph" model="ir.ui.view">
+        <field name="name">Candidate Experience report: Graph</field>
+        <field name="model">candidate.exp</field>
+        <field name="arch" type="xml">
+            <graph string="Candidate Experience" sample="1" disable_linking="1">
+                &lt;!&ndash;<field name="appl_per_hire" type="measure"/>&ndash;&gt;
+            </graph>
+        </field>
+    </record>-->
+
+
+    <record id='candidate_exp_report_action' model='ir.actions.act_window'>
+        <field name="name">Candidate Experience Report</field>
+        <field name="res_model">candidate.exp</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem action="candidate_exp_report_action"
+              parent="hr_recruitment.report_hr_recruitment"
+              sequence="114"
+              id="candidate_exp_report_menu"
+    />
+
+</odoo>

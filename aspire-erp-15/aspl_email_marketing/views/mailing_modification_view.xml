@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mailing_list_contact_modification" model="ir.ui.view">
+            <field name="name">mailing.list.contact.modification</field>
+            <field name="model">mailing.contact</field>
+            <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='id']" position="before">
+                    <header>
+                        <button name="generate_lead" string="Create Lead" type="object" class="oe_highlight"/>
+                    </header>
+                </xpath>
+                 <xpath expr="//div[hasclass('oe_title')]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="lead" string="Lead" class="oe_stat_button" icon="fa-tasks" type="object">
+                        </button>
+                    </div>
+                </xpath>
+
+                <xpath expr="//field[@name='company_name']" position="after">
+                    <field name="website_url" sting="Company Website" widget="url"/>
+                </xpath>
+                <xpath expr="//field[@name='message_bounce']" position="after">
+                    <field name="linkedin_id" sting="LinkedIn Profile" widget="url"/>
+                    <field name="contact_number" sting="Contact Number"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

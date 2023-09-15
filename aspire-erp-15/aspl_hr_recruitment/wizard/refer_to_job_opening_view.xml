@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Transfer Application-->
+        <record id="refer_to_job_opening_view_form" model="ir.ui.view">
+            <field name="name">refer_to_job_opening</field>
+            <field name="model">refer.to.job.opening.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Move To Job Opening">
+                    <sheet>
+                        <group>
+                            <field name="job_opening_id" required="1" options="{'no_create':1}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="move_to_job_opening" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="refer_to_job_opening_action" model="ir.actions.act_window">
+            <field name="name">Refer To Job Opening</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">refer.to.job.opening.wiz</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="refer_to_job_opening_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

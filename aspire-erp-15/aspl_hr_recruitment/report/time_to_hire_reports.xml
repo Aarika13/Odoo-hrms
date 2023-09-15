@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="time_to_hire_view_tree" model="ir.ui.view">
+        <field name="name">Time to Hire report: tree</field>
+        <field name="model">time.to.hire</field>
+        <field name="arch" type="xml">
+            <tree string="Time to Hire" create="false" delete="false">
+                <field name="job_opening_id"/>
+                <field name="applicant_id"/>
+                <field name="screen_time"/>
+                <field name="review_time"/>
+                <field name="interview_time"/>
+                <field name="offer_time"/>
+                <field name="hired_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="time_to_hire_report_pivot" model="ir.ui.view">
+        <field name="name">Time to Hire report: Pivot</field>
+        <field name="model">time.to.hire</field>
+        <field name="arch" type="xml">
+            <pivot string="Time to Hire" disable_linking="1" sample="1">
+                <field name="job_opening_id" type="row"/>
+                <field name="screen_time" type="measure"/>
+                <field name="review_time" type="measure"/>
+                <field name="interview_time" type="measure"/>
+                <field name="offer_time" type="measure"/>
+                <field name="hired_time" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!--<record id="time_to_hire_report_graph" model="ir.ui.view">
+        <field name="name">Time to Hire report: Graph</field>
+        <field name="model">time.to.hire</field>
+        <field name="arch" type="xml">
+            <graph string="Applicants Per Hire" sample="1" disable_linking="1">
+                <field name="appl_per_hire" type="measure"/>
+            </graph>
+        </field>
+    </record>-->
+
+
+    <record id='time_to_hire_report_action' model='ir.actions.act_window'>
+        <field name="name">Time to Hire Report</field>
+        <field name="res_model">time.to.hire</field>
+        <field name="view_mode">tree,pivot</field>
+    </record>
+
+    <menuitem action="time_to_hire_report_action"
+              parent="hr_recruitment.report_hr_recruitment"
+              sequence="112"
+              id="time_to_hire_report_menu"
+    />
+
+</odoo>

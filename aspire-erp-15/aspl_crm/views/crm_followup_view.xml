@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="crm_followup_form" model="ir.ui.view">
+        <field name="name">crm.followup.form</field>
+        <field name="model">crm.followup</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="frequency_days"/>
+                        </group>
+                        <group>
+                            <field name="subject" required="1"/>
+                            <field name="add_context" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_followup_tree" model="ir.ui.view">
+        <field name="name">crm.followup.tree</field>
+        <field name="model">crm.followup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="subject"/>
+                <field name="frequency_days"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_followup" model="ir.actions.act_window">
+        <field name="name">CRM Followup</field>
+        <field name="res_model">crm.followup</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id"/>
+    </record>
+
+    <menuitem
+            id="crm_menu_config_followup"
+            name="CRM Followup"
+            parent="crm.crm_menu_config"
+            action="crm_followup"
+            sequence="3"/>
+</odoo>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_res_partner_applications">
+            <field name="name">Applications</field>
+            <field name="res_model">hr.applicant</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('partner_id', '=', active_id),('active', 'in', [True, False])]</field>
+            <field name="search_view_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
+            <field name="context">{'search_default_partner_id': [active_id], 'default_partner_id': active_id}
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    No applications yet
+                </p>
+                <p>
+                    Odoo helps you track applicants in the recruitment
+                    process and follow up all operations: meetings, interviews, etc.
+                </p>
+                <p>
+                    Applicants and their attached CV are created automatically when an email is sent.
+                    If you install the document management modules, all resumes are indexed automatically,
+                    so that you can easily search through their content.
+                </p>
+            </field>
+        </record>
+        <!-- Job Opening Skills Form View-->
+        <record id="candidate_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.candidate.skill.form</field>
+            <field name="model">hr.candidate.skill</field>
+            <field name="arch" type="xml">
+                <form string="Skills">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="skill_type_id"/>
+                                <field
+                                        name="skill_id"
+                                        domain="[('skill_type_id', '=', skill_type_id)]"
+                                        options="{'no_create_edit':True}"/>
+                            </group>
+                            <group>
+                                <field name="skill_level_id" domain="[('skill_type_id', '=', skill_type_id)]"
+                                       invisible="0"/>
+                                <field name="level_progress" widget="progressbar" invisible="0"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--END-->
+        <record id="view_candidate_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="500"/>
+            <field name="arch" type="xml">
+                <form string="Candidates">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                    icon="fa-pencil"
+                                    name="%(action_res_partner_applications)d"
+                                    type="action">
+                                <field name="all_application_count" widget="statinfo" string="Applications"/>
+                            </button>
+
+                        </div>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <field name="image_1920" widget='image' class="oe_avatar"
+                               options='{"preview_image": "image_128"}'/>
+                        <div class="oe_title">
+                            <field name="is_company" invisible="1"/>
+                            <field name="commercial_partner_id" invisible="1"/>
+                            <field name="active" invisible="1"/>
+                            <field name="company_type" widget="radio"
+                                   class="oe_edit_only"
+                                   options="{'horizontal': true}" invisible="1"/>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Candidate Name"
+                                       attrs="{'required' : [('type', '=', 'contact')]}" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="email" widget="email" context="{'gravatar_image': True}" required="1"/>
+                                <field name="phone" widget="phone" invisible="1"/>
+                                <field name="mobile" required="1"/>
+                                <field name="type_id" placeholder="Degree"
+                                       options="{'no_create_edit': True,'no_create': True, 'no_open': True}"/>
+                                <field name="job_id"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                                <field name="current_company_id"/>
+                                <field name="current_location_city" options="{'no_open': True}"/>
+                                <field name="date_received"/>
+                                <field name="stage" string="V9 Application Stage" readonly="1"/>
+                                <field name="aspire_candidate_id" groups="base.group_no_one"/>
+                            </group>
+                            <group>
+                                <field name="categ_ids" widget="many2many_tags" required="1"
+                                       options="{'color_field': 'color','no_create': True, 'no_create_edit': True}"/>
+                                <field name="salary_current"
+                                       groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                                <field name="salary_expected"
+                                       groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                                <field name="type" invisible="1"/>
+                                <field name="partner_id" options="{'no_create_edit': True,'no_create': True}"/>
+                                <field name="is_applicant" invisible="1"/>
+                                <field name="is_candidate" groups="base.group_no_one"/>
+                                <field name="total_exp_years" class="oe_edit_only" invisible="0"/>
+                                <field name="total_exp" class="oe_read_only" readonly="True" force_save="1"/>
+                                <field name="current_experience"/>
+                                <field name="in_application" invisible="1"/>
+                                <field name="linked_in_profile" widget="url"/>
+                                <field name="year_of_passing" options="{'format': 0}"/>
+                                <field name="job_opening_id" invisible="1"/>
+                                <field name="job_opening_ids" widget="many2many_tags" invisible="0" force_save="1"
+                                       readonly="1"/>
+                                <field name="v9_an_id" invisible="1"/>
+                                <field name="source_id"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                                <field name="sourced_by"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="public" string="Skills">
+                                <div class="row">
+                                    <div class="o_hr_skills_group o_group_skills col-lg-12 d-flex flex-column">
+                                        <!--                                        <separator string="Skills"/>-->
+                                        <field mode="tree" nolabel="1" name="candidate_skill_ids"
+                                               widget="hr_skills" readonly="1" force_save="1"
+                                               options="{'no_open': True}">
+                                            <tree create="0" delete="0" update="0" editable="bottom" readonly="1"
+                                                  force_save="1">
+                                                <field name="skill_type_id" invisible="1"/>
+                                                <field name="skill_id"/>
+                                                <field name="skill_level_id" invisible="1"/>
+                                                <field name="level_progress" widget="progressbar" invisible="1"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                        <separator string="Private Note"
+                                   groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                        <field name="private_note" placeholder="Confidential information..."
+                               groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                        <separator string="Application Summary"/>
+                        <field name="description" placeholder="Feedback of interviews..."/>
+                    </sheet>
+                    <!--<div groups="hr_recruitment.group_hr_recruitment_manager">
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                    </div>-->
+                    <!--Removed group for access chatter 18-1-22-->
+                    <div>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_calendar_event_form_inherit" model="ir.ui.view">
+            <field name="name">view_calendar_event_form_inherit</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_ids" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True}</attribute>
+                    <attribute name="domain">[('active_employee', '=', True)]</attribute>
+                </field>
+                <field name="videocall_location" position="attributes">
+                    <attribute name="attrs">{'invisible': [('meeting_location','!=', 'online')]}</attribute>
+                </field>
+                <xpath expr="//form/sheet/notebook/page/group/group[2]/field[@name='location']" position="replace">
+                    <field name="meeting_location"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Candidate List View -->
+        <record id="view_candidate_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Contacts" sample="1" multi_edit="1" decoration-danger="app_status">
+                    <field name="display_name" string="Name"/>
+                    <!-- <field name="id" groups="base.group_no_one"/> -->
+                    <field name="aspire_candidate_id" groups="base.group_no_one"/>
+                    <field name="job_id" invisible="0"/>
+                    <field name="date_received" invisible="0"/>
+                    <field name="mobile" invisible="0"/>
+                    <field name="categ_ids" invisible="0" widget="many2many_tags"
+                           options="{'color_field': 'color', 'no_create_edit': True}"/>
+                    <field name="type_id" invisible="0"/>
+                    <field name="app_status" invisible="0" optional="hide"/>
+                    <field name="phone" class="o_force_ltr" optional="hide"/>
+                    <field name="job_opening_ids" widget="many2many_tags" optional="hide"/>
+                    <field name="email" optional="show"/>
+                    <field name="active" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_candidate_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Candidate">
+                    <field name="name"
+                           filter_domain="['|', '|', ('display_name', 'ilike', self), ('ref', '=', self), ('email', 'ilike', self)]"/>
+                    <field name="email" filter_domain="[('email', 'ilike', self)]"/>
+                    <field name="mobile" filter_domain="['|', ('phone', 'ilike', self), ('mobile', 'ilike', self)]"/>
+                    <field name="categ_ids" string="Tag" filter_domain="[('categ_ids', 'ilike', self)]"/>
+                    <separator/>
+                    <filter string="In Application" name="in_application" domain="[('in_application', '=', True)]"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="job_id" string="Applied Job" domain="[]" context="{'group_by' : 'job_id'}"/>
+                        <filter name="type_id" string="Degree" domain="[]" context="{'group_by' : 'type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_candidate" model="ir.actions.act_window">
+            <field name="name">Candidates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="domain">[('is_candidate', '=', True)]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_candidate_filter"/>
+            <!--            <field name="context">{'default_is_candidate': True}</field>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Candidates in your address book
+                </p>
+                <p>
+                    Odoo helps you to easily track all activities related to a Candidates.
+                </p>
+            </field>
+        </record>
+        <record id="action_candidate_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_candidate_tree"/>
+            <field name="act_window_id" ref="action_candidate"/>
+        </record>
+        <record id="action_candidate_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_candidate_form"/>
+            <field name="act_window_id" ref="action_candidate"/>
+        </record>
+<!--
+        <menuitem name="Candidates"
+                  parent="hr_recruitment.menu_hr_recruitment_root"
+                  id="menu_hr_candidate"
+                  action="action_candidate"
+                  sequence="3"
+                  groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"
+        />
+-->
+
+        <record id="create_application_action" model="ir.actions.server">
+            <field name="name">Create Application</field>
+            <field name="model_id" ref="aspl_hr_recruitment.model_res_partner"/>
+            <field name="binding_model_id" ref="aspl_hr_recruitment.model_res_partner"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.create_application()</field>
+        </record>
+        <record id="aspire_create_application_action" model="ir.actions.server">
+            <field name="name">Create Application</field>
+            <field name="model_id" ref="aspl_hr_recruitment.model_candidate"/>
+            <field name="binding_model_id" ref="aspl_hr_recruitment.model_candidate"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.aspire_create_application()</field>
+        </record>
+        <!--<record id="res_partner_kanban_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.kanban.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban/field[@name='id']" position="after">
+                    <field name="active_employee" invisibll="1"/>
+                </xpath>
+                &lt;!&ndash;<xpath expr="//kanban/templates/t/div/div/div[1]" position="before">&ndash;&gt;
+                <xpath expr="//kanban/templates/t/div/div/ul/li" position="before">
+                    <t t-if="active_employee"><li>Employee</li></t>
+                </xpath>
+            </field>
+        </record>-->
+
+        <record model="ir.actions.act_window" id="action_aspire_res_partner_applications">
+            <field name="name">Applications</field>
+            <field name="res_model">hr.applicant</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('candidate_id', '=', active_id),('active', 'in', [True, False])]</field>
+            <field name="search_view_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
+            <field name="context">{'search_default_candidate_id': [active_id], 'default_candidate_id': active_id}
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    No applications yet
+                </p>
+                <p>
+                    Odoo helps you track applicants in the recruitment
+                    process and follow up all operations: meetings, interviews, etc.
+                </p>
+                <p>
+                    Applicants and their attached CV are created automatically when an email is sent.
+                    If you install the document management modules, all resumes are indexed automatically,
+                    so that you can easily search through their content.
+                </p>
+            </field>
+        </record>
+
+        <record id="view_aspire_candidate_form" model="ir.ui.view">
+            <field name="name">aspire_candidate_form</field>
+            <field name="model">candidate</field>
+            <field name="priority" eval="-1"/>
+            <field name="arch" type="xml">
+                <form string="Candidates">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                    icon="fa-pencil"
+                                    name="%(action_aspire_res_partner_applications)d"
+                                    type="action">
+                                <field name="all_aspire_application_count" widget="statinfo" string="Applications"/>
+                            </button>
+
+                        </div>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <div class="oe_title">
+                            <field name="active" invisible="1"/>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Candidate Name"
+                                       required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="email" widget="email" context="{'gravatar_image': True}" required="1"/>
+                                <field name="mobile" required="1"/>
+                                <field name="type_id" placeholder="Degree"
+                                       options="{'no_create_edit': True,'no_create': True, 'no_open': True}"/>
+                                <field name="job_id"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                                <field name="current_company_id"/>
+                                <field name="current_location_city" options="{'no_open': True}"/>
+                                <field name="stage" string="V9 Application Stage" readonly="1"/>
+                                <field name="is_applicant" groups="base.group_no_one" readonly="True"/>
+                                <field name="in_application" groups="base.group_no_one" readonly="True"/>
+                                <field name="is_candidate" groups="base.group_no_one" readonly="True"/>
+                                <field name="is_employee" groups="base.group_no_one" readonly="True"/>
+                                <field name="create_date" groups="base.group_no_one" readonly="True"/>
+                                <field name="create_date" string="Date Received" groups="base.group_no_one" readonly="True"/>
+                                <field name="partner_create_date" groups="base.group_no_one" readonly="1"/>
+                                <field name="res_partner_id" groups="base.group_no_one" readonly="True"/>
+                                <field name="app_status"/>
+                            </group>
+                            <group>
+                                <field name="categ_ids" widget="many2many_tags" required="1"
+                                       options="{'color_field': 'color','no_create': True, 'no_create_edit': True}"/>
+                                <field name="salary_current"
+                                       groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                                <field name="salary_expected"
+                                       groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                                <field name="partner_id" options="{'no_create_edit': True,'no_create': True}"/>
+                                <field name="total_exp_years" class="oe_edit_only" invisible="0"/>
+                                <field name="total_exp" class="oe_read_only" readonly="True" force_save="1"/>
+                                <field name="current_experience" readonly="True" force_save="1"/>
+                                <field name="notice_period" placeholder="Months"/>
+                                <field name="linked_in_profile" widget="url"/>
+                                <field name="year_of_passing" options="{'format': 0}"/>
+                                <field name="job_opening_id" groups="base.group_no_one" readonly="1"/>
+                                <field name="job_opening_ids" widget="many2many_tags" invisible="0" force_save="1"
+                                       readonly="1"/>
+                                <field name="v9_an_id" invisible="1"/>
+                                <field name="source_id"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                                <field name="sourced_by"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="public" string="Skills">
+                                <div class="row">
+                                    <div class="o_hr_skills_group o_group_skills col-lg-12 d-flex flex-column">
+                                        <!--                                        <separator string="Skills"/>-->
+                                        <field mode="tree" nolabel="1" name="candidate_skill_ids"
+                                               widget="hr_skills" readonly="1" force_save="1"
+                                               options="{'no_open': True}">
+                                            <tree create="0" delete="0" update="0" editable="bottom" readonly="1"
+                                                  force_save="1">
+                                                <field name="skill_type_id" invisible="1"/>
+                                                <field name="skill_id"/>
+                                                <field name="skill_level_id" invisible="1"/>
+                                                <field name="level_progress" widget="progressbar" invisible="1"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                        <separator string="Private Note"
+                                   groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                        <field name="private_note" placeholder="Confidential information..."
+                               groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                        <separator string="Application Summary"/>
+                        <field name="description" placeholder="Feedback of interviews..."/>
+                    </sheet>
+                    <div>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                    </div>
+                    <!--Removed group for access chatter 18-1-22-->
+                    <!--<div>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids"/>
+                        </div>
+                    </div>-->
+                </form>
+            </field>
+        </record>
+
+        <!-- Aspire Candidate List View -->
+        <record id="view_aspire_candidate_tree" model="ir.ui.view">
+            <field name="name">aspire_candidate_tree</field>
+            <field name="model">candidate</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Contacts" sample="1" multi_edit="1" decoration-danger="app_status" default_order="create_date">
+                    <field name="display_name" string="Name"/>
+                    <!-- <field name="id" groups="base.group_no_one"/> -->
+                    <!-- <field name="res_partner_id" groups="base.group_no_one"/> -->
+                    <field name="job_id" invisible="1"/>
+                    <field name="create_date" string="Date Received" invisible="0" widget="date"/>
+                    <field name="mobile" invisible="0"/>
+                    <field name="categ_ids" invisible="0" widget="many2many_tags"
+                           options="{'color_field': 'color', 'no_create_edit': True}"/>
+                    <field name="type_id" invisible="0"/>
+                    <field name="app_status" invisible="0" optional="hide"/>
+                    <field name="job_opening_ids" widget="many2many_tags" optional="hide"/>
+                    <field name="email" optional="show"/>
+                    <field name="active" invisible="1"/>
+                    <field name="application_refused" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_aspire_candidate_filter" model="ir.ui.view">
+            <field name="name">aspl_candidate_select</field>
+            <field name="model">candidate</field>
+            <field name="arch" type="xml">
+                <search string="Search Candidate">
+                    <field name="name"
+                           filter_domain="['|', '|', ('name', 'ilike', self), ('ref', '=', self), ('email', 'ilike', self)]"/>
+                    <field name="email" filter_domain="[('email', 'ilike', self)]"/>
+                    <field name="mobile"
+                           filter_domain="[('mobile', 'ilike', self)]"/>  <!--'|', ('phone', 'ilike', self), -->
+                    <field name="categ_ids" string="Tag" filter_domain="[('categ_ids', 'ilike', self)]"/>
+                    <separator/>
+                    <filter string="In Application" name="in_application" domain="[('in_application', '=', True)]"/>
+                    <separator/>
+                    <filter string="Active Applicant" name="application_status" domain="[('application_refused', '=', False)]"/>
+                    <separator/>
+                    <filter string="Rejected Application" name="application_rejected" domain="[('application_refused', '=', True)]"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="job_id" string="Applied Job" domain="[]" context="{'group_by' : 'job_id'}"/>
+                        <filter name="type_id" string="Degree" domain="[]" context="{'group_by' : 'type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_aspire_candidate" model="ir.actions.act_window">
+            <field name="name">Aspire Candidates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">candidate</field>
+            <!-- <field name="domain">[('app_status_data','=',True)]</field> -->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_aspire_candidate_filter"/>
+            <!-- <field name="context">{'search_default_application_status': 1}</field> -->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a Candidates in your address book
+                </p>
+                <p>
+                    Odoo helps you to easily track all activities related to a Candidates.
+                </p>
+            </field>
+        </record>
+        <record id="action_aspire_candidate_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_aspire_candidate_tree"/>
+            <field name="act_window_id" ref="action_aspire_candidate"/>
+        </record>
+        <record id="action_aspire_candidate_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_aspire_candidate_form"/>
+            <field name="act_window_id" ref="action_aspire_candidate"/>
+        </record>
+        <menuitem name="Candidates"
+                  parent="hr_recruitment.menu_hr_recruitment_root"
+                  id="menu_hr_aspire_candidate"
+                  action="action_aspire_candidate"
+                  sequence="3"
+                  groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"
+        />
+        <record id="view_my_activity_tree" model="ir.ui.view">
+            <field name="name">my_activity_tree</field>
+            <field name="model">mail.activity</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="My Activity" create="false">
+                    <field name="activity_type_id"/>
+                    <field name="res_name"/>
+                    <field name="summary"/>
+                    <field name="date_deadline"/>
+                    <field name="state"/>
+                    <button string="Mark Done" name="action_done" type="object" icon="fa-check"
+                            groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                    <button string="Cancel" name="action_refuse" type="object" icon="fa-times"
+                            groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- <record id="view_my_activity_pivot" model="ir.ui.view">
+            <field name="name">my_activity_pivot</field>
+            <field name="model">mail.activity</field>
+            <field name="arch" type="xml">
+                <pivot string="My Activity" disable_linking="1" sample="1">
+                    <field name="date_deadline" type="row"/>
+                    <field name="state" type="measure"/>
+                </pivot>
+            </field>
+        </record> -->
+
+        <record id="action_my_activity" model="ir.actions.act_window">
+            <field name="name">Aspire Candidates</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mail.activity</field>
+            <field name="domain">[('res_model', '=', 'hr.applicant'),('user_id', '=', uid),('date_deadline','>=',datetime.datetime.now())]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_my_activity_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_my_activity_tree"/>
+            <field name="act_window_id" ref="action_my_activity"/>
+        </record>
+        <!--<record id="action_my_activity_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_my_activity_form"/>
+            <field name="act_window_id" ref="action_my_activity"/>
+        </record>-->
+        <menuitem name="My activity"
+                  parent="hr_recruitment.menu_hr_recruitment_root"
+                  id="menu_my_activity"
+                  action="action_my_activity"
+                  sequence="4"
+                  groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"
+        />
+    </data>
+</odoo>

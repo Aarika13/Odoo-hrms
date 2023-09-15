@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="interchange_task_timesheet_project_view" model="ir.ui.view">
+        <field name="name">interchange.task.timesheet.project.view</field>
+        <field name="model">timesheet.task.change</field>
+        <field name="arch" type="xml">
+            <form string="Project Task">
+                <group>
+                    <group>
+                        <field name="task_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                    </group>
+                </group>
+                
+                <footer>
+                    <button name="interchange_task_timesheet_project_record" string="Change Task" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="action_view_interchange_task_timesheet_project" model="ir.actions.act_window">
+        <field name="name">Timesheet Entry Task Change</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">timesheet.task.change</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="interchange_task_timesheet_project_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="merge_skills_view" model="ir.ui.view">
+        <field name="name">merge.skills.view</field>
+        <field name="model">merge.skills</field>
+        <field name="arch" type="xml">
+            <form string="Merge Skills">
+                <group>
+                    <!-- <group> -->
+                        <field name="primary_skills" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                        <field name="merge_skills" widget="many2many_tags"/>
+                    <!-- </group> -->
+                </group>
+                
+                <footer>
+                    <button name="merge_similar_skills" string="Merge Skills" type="object" class="btn-danger"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="action_merge_skills_view" model="ir.actions.act_window">
+        <field name="name">Merge Skills</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">merge.skills</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="merge_skills_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!-- Add employee leave detail in the Employee Infoemation view-->
+
+    <record id="view_own_employee_form_view_inherit" model="ir.ui.view">
+        <field name="name">hr.own.employee.form.inherited</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_aspire.view_own_employee_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='document']" position="after">
+                <page name="leave_detail" string="Leave Detail">
+                    <group string="Leave" name="leave">
+                        <label for="remaining_leaves"/>
+                        <div>
+                            <field name="remaining_leaves" class="oe_inline"/> days
+                        </div>
+                        <label for="remaining_unplanned_leaves"/>
+                        <div>
+                            <field name="remaining_unplanned_leaves" class="oe_inline"/> days
+                        </div>
+                        <label for="remaining_floating_leaves"/>
+                        <div>
+                            <field name="remaining_floating_leaves" class="oe_inline"/> days
+                        </div>
+                    </group>
+                </page>
+            </xpath>                      
+        </field>
+    </record>
+</data>
+</openerp>

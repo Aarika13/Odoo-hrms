@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_education_tree" model="ir.ui.view">
+            <field name="name">hr.employee.education.tree</field>
+            <field name="model">employee.education</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <!--                attrs="{'delete': [('qualification','!=','graduate')]}"-->
+                <tree>
+                    <field name="degree"/>
+                    <field name="qualification"/>
+                    <field name="field_id"/>
+                    <field name="institute"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_employee_education_form" model="ir.ui.view">
+            <field name="name">hr.employee.education.form</field>
+            <field name="model">employee.education</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Education Information">
+                            <group>
+                                <field name="degree" on_change="onchange_field(degree)"/>
+                                <field name="field_id"/>
+                                <field name="qualification" invisible="1"/>
+                                <field name="university"/>
+                                <field name="institute"/>
+                            </group>
+                            <group>
+                                <field name="start_date" on_change="onchange_dates(start_date,end_date)"
+                                       attrs="{'required': [('degree', '!=', False)]}"/>
+                                <field name="end_date" on_change="onchange_dates(start_date,end_date)"
+                                       attrs="{'required': [('degree', '!=', False)]}"/>
+                                <field name="percentage"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--
+                <record id="ir_cron_update_employee_position_company" model="ir.cron">
+                    <field name="name">update_employee_position_company</field>
+                    <field name="model_id" ref="model_hr_employee"/>
+                    <field name="state">code</field>
+                    <field name="code">model.update_company_history()</field>
+                    <field name="priority">1</field>
+                    <field name="interval_number">1</field>
+                    <field name="interval_type">days</field>
+                    <field name="active">False</field>
+                    <field name="numbercall">-1</field>
+                    <field name="doall" eval="False"/>
+                </record>
+        -->
+        <record model="ir.ui.view" id="user_form_inherited">
+            <field name="name">user.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div[3]/group" position="replace">
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="1" required="0" groups="base.group_no_one"
+                                   attrs="{'invisible': [('id', '=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="employee_id" readonly="True"/>
+                            <field name="employee_ids" readonly="True" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

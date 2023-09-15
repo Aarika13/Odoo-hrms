@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_approved_employee_my_timesheet" model="ir.cron">
+            <field name="name">Approved Employee My Timesheet</field>
+            <field name="model_id">hr_timesheet_sheet.sheet</field>
+            <field name="state">code</field>
+            <field name="code">model.approved_employee_my_timesheet()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="active">False</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

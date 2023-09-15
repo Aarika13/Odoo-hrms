@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_equipment_replaced" model="ir.ui.view">
+            <field name="name">equipment.replaced.form</field>
+            <field name="model">equipment.replaced</field>
+            <field name="arch" type="xml">
+                <form string="Replacement">
+                    <group>
+                        <group>
+                            <field name="replaced_serial_no"/>
+                        </group>
+                        <group>
+                            <field name="replacement_date"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_replace" string="Replace" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

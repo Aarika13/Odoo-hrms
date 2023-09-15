@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_holidays_detail_employee,hr.holidays.detail.employee,model_hr_holidays_detail,base.group_user,1,0,0,0
+access_hr_holidays_detail_user,hr.holidays.detail.user,model_hr_holidays_detail,hr.group_hr_user,1,1,1,1
+access_hr_holidays_detail_manager,hr.holidays.detail.manager,model_hr_holidays_detail,hr.group_hr_manager,1,1,1,1
+access_resource_calendar_leaves_reporting_authority,resource_calendar_leaves_reporting_authority,resource.model_resource_calendar_leaves,group_hr_reporting_authority,1,1,1,1
+access_calendar_event_reporting_authority,calendar.event.reporting.authority,calendar.model_calendar_event,group_hr_reporting_authority,1,1,1,1
+access_calendar_event_type_reporting_authority,calendar.event.type.reporting_authority,calendar.model_calendar_event_type,group_hr_reporting_authority,1,1,1,1
+access_calendar_attendee_hr_reporting_authority,calendar.attendee.hr.reporting_authority,calendar.model_calendar_attendee,group_hr_reporting_authority,1,1,1,1
+access_hr_holidays_reporting_authority,hr.holidays.reporting_authority,model_hr_leave,group_hr_reporting_authority,1,1,1,1
+access_hr_leave_allocation,hr.leave.allocation,model_hr_leave_allocation,,1,1,1,1

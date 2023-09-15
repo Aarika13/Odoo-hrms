@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_resume_line_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr.resume.line.form.inherit</field>
+            <field name="model">hr.resume.line</field>
+            <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group/group[2]/field[@name='date_end']" position='after'>
+                    <field name="percentage" attrs="{'invisible': [('line_type_id','!=',2)]}"/>
+                    <field name="relevant" attrs="{'invisible': [('line_type_id','!=',1)]}"/>
+                    <field name="leaving_reason" attrs="{'invisible': [('line_type_id','!=',1)]}"/>
+                </xpath>
+                <!--<field name="date_end" position="attributes">
+                    <attribute name="attrs">{'invisible': [('line_type_id','!=',1)]}</attribute>
+                </field>-->
+                <field name="line_type_id" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit':True, 'no_open':True}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

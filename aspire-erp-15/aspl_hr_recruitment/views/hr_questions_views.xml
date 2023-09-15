@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- HR Questions Skills Form View-->
+        <record id="hr_questions_view_form" model="ir.ui.view">
+            <field name="name">hr.questions.form</field>
+            <field name="model">hr.questions</field>
+            <field name="arch" type="xml">
+                <form string="HR Questions">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- HR Questions Skills List View-->
+        <record id="view_hr_questions_tree" model="ir.ui.view">
+            <field name="name">hr.questions.tree</field>
+            <field name="model">hr.questions</field>
+            <field name="arch" type="xml">
+                <tree string="HR Questions">
+                    <field name="name"/>
+                    <field name="active" invisible="0"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_hr_questions" model="ir.actions.act_window">
+            <field name="name">HR Questions</field>
+            <field name="res_model">hr.questions</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Ready to recruit more efficiently?
+                </p>
+                <p>
+                    Let's create a Recruitment Question for HR Team.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_hr_questions"
+                name="HR Questions"
+                parent="hr_recruitment.menu_hr_recruitment_configuration"
+                action="action_hr_questions"
+        />
+
+        <!--<record id="ir_cron_active_employee" model="ir.cron">
+            <field name="name">Update the active employee in res partner</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">model._active_employee()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">False</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>-->
+
+        <record id="ir_cron_is_applicant" model="ir.cron">
+            <field name="name">Sort out partner as candidate_employee_applicant</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">model._update_partner()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active">False</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

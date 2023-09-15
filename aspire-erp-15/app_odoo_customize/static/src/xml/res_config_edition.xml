@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="res_config_edition">
+        <t t-jquery=".user-heading h3" t-operation="replace">
+            <h3>
+                HRMS <t t-esc="widget.server_version"/>
+                (Aspire Professional Edition)
+            </h3>
+        </t>
+    </t>
+</templates>

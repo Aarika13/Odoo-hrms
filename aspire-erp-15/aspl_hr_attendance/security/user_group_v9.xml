@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <delete model="ir.rule" search="[('id', 'in',
+            [ref('hr_attendance.property_rule_attendace_manager')])]"/>
+
+            <record model="ir.module.category" id="attendance_group_user">
+                <field name="name">Attendance</field>
+                <field name="description">Attendance User Group</field>
+                <field name="sequence">5</field>
+            </record>
+
+            <record id="group_employee_user" model="res.groups">
+                <field name="name">Employee</field>
+                <field name="category_id" ref="attendance_group_user"/>
+                <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+                <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            </record>
+
+            <record id="group_manager_user" model="res.groups" >
+                <field name="name">Manager</field>
+                <field name="category_id" ref="attendance_group_user"/>
+                <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            </record>
+
+            <record id="group_admin_user" model="res.groups">
+                <field name="name">Admin</field>
+                <field name="category_id" ref="attendance_group_user"/>
+                <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+                <field name="users" eval="[(4, ref('base.user_root'))]"/>
+            </record>  
+
+        <!-- <record id="approve_employee_attendance_by_admin" model="ir.rule">
+            <field name="name">Approve Employee Attendance Work From Home by Admin</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('group_admin_user'))]"/>
+        </record>
+
+         <record id="attendance_work_from_home_employee" model="ir.rule">
+            <field name="name">Employee Attendance Work From Home</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_employee_user'))]"/>
+        </record>
+ -->
+        <record id="employee_daily_summary" model="ir.rule">
+            <field name="name">Employee Daily Summary</field>
+            <field name="model_id" ref="model_attendance_daily_summary"/>
+            <field name="domain_force">[('emp_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_employee_user'))]"/>
+        </record>
+
+        <record id="admin_daily_summary" model="ir.rule">
+            <field name="name">Admin Daily Summary</field>
+            <field name="model_id" ref="model_attendance_daily_summary"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('group_admin_user'))]"/>
+        </record>
+        
+
+        <record id="employee_monthly_summary" model="ir.rule">
+            <field name="name">Employee Monthly Summary</field>
+            <field name="model_id" ref="model_attendance_monthly_summary"/>
+            <field name="domain_force">[('employee.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_employee_user'))]"/>
+        </record>
+
+        <record id="manager_daily_summary" model="ir.rule">
+            <field name="name">Manager Daily Summary</field>
+            <field name="model_id" ref="model_attendance_daily_summary"/>
+            <field name="domain_force">['|',('emp_id.user_id','=',user.id),('emp_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_manager_user'))]"/>
+        </record>
+
+        <record id="manager_monthly_summary" model="ir.rule">
+            <field name="name">Manager Monthly Summary</field>
+            <field name="model_id" ref="model_attendance_monthly_summary"/>
+            <field name="domain_force">['|',('employee.user_id','=',user.id),('employee.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_manager_user'))]"/>
+        </record>
+
+        <record id="admin_monthly_summary" model="ir.rule">
+            <field name="name">Admin Monthly Summary</field>
+            <field name="model_id" ref="model_attendance_monthly_summary"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('group_admin_user'))]"/>
+        </record>
+
+
+        <record id="manager_attendance_record" model="ir.rule">
+            <field name="name">Manager Attendance Record</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_manager_user'))]"/>
+        </record>
+
+        <record id="admin_attendance_record" model="ir.rule">
+            <field name="name">Admin Attendance Record</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('group_admin_user'))]"/>
+        </record>
+
+
+        <record id="user_attendance_corrections_record" model="ir.rule">
+            <field name="name">User Attendance Corrections Record</field>
+            <field name="model_id" ref="model_attendance_corrections"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_employee_user')),(4,ref('group_admin_user')),(4,ref('group_manager_user'))]"/>
+        </record>
+
+        <record id="hr_attendance_corrections_record" model="ir.rule">
+            <field name="name">HR Attendance Corrections Record</field>
+            <field name="model_id" ref="model_attendance_corrections"/>
+            <field name="domain_force">['|',('work_state','not in',['new','rejected']),('create_uid','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_hr_user'))]"/>
+        </record>
+
+        <record id="hr_attendance_WFH_record" model="ir.rule">
+            <field name="name">HR Attendance wfh Record</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">['|',('work_state','not in',['new','rejected']),('create_uid','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_hr_user'))]"/>
+        </record>
+
+        <record id="user_attendance_wfh_record" model="ir.rule">
+            <field name="name">User Attendance wfh Record</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_employee_user')),(4,ref('group_admin_user')),(4,ref('group_manager_user'))]"/>
+        </record>
+
+        <record id="user_attendance_multi_company" model="ir.rule">
+            <field name="name">Attendance Multi Company</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">['|',('user_id.company_id','=',False),('user_id.company_id','child_of',[user.company_id.id])]</field>
+            <field name="groups" eval="[(4,ref('group_admin_user'))]"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="approve_employee_attendance_by_manager" model="ir.rule">
+            <field name="name">Approve Employee Attendance Work From Home by Manager</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">['|','|',('employee_id.user_id','=',user.id),('create_uid','=',user.id),('work_state','not in',['new','rejected']),('employee_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('group_manager_user'))]"/>
+        </record>
+    </data>
+</odoo>

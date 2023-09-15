@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="inherit_view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet//group[1]//field[@name='website']" position="after">
+                    <field name="gstin"/>
+                    <field name="currency" widget="selection"/>
+                </xpath>
+                <!-- <xpath expr="//form//sheet//group[1]" position="after">
+                    <group>
+                        <field name="payment_instruction"/>
+                    </group>
+                </xpath> -->
+                <xpath expr="//form//sheet//notebook//page[1]" position="before">
+                    <page string="Configuration" name="configuration">
+                        <group>
+                            <group>
+                                <field name="invoicing"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

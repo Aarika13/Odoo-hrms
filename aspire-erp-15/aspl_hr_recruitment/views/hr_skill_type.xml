@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="change_merge_skills" model="ir.actions.server">
+            <field name="name">Merge Skills</field>
+            <field name="model_id" ref="model_hr_skill_type"/>
+            <field name="binding_model_id" ref="model_hr_skill_type"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.merge_skills()</field>
+        </record>
+    </data>
+</odoo>

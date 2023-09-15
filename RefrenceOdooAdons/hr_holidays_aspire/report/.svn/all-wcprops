@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repos/aspire/!svn/ver/2691/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report
+END
+__init__.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/repos/aspire/!svn/ver/2369/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/__init__.pyc
+END
+leave_summary_report.py
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/aspire/!svn/ver/2691/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/leave_summary_report.py
+END
+leave_summary_report.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/aspire/!svn/ver/2369/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/leave_summary_report.pyc
+END
+leave_summary_report_template.xml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/aspire/!svn/ver/2665/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/leave_summary_report_template.xml
+END
+page_format_hr_holiday_report.xml
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/aspire/!svn/ver/2369/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/page_format_hr_holiday_report.xml
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/repos/aspire/!svn/ver/2369/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/__init__.py
+END
+last_month_leave_summary_report.pyc
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/aspire/!svn/ver/2369/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/report/last_month_leave_summary_report.pyc
+END

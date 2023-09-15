@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_homerent_allowance,access_homerent.allowance,model_homerent_allowance,base.group_user,1,1,1,1
+access_income_loss,access_income.loss,model_income_loss,base.group_user,1,1,1,1
+access_income_loss,access_income.loss,model_income_loss,base.group_user,1,1,1,1
+access_other_income,access_other.income,model_other_income,base.group_user,1,1,1,1
+access_salary_components,access_salary.components,model_salary_components,base.group_user,1,1,1,1

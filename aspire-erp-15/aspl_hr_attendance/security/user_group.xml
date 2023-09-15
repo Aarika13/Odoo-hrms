@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--Rule: WFH for Attendance Manager: Access All records-->
+        <record id="rule_attendance_wfh_all_manager" model="ir.rule">
+            <field name="name">Approve Employee Attendance Work From Home by Manager</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+        <!--Rule: Correction Request for Attendance Manager: Access All records-->
+        <record id="rule_attendance_correction_all_manager" model="ir.rule">
+            <field name="name">Approve Employee Attendance Correction Request by Manager</field>
+            <field name="model_id" ref="model_attendance_corrections"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+        <!--Rule: Correction Request for Manual Attendance, Officer and Manager: Access Own records-->
+        <record id="user_attendance_corrections_record" model="ir.rule">
+            <field name="name">User Attendance Corrections Record</field>
+            <field name="model_id" ref="model_attendance_corrections"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups"
+                   eval="[(4,ref('hr_attendance.group_hr_attendance')),(4,ref('hr_attendance.group_hr_attendance_user')),(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+        <!--Rule: WFH for Manual Attendance, Officer and Manager: Access Own records-->
+        <record id="user_attendance_wfh_record" model="ir.rule">
+            <field name="name">User Attendance wfh Record</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups"
+                   eval="[(4,ref('hr_attendance.group_hr_attendance')),(4,ref('hr_attendance.group_hr_attendance_user')),(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+        <!--Rule: Show attendance wfh records to Reporting Authority-->
+        <record id="rule_attendance_wfh_reporting_authority" model="ir.rule">
+            <field name="name">Show Attendance WFH records to Reporting Authority</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_user'))]"/>
+        </record>
+        <!--Rule: Show attendance records to Reporting Authority-->
+        <record id="rule_attendance_reporting_authority" model="ir.rule">
+            <field name="name">Show Attendance records to Reporting Authority</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_user'))]"/>
+        </record>
+
+        <function name="archive_attendance_rule" model="ir.rule"/>
+
+        <record id="hr_attendance_rule_attendance_manager" model="ir.rule">
+            <field name="name">attendance administrator: full access</field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+
+
+        <!--Rule: WFH for Attendance Manager: Access All records-->
+        <record id="rule_attendance_wfh_all_manager" model="ir.rule">
+            <field name="name">Approve Employee Attendance Work From Home by Manager</field>
+            <field name="model_id" ref="model_application_work_from_home"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+
+        <!--Rule: WFH Application for Manual Attendance, Officer and Manager: Access Own records-->
+        <record id="user_attendance_wfh_record" model="ir.rule">
+            <field name="name">User Attendance wfh Application Record</field>
+            <field name="model_id" ref="model_application_work_from_home"/>
+            <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+            <field name="groups"
+                   eval="[(4,ref('hr_attendance.group_hr_attendance')),(4,ref('hr_attendance.group_hr_attendance_user')),(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+        <!--Rule: Show attendance wfh records to Reporting Authority-->
+        <record id="rule_attendance_wfh_reporting_authority" model="ir.rule">
+            <field name="name">Show Attendance WFH Application records to Reporting Authority</field>
+            <field name="model_id" ref="model_application_work_from_home"/>
+            <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_user'))]"/>
+        </record>
+
+        <record id="rule_attendance_log_employee" model="ir.rule">
+            <field name="name">Employee can show only own Attendance</field>
+            <field name="model_id" ref="model_attendance_log"/>
+            <field name="domain_force">['|',('employee.user_id','=',user.id),('employee.parent_id.user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_user'))]"/>
+        </record>
+
+        <record id="rule_attendance_log_admin" model="ir.rule">
+            <field name="name">Employee can show only own Attendance</field>
+            <field name="model_id" ref="model_attendance_log"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4,ref('hr_attendance.group_hr_attendance_manager'))]"/>
+        </record>
+
+        <record id="rule_hr_attendance_report_multi_company" model="ir.rule">
+            <field name="name">Multi Company HR Attendance Report</field>
+            <field name="model_id" ref="hr_attendance.model_hr_attendance_report"/>
+            <field name="domain_force">['|',('employee_id.company_id','=',False),('employee_id.company_id', 'in', company_ids)]</field>
+        </record>
+
+<!--        <record id="hr_attendance_report_rule_multi_company" model="ir.rule">-->
+<!--            <field name="name">Monthly attendance report: Record rule</field>-->
+<!--            <field name="model_id" ref="model_attendance_report_daywise"/>-->
+<!--            <field name="domain_force">[('employee_id.company_id', 'in', company_ids)]</field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

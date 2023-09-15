@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <!-- <record id="data_inherit_product_template_form_view" model="ir.ui.view">
+            <field name="name">Inherit Product Template Form Data</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='taxes_id']" position="before">
+                    <field name="gst_service_code" string="GST Service Code" options="{'no_create': True,'no_open':True}">  
+                    </field>
+                </xpath>
+            </field>
+        </record> -->
+        <!-- <record id="product.menu_product_template_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('account.group_account_manager'))]"/>
+        </record> -->
+
+        <!-- view for GST number Configuration -->
+        <!-- <record id="product_gst_code_tree" model="ir.ui.view">
+            <field name="name">Product GST Code</field>
+            <field name="model">product.gst.code</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record> -->
+
+        <!-- <record id="product_gst_code_action_window" model="ir.actions.act_window">
+            <field name="name">Product GST code</field>
+            <field name="res_model">product.gst.code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Expanding Business!!!!
+                </p>
+                <p>
+                    Let's work with GST.
+                </p>
+            </field>
+        </record> -->
+
+        <!-- <menuitem id="product_gst_code_view" 
+                  name="GST code"
+                  parent="account.account_account_menu"
+                  action="product_gst_code_action_window"
+                  sequence="1"/> -->
+    </data>
+</odoo>

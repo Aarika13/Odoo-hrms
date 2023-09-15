@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="add_content_playlist" model="ir.ui.view">
+        <field name="name">Content Playlist</field>
+        <field name="model">content.playlist</field>
+        <field name="arch" type="xml">
+            <form string="Content Playlist">
+                <group>
+                    <group>
+                        <field name="playlist_url"/>
+                    </group>
+                </group>
+                
+                <footer>
+                    <button name="add_content_playlist_video" string="Add Playlist" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="action_add_content_playlist" model="ir.actions.act_window">
+        <field name="name">Add Content Playlist</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">content.playlist</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="add_content_playlist"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

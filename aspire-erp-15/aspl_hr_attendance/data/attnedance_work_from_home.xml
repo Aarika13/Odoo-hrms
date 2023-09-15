@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- <record id="ir_cron_mail_gateway_action_work_from_home" model="ir.cron">
+            <field name="name">Employee Attendance Work From Home</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id">attendance.work.from.home</field>
+            <field name="code">model.attnedance_work_from_home_schedular()</field>
+            <field name="active">True</field>
+            <field name="args">()</field>
+        </record> -->
+
+        <record model="ir.cron" id="auto_approve_work_from_home_cron">
+            <field name="name">Auto Approve Work From Home</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_approve_attnedance_work_from_home_schedular()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+ 
+        <record id="ir_cron_add_attendance_daily" model="ir.cron">
+            <field name="name">Auto Attendance from Biometric </field>
+            <field name="model_id" ref="model_hr_attendance"/>
+            <field name="state">code</field>
+            <field name="code">model.add_auto_attendance_from_biometric()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

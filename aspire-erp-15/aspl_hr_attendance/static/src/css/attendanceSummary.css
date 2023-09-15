@@ -1,0 +1,20 @@
+table, th, td {
+    border: 0.5px solid black;
+    border-collapse: collapse;
+}
+th{
+	padding-top:15px;
+}
+.sectionTable thead {
+	background-color:#a4a6aa;
+	height: 300px;
+	text-align: center;
+
+}
+ul {
+  list-style-type: none;
+}
+.custom-font{
+	font-family: "Droid Sans";
+	font-style: normal;
+}

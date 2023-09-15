@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="company_employment_form_view" model="ir.ui.view">
+        <field name="name">company.employment.detail.form.view</field>
+        <field name="model">company.employment.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Employment Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/><!--company_employment_type-->
+                            <field name="prefix_sequence"/>
+                            <field name="padding"/>
+                            <field name="sequence_id" invisible='1'/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="employement_type_tree_view" model="ir.ui.view">
+        <field name="name">employment.type.tree</field>
+        <field name="model">company.employment.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id"/>
+                <field name="name"/><!--company_employment_type-->
+                <field name="prefix_sequence"/>
+                <field name="padding"/>
+           </tree>
+        </field>
+    </record>
+
+    <record id="employement_type_conf" model="ir.actions.act_window">
+        <field name="name">Employment Type</field>
+        <field name="res_model">company.employment.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add Employment Type....
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="Employement_type_menu"
+            name = "Employment Type"
+            action="employement_type_conf"
+            parent="hr.menu_human_resources_configuration"
+            />
+    </data>
+</odoo>

@@ -1,0 +1,585 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Templates for end of training period -->
+        <record id="training_end_notification" model="mail.template">
+            <field name="name">End of training period</field>
+            <field name="subject">End Of Training Period</field>
+            <field name="email_from">{{ object.work_email }}</field>
+            <field name="email_to">{{ object._get_mail_to('training_end_notification') }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <!-- <field name="user_signature" eval="0"/> -->
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content" style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}"
+                                                 t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <br/>
+                                                            <p style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Hi,
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Training period of
+                                                                <strong>
+                                                                    <t t-out="object.name">Employee</t>
+                                                                </strong>
+                                                                will end on
+                                                                <strong>
+                                                                    <t t-out="object.training_end_date">Date</t>
+                                                                </strong>
+                                                                . Please change status from Training to Probation.
+                                                            </p>
+                                                            <br/>
+
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <!-- Templates for end of probation period -->
+        <record id="probation_end_notification" model="mail.template">
+            <field name="name">End of probation period</field>
+            <field name="subject">End Of Probation Period</field>
+            <field name="email_from">{{ object.work_email }}</field>
+            <field name="email_to">{{ object._get_mail_to('probation_end_notification') }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <!-- <field name="user_signature" eval="0"/> -->
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content" style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}"
+                                                 t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Hi,
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Probation period of
+                                                                <strong>
+                                                                    <t t-out="object.name">Employee</t>
+                                                                </strong>
+                                                                will end on
+                                                                <strong>
+                                                                    <t t-out="object.probation_end_date">Date</t>
+                                                                </strong>
+                                                                . Please change status from Probation to Confirmed.
+                                                            </p>
+                                                            <br/>
+
+
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <record id="appraisal_date_notification" model="mail.template">
+            <field name="name">Appraisal Due on</field>
+            <field name="subject">Appraisal Due on</field>
+            <field name="email_from">{{ object.work_email }}</field>
+            <field name="email_to">{{ object._get_mail_to('appraisal_date_notification') }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <!-- <field name="user_signature" eval="0"/> -->
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content" style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}"
+                                                 t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Hi,
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Appraisal of
+                                                                <strong>
+                                                                    <t t-out="object.name">Employee</t>
+                                                                </strong>
+                                                                will due on
+                                                                <strong>
+                                                                    <t t-out="object.appraisal_date">Date</t>
+                                                                </strong>
+                                                                . Please change date of appraisal for next,
+                                                                respectively.
+                                                            </p>
+                                                            <br/>
+
+
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <record id="birth_day_notification" model="mail.template">
+            <field name="name">Birth Day</field>
+            <field name="subject">Happy Birthday – {{ object.name }}</field>
+            <field name="email_from">{{ 'hr@aspiresoftserv.com' }}</field>
+            <field name="email_to">{{ '583eb650.aspiresoftserv.com@in.teams.ms' }}</field>
+            <field name="reply_to">{{ 'noreply@aspiresoftserv.com' }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- BODY -->
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                We wish you a very Happy Birthday to a great member of
+                                                                our team. May your special day be full of happiness, fun
+                                                                and cheer !
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <t t-set="attach_id"
+                                                           t-value="object.get_attach_id('birth_day_notification')"/>
+                                                        <td class="header">
+                                                            <div class="container"
+                                                                 style="display: block!important; max-width: 100%!important; margin: 0 auto!important; clear: both!important;padding: 15px 0px;">
+                                                                <div class="content"
+                                                                     style="margin: auto;text-align: center;">
+                                                                    <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[1] }}/datas"
+                                                                         style="width:100%;margin-top:20ox;"
+                                                                         t-att-alt="object.company_id.name"></img>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <br/>
+                                                    <br/>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <record id="2_year_complete_notification" model="mail.template">
+            <field name="name">2 Year Complete</field>
+            <field name="subject">2 Year Complete</field>
+            <field name="email_from">{{ object._get_mail_to('2_year_complete_notification') }}</field>
+            <field name="email_to">{{ object.work_email }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- BODY -->
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Wishing you a very Happy Work Anniversary.
+                                                                <br/>
+                                                                You have made this year an absolute success with your
+                                                                hard work and dedication.
+                                                                <br/>
+                                                                Thank you!
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <t t-set="attach_id"
+                                                           t-value="object.get_attach_id('2_year_complete_notification')"/>
+                                                        <td class="header">
+                                                            <div class="container"
+                                                                 style="display: block!important; max-width: 100%!important; margin: 0 auto!important; clear: both!important;padding: 15px 0px;">
+                                                                <div class="content"
+                                                                     style="margin: auto;text-align: center;">
+                                                                    <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[1] }}/datas"
+                                                                         style="width:100%;margin-top:20ox;"
+                                                                         t-att-alt="object.company_id.name"></img>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <br/>
+                                                    <br/>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <record id="5_year_complete_notification" model="mail.template">
+            <field name="name">5 Year Complete</field>
+            <field name="subject">5 Year Complete</field>
+            <field name="email_from">{{ object._get_mail_to('5_year_complete_notification') }}</field>
+            <field name="email_to">{{ object.work_email }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- BODY -->
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Withing you a very happy work anniversary.
+                                                                <br/>
+                                                                We are so proud to have you on our team. Thank you for
+                                                                all our creativity and innovation that have helped us
+                                                                build the most impressive winning strategies.
+                                                                <br/>
+                                                                Thank you!
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <t t-set="attach_id"
+                                                           t-value="object.get_attach_id('5_year_complete_notification')"/>
+                                                        <td class="header">
+                                                            <div class="container"
+                                                                 style="display: block!important; max-width: 100%!important; margin: 0 auto!important; clear: both!important;padding: 15px 0px;">
+                                                                <div class="content"
+                                                                     style="margin: auto;text-align: center;">
+                                                                    <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[1] }}/datas"
+                                                                         style="width:100%;margin-top:20ox;"
+                                                                         t-att-alt="object.company_id.name"></img>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <br/>
+                                                    <br/>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <record id="10_year_complete_notification" model="mail.template">
+            <field name="name">10 Year Complete</field>
+            <field name="subject">10 Year Complete</field>
+            <field name="email_from">{{ object._get_mail_to('10_year_complete_notification') }}</field>
+            <field name="email_to">{{ object.work_email }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- BODY -->
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Wishing you a very happy work anniversary.
+                                                                <br/>
+                                                                Your hard work, dedication, and loyalty are, quite
+                                                                frankly, unparalleled. You
+                                                                have set the bar very high and we are extremely glad to
+                                                                have had spent our most
+                                                                significant years with you.
+                                                                <br/>
+                                                                Thank you!
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <t t-set="attach_id"
+                                                           t-value="object.get_attach_id('10_year_complete_notification')"/>
+                                                        <td class="header">
+                                                            <div class="container"
+                                                                 style="display: block!important; max-width: 100%!important; margin: 0 auto!important; clear: both!important;padding: 15px 0px;">
+                                                                <div class="content"
+                                                                     style="margin: auto;text-align: center;">
+                                                                    <img t-attf-src="{{ attach_id[0] }}/web/image/ir.attachment/{{ attach_id[1] }}/datas"
+                                                                         style="width:100%;margin-top:20ox;"
+                                                                         t-att-alt="object.company_id.name"></img>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <br/>
+                                                    <br/>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+
+        <record id="notice_period_notification" model="mail.template">
+            <field name="name">End of Notice period</field>
+            <field name="subject">End Of Notice Period</field>
+            <field name="email_from">{{ object.work_email }}</field>
+            <field name="email_to">{{ object._get_mail_to('notice_period_notification') }}</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <!-- <field name="user_signature" eval="0"/> -->
+            <field name="body_html" type="html">
+                <div style="font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; max-width: 600px; font-size: 14px; margin: 0 auto; ;padding: 0px; box-sizing: border-box;border:1px solid #ddd;">
+                    <!-- HEADER -->
+                    <table class="head-wrap"
+                           style=" width: 100%; padding: 5px;  border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td class="header" style="padding: 5px;">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content" style="margin: auto;padding: 12px;text-align: center">
+                                            <img t-attf-src="{{object.company_id.logo_url}}"
+                                                 t-att-alt="object.company_id.name" style="width:55%;margin-top:20ox;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /HEADER -->
+                    <!-- BODY -->
+
+                    <table class="body-wrap" style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#FFFFFF">
+                                    <div class="container"
+                                         style="display: block!important; max-width: 600px!important; margin: 0 auto!important; clear: both!important;">
+                                        <div class="content"
+                                             style="padding: 10px; max-width: 80%; margin: 0 auto; display: block;">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <p style="font-weight: 500; font-size: 27px; margin-bottom: 15px;">
+                                                                Hi,
+                                                            </p>
+                                                            <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                Notice period of
+                                                                <strong>
+                                                                    <t t-out="object.name">Employee</t>
+                                                                </strong>
+                                                                will end on
+                                                                <strong>
+                                                                    <t t-out="object.probation_end_date">Date</t>
+                                                                </strong>
+                                                                . Please change status from Notice to Left Organization.
+                                                            </p>
+                                                            <br/>
+
+
+                                                            <p style="margin-bottom: 0px; font-weight: normal; font-size: 14px; line-height: 1.4;">
+                                                                <strong>Note :</strong>This is an auto-generated mail.
+                                                                Please do not reply.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_attendance_monthly_summary_report" model="ir.ui.view">
+            <field name="name">attendance.monthly.summary.report.form</field>
+            <field name="model">attendance.monthly.summary.report</field>
+            <field name="arch" type="xml">
+                <form string="Monthly Report">
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_attendance_monthly_summary_report" model="ir.actions.act_window">
+            <field name="name">Monthly Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">attendance.monthly.summary.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                name="Attendance Report By Date"
+                parent="hr_attendance.menu_hr_attendance_report"
+                action="action_attendance_monthly_summary_report"
+                id="menu_attendance_summary_report_by_date"
+                sequence="3"
+        />
+        <!--groups="group_admin_user"-->
+
+    </data>
+</odoo>

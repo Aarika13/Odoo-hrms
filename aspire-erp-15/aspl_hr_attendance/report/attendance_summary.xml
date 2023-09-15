@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="attendance_summary_pivot" model="ir.ui.view">
+        <field name="name">Attendance Summary</field>
+        <field name="model">attendance.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Attendance Summary" disable_linking="1" sample="1">
+                <field name="employee_id" type="row"/>
+                <field name="working_days" type="measure"/>
+                <field name="hours" type="measure"/>
+                <field name="leave_days" type="measure"/>
+                <field name="leave_hours" type="measure" widget="float_time"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="attendance_summary_search" model="ir.ui.view">
+        <field name="name">report01.view.search</field>
+        <field name="model">attendance.summary</field>
+        <field name="arch" type="xml">
+            <search string="HR Attendance Search">
+                <field name="employee_id"/>
+                <filter name="date" string="Month" date="date"/>
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter string="Employee" name="groupby_employee" context="{'group_by': 'employee'}"/>-->
+<!--                    <filter string="Check In" name="groupby_check_in" context="{'group_by': 'check_in'}"/>-->
+<!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+    <record id='attendance_summary_action' model='ir.actions.act_window'>
+        <field name="name">Attendance Summary</field>
+        <field name="res_model">attendance.summary</field>
+        <field name="view_mode">pivot</field>
+        <field name="search_view_id" ref="attendance_summary_search"/>
+        <field name="context">{'search_default_check_in': 1}</field>
+    </record>
+
+    <menuitem id="menu_my_attendance_summary"
+              name="Attendance Summary"
+              sequence="2"
+              parent="hr_attendance.menu_hr_attendance_report"
+              action="attendance_summary_action"
+              groups="hr_attendance.group_hr_attendance_user"/>
+
+</odoo>

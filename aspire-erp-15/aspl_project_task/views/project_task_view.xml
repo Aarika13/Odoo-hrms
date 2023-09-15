@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+         <record id="view_task_form2_inherit" model="ir.ui.view">
+            <field name="name">view.task.form2</field>
+            <field name="model">project.task</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="task_priority"/>
+                    <field name="story_points"/>
+                    <field name="type_of_task" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" domain="[('project_id', '=', project_id)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_task_enhancement_module_kanban">
+            <field name="name">project.task.enhancement.module.kanban</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name = 'is_private']" position="after">
+                    <field name="type_of_task"/>
+                    <field name="type_of_task_color"/>
+                </xpath>
+                <xpath expr="//div[contains(@class,'o_kanban_record_body')]" position="inside">
+                    <t t-if="record.task_priority.raw_value == 'lowest'">
+                        <span style="color:#808080;">
+                            <i class="fa fa-arrow-down"/>
+                            <field name="task_priority"/>
+                        </span>
+                    </t>
+                    <t t-if="record.task_priority.raw_value == 'low'">
+                        <span style="color:#A9A9A9;">
+                            <i class="fa fa-arrow-down"/>
+                            <field name="task_priority"/>
+                        </span>
+                    </t>
+                    <t t-if="record.task_priority.raw_value == 'medium'">
+                        <span style="color:#8B8000;">
+                            <i class="fa fa-arrow-up"/>
+                            <field name="task_priority"/>
+                        </span>
+                    </t>
+                    <t t-if="record.task_priority.raw_value == 'high'">
+                        <span style="color:#FF8C00;">
+                            <i class="fa fa-arrow-up"/>
+                            <field name="task_priority"/>
+                        </span>
+                    </t>
+                    <t t-if="record.task_priority.raw_value == 'highest'">
+                        <span style="color:#8B0000;">
+                            <i class="fa fa-arrow-up"/>
+                            <field name="task_priority"/>
+                        </span>
+                    </t>
+                </xpath>
+                
+                <xpath expr="//div[contains(@class,'oe_kanban_bottom_left')]" position="inside">
+                    
+                    <t t-if="record.type_of_task.raw_value">
+                        <i class="fa fa-tasks"  t-attf-style="color:#{record.type_of_task_color.raw_value};" ></i>
+                    </t>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_task_enhancement_module_tree">
+            <field name="name">project.task.enhancement.module.tree</field>
+            <field name="model">project.task</field> 
+            <field name="inherit_id" ref="project.view_task_tree2" />
+            <field eval="2" name="priority" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name = 'project_id']" position="before">
+                    <field name="type_of_task" string="Type Task" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name = 'company_id']" position="before">
+                    <field name="milestone_id"/>
+                    <field name="task_priority"/>
+                    <field name="story_points"/>
+                </xpath>
+            </field>
+        </record>
+
+       <record id="project_task_type_selection_tree" model="ir.ui.view">
+            <field name="name">selection_type_tree</field>
+            <field name="model">project.task.selection</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="project_id"/> 
+                    <field name="name"/>
+                    <field name="color" widget="color"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="project_task_type_selection_view_form" model="ir.ui.view">
+            <field name="name">selection_type_form</field>
+            <field name="model">project.task.selection</field>
+            <field name="arch" type="xml">
+                <form> 
+                    <group>
+                    <field name="project_id" string="Project"/>
+                    <field name="name" string="Type of Task"/>
+                    <field name="color" widget="color"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_task_type_selection_form" model="ir.actions.act_window">
+            <field name="name">Task Types</field>
+            <field name="res_model">project.task.selection</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" />
+        </record>
+                
+    </data>
+</odoo>
+
+               

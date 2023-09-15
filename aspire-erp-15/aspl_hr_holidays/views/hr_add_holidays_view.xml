@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Add Holidays calendar view -->
+        <record id="view_holiday_calendar" model="ir.ui.view">
+            <field name="name">holidays.detail.calendar</field>
+            <field name="model">hr.holidays.detail</field>
+            <field name="arch" type="xml">
+                <calendar string="Add Holidays"
+                          date_start="holiday_from" date_stop="holiday_from"
+                          quick_add="False">
+                    <!--<field name="leave_status"/>-->
+                    <field name="des"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_holiday_form_view">
+            <field name="name">holidays.detail.form</field>
+            <field name="model">hr.holidays.detail</field>
+            <field name="arch" type="xml">
+                <form string="Add Holidays">
+                    <sheet>
+                        <group>
+                            <group string="Add Holiday leave">
+                                <field name="name"/>
+                                <field name="holiday_from"/>
+                                <field name="des"/>
+                                <field name="leave_status" invisible="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_holiday_tree_view">
+            <field name="name">holidays.detail.tree</field>
+            <field name="model">hr.holidays.detail</field>
+            <field name="arch" type="xml">
+                <tree string="Add Holidays">
+                    <field name="name"/>
+                    <field name="holiday_from"/>
+                    <field name="des"/>
+                    <field name="leave_status" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_employee_holidays_inherited" model="ir.ui.view">
+            <field name="name">holidays</field>
+            <field name="model">hr.holidays.detail</field>
+            <field name="arch" type="xml">
+                <search string="holidays">
+                    <filter domain="[('holiday_from','>=', time.strftime('%%Y-%%m-%%d'))]" string="Upcomming holidays"
+                            name="holidays"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_holiday_leave">
+            <field name="name">Public Holiday</field>
+            <field name="res_model">hr.holidays.detail</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_holiday_form_view"/>
+            <field name="context">{'search_default_holidays':1}</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_open_holiday_leave_calendar">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="view_holiday_calendar"/>
+            <field name="act_window_id" ref="open_holiday_leave"/>
+        </record>
+
+
+        <record model="ir.actions.act_window.view" id="action_open_holiday_leave_tree">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_holiday_tree_view"/>
+            <field name="act_window_id" ref="open_holiday_leave"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="action_open_holiday_leave_form">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_holiday_form_view"/>
+            <field name="act_window_id" ref="open_holiday_leave"/>
+        </record>
+
+        <!--<menuitem name="Public Holiday"
+                  id="menu_public_holidays_leaves_root"
+                  parent="hr_holidays.menu_hr_holidays_root"
+                  sequence="4"/>-->
+
+
+        <!--<record id="hr_holidays.hr_holidays_public_time_off_menu_configuration" model="ir.ui.menu">
+            <field name="name">Public Holidays</field>
+            <field name="action"></field>
+            <field name="parent">hr_holidays.menu_hr_holidays_root</field>
+            &lt;!&ndash; <field name="groups_id" eval="[(6, 0, [ref('hr.group_hr_manager')])]"/>&ndash;&gt;
+        </record>-->
+
+        <!--        <menuitem parent="menu_public_holidays_leaves_root"-->
+        <!--                  id="menu_public_holidays_leaves"-->
+        <!--                  action="open_holiday_leave"/>-->
+        <!--<menuitem parent="hr_holidays.hr_holidays_public_time_off_menu_configuration"
+                  id="menu_public_holidays_leaves"
+                  action="open_holiday_leave"/>-->
+
+    </data>
+</odoo>

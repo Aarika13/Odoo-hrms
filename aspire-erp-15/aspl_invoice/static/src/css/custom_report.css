@@ -1,0 +1,95 @@
+.table > thead > tr > th
+{
+    border:none !important;
+}
+.table > tbody > tr > td 
+{
+    border:none !important;
+}
+.table > tr > td
+{
+    border:none !important;
+}
+.header_invoice_name
+{
+    float: right;
+    width: 50%;
+    text-align: right;
+    font-size: 40px;
+    padding-right:80px;
+}
+.header_company_image
+{
+    float: left;
+    width: 50%;
+}
+.html_body
+{
+    margin-right:30px;
+    margin-left: 30px;
+}
+.inner-total {
+    float: right;
+}
+h4.inv-title
+{
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+p.inv-total {
+    font-weight: 500;
+    font-size: 2em;
+    display: inline-block;
+    padding: 10px;
+    float: right;
+}
+h4
+{
+    margin-top: 0;
+    line-height: 18px;
+    margin: 0;
+    text-rendering: optimizelegibility;
+    display: block;
+    -webkit-margin-before: 1.33em;
+    -webkit-margin-after: 1.33em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+
+}
+div {
+    display: block;
+}
+.invoiceBox_padding
+{
+    float: left;
+    width: 30%;
+    padding-left:6px;
+}
+.billToAddBox_padding
+{
+    padding-left:10px;
+}
+.invoiceBox_element
+{
+    float: left;
+    width: 70%;
+}
+.shipto_title
+{
+    background: url("/invoice_aspire/static/src/img/cbneogul.png") no-repeat left bottom;
+}
+.custom-font
+{
+    font-family: "Century Gothic";
+    font-style: normal;
+}
+ th{
+    text-align: left;
+ }
+td{
+    padding: 4px;
+}
+.nnopadding{
+    font-size:18px
+}

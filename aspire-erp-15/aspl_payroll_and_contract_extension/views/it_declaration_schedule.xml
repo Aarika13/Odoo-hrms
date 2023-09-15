@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_add_employee_it_declarations" model="ir.cron">
+            <field name="name">It Declaration Schedule</field>
+            <field name="model_id" ref="model_it_declaration_payslip"/>
+            <field name="state">code</field>
+            <field name="code">model.calculate_it_declaration()</field>
+            <field name="priority">1</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,673 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Applications Inherited List View -->
+        <record id="view_hr_applicant_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.applicant.tree.inherit</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                     <attribute name="default_order">write_date desc</attribute>
+                </xpath>
+                <!-- default_order="write_date desc" -->
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_mobile']" position="replace">
+                    <field name="partner_mobile" readonly="1" optional="show"/>
+                </xpath>
+                <xpath expr="//field[@name='create_date']" position="replace">
+                    <field name="write_date" readonly="1" optional="show" widget="date"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_phone']" position="replace">
+                    <field name="partner_phone" readonly="1" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="replace">
+                    <field name="job_opening_id"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="candidate_id"/>
+                    <field name="interviewers_ids" widget="many2many_tags"/>
+                    <field name="reviewer_user_ids" widget="many2many_tags"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Interview Skills Line Form View-->
+        <record id="int_feedbacks_skill_view_form" model="ir.ui.view">
+            <field name="name">int.feedbacks.skill.form</field>
+            <field name="model">int.feedbacks.skill</field>
+            <field name="arch" type="xml">
+                <form string="Skills">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="skill_type_id" options="{'no_create_edit': True,'no_create': True}"/>
+                                <field
+                                        name="skill_id"
+                                        domain="[('skill_type_id', '=', skill_type_id)]"
+                                        options="{'no_create_edit':True,'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="skill_level_id" domain="[('skill_type_id', '=', skill_type_id)]"
+                                       options="{'no_create_edit':True,'no_create': True}"/>
+                                <field name="level_progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Interviewer Feedbacks Skills Form View-->
+        <record id="int_feedbacks_view_form" model="ir.ui.view">
+            <field name="name">int.feedbacks.form</field>
+            <field name="model">int.feedbacks</field>
+            <field name="arch" type="xml">
+                <form string="Interviewer Feedbacks on Applicant Skills">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="interviewer_id"
+                                       options="{'no_create_edit': True,'no_create': True,'no_open': True}"
+                                       readonly="1" force_save="1"/>
+                                <field name="date" readonly="1" force_save="1" invisible="1"/>
+                                <field name="interview_date" force_save="1"/>
+                                <field name="activity_type_id"/>
+                            </group>
+                            <group>
+                                <field name="status" required="1"/>
+                                <field name="interview" required="1"/>
+                                <field name="refuse_reason" attrs="{'invisible':[('status','!=','rejected')],'required': [('status', '=', 'rejected')]}" options="{'no_create_edit': True,'no_create': True,'no_open': True}"/>
+                                <field name="interview_time"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="comment"/>
+                        </group>
+                        <notebook>
+                            <page name="public" string="Skills">
+                                <div class="row">
+                                    <div class="o_hr_skills_group o_group_skills col-lg-12 d-flex flex-column">
+                                        <field mode="tree" nolabel="1" name="feedbacks_skill_ids">
+                                            <tree editable="bottom"> 
+                                                <field name="skill_type_id" options="{'no_create': True,'no_open':True}"/>
+                                                <field name="skill_id" domain="[('skill_type_id','=', skill_type_id)]" options="{'no_create': True,'no_open':True}"/>
+                                                <field name="skill_level_id" domain="[('skill_type_id','=', skill_type_id)]" options="{'no_create': True,'no_open':True}"/>
+                                                <field name="level_progress" widget="progressbar"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- HR Applicant Skills Form View-->
+        <record id="hr_applicant_skill_view_form" model="ir.ui.view">
+            <field name="name">hr.applicant.skill.form</field>
+            <field name="model">hr.applicant.skill</field>
+            <field name="arch" type="xml">
+                <form string="Skills" create="0" delete="0" edit="0">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="skill_type_id"/>
+                                <field
+                                        name="skill_id"
+                                        domain="[('skill_type_id', '=', skill_type_id)]"
+                                        options="{'no_create_edit':True}"/>
+                            </group>
+                            <group>
+                                <field name="skill_level_id" domain="[('skill_type_id', '=', skill_type_id)]"/>
+                                <field name="level_progress" widget="progressbar"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- HR Question Form View-->
+        <record id="app_questions_line_view_form" model="ir.ui.view">
+            <field name="name">app.questions.line.form</field>
+            <field name="model">app.questions.line</field>
+            <field name="arch" type="xml">
+                <form string="HR Question">
+                    <sheet>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="ans" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Applications Inherited Form View -->
+        <record id="view_hr_applicant_form_inherit" model="ir.ui.view">
+            <field name="name">hr.applicant.form.inherit</field>
+            <field name="model">hr.applicant</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+                <xpath expr="//form/header/button[@name='create_employee_from_applicant']" position="before">
+                    <button string="HR Questions"
+                            name="get_question"
+                            style="background-color:#ffeb3b;"
+                            type="object"
+                            attrs="{'invisible': [('stage_status', '!=', 'In')]}"/>
+                    <button id="button_send_feedback_template" name="send_feedback_form" string="Send Feedback Mail"
+                            type="object" class="btn-primary"
+                            attrs="{'invisible': [('stage_status', '!=', 'O')]}"/>
+                    <button id="button_schedule_interview" name="action_schedule_interview"
+                            string="Interview Schedule"
+                            type="object" class="btn-primary" attrs="{'invisible': ['&amp;',('stage_status', '!=', 'Sh'),('stage_status','!=','Int')]}"
+                    />      
+                    <button string="Refer to Job Opening"
+                            name="%(refer_to_job_opening_action)d"
+                            style="background-color:#3cb371;"
+                            type="action"
+                    />
+                    <button string="Offer Accepted"
+                            name="offer_accepted_applicant"
+                            style="background-color:#3cb371;"
+                            type="object"
+                            attrs="{'invisible': ['|',('stage_status', '!=', 'O'),('kanban_state', '=', 'done')],'required':[('stage_status', '=', 'O')]}"
+                    />
+                </xpath>
+                <xpath expr="//form/sheet/widget[2]" position="replace"/>
+                
+                <xpath expr="//form/sheet/div[1]" position="after">
+                    <widget name="web_ribbon" title="Selected" bg_color="bg-success"
+                            attrs="{'invisible': [('stage_status', '!=', 'Sel')]}"/>
+                    <widget name="web_ribbon" title="Offered" bg_color="bg-success"
+                            attrs="{'invisible': [('stage_status', '!=', 'O')]}"/>
+                    <widget name="web_ribbon" title="Accepted" bg_color="bg-success"
+                            attrs="{'invisible': ['|',('kanban_state', '!=', 'done'),('stage_status','!=','O')],'required':[('stage_status', '=', 'O')]}"/>
+                    <widget name="web_ribbon" title="Joined" bg_color="bg-success"
+                            attrs="{'invisible': [('stage_status', '!=', 'Jo')]}"/>
+                </xpath>
+                <xpath expr="//form/sheet/group/group[4]" position="before">
+                    <field name ="check_owner_and_current_user" invisible ="1"/>
+                </xpath>
+                <!-- <xpath expr="//form/sheet/group/group[4]" position="attributes">
+                    <attribute name="groups">
+                        hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user
+                    </attribute>
+                </xpath> -->
+
+                <xpath expr="//form/sheet/group/group[4]" position="attributes">
+                    <attribute name="attrs">{'invisible':[('check_owner_and_current_user','=',False)]}</attribute>
+                </xpath>
+                <!--Chatter visible for interviewer and Reviewers also 18/1/22-->
+                <xpath expr="//div[hasclass('oe_chatter')]" position="replace">
+                    <div groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user">
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids"/>
+                            <field name="activity_ids"/>
+                            <field name="message_ids" options="{'open_attachments': True}"/>
+                        </div>
+                    </div>
+                </xpath>
+                <xpath expr="//form/header/button[@name='create_employee_from_applicant']" position="replace">
+                    <!-- <button string="Create Employee"
+                            name="create_employee_from_aspire_applicant"
+                            type="object"
+                            class="oe_highlight o_create_employee"
+                            attrs="{'invisible': ['|',('offer', '!=', 'accepted'),('stage_status','!=','O')]}"/> -->
+
+                    <button string="Onboard"
+                            name="candidate_on_boarding_process"
+                            type="object"
+                            style="background-color:#017e84;color:white"
+                            attrs="{'invisible': ['|',('offer', '!=', 'accepted'),('stage_status','!=','O')]}"/>        
+                </xpath>
+                <field name="partner_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <xpath expr="//form/sheet/group/group[1]/field[@name='partner_id']" position="after">
+                    <field name="candidate_id"/>
+                </xpath>
+                <field name="partner_phone" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="email_from" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+
+                <xpath expr="//form/sheet/div[2]" position="replace">
+                </xpath>
+                <xpath expr="//form/sheet/group" position="before">
+                    <div class="oe_title">
+                        <h1 class="o_row">
+                            <label for="partner_name" class="oe_edit_only"/>
+                            <field name="partner_name"/>
+                        </h1>
+                    </div>
+                </xpath>
+                <field name="categ_ids" position="attributes">
+                    <attribute name="options">{'no_create_edit': True,'no_create': True}</attribute>
+                    <attribute name="required">1</attribute>
+                </field>
+
+                <field name="type_id" position="attributes">
+                    <attribute name="options">{'no_create_edit': True,'no_create': True,'no_open': True}</attribute>
+                    <attribute name="required">1</attribute>
+                </field>
+
+                <field name="medium_id" position="attributes">
+                    <attribute name="options">{'no_create_edit': True,'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <field name="source_id" position="attributes">
+                    <attribute name="options">{'no_create_edit': True,'no_create': True,'no_open': True}</attribute>
+                </field>
+
+                <field name="department_id" position="attributes">
+                    <attribute name="options">{'no_create_edit': True,'no_create': True,'no_open': True}</attribute>
+                    <attribute name="required">1</attribute>
+                </field>
+
+                <field name="job_id" position="attributes">
+                    <attribute name="options">{'no_create_edit': True,'no_create': True,'no_open': True}</attribute>
+                    <attribute name="required">1</attribute>
+                </field>
+
+                <field name="partner_mobile" position="replace">
+                    <field name="partner_mobile" required="1"/>
+                </field>
+
+                <field name="job_id" position="after">
+                    <field name="job_opening_id" invisible="0" force_save="1"
+                           options="{'no_create_edit': True,'no_create': True, 'no_open': True}"/>
+                    <field name="job_opening_ids" widget="many2many_tags" invisible="1"
+                           options="{'no_create_edit': True,'no_create': True}"/>
+                </field>
+                <field name="type_id" position="after">
+                    <field name="current_company_id"/>
+                    <field name="current_location_city" options="{'no_open': True}"/>
+                    <field name="ready_to_relocate"/>
+                    <field name="date_received"/>
+                    <field name="year_of_passing" options="{'format': 0}"/>
+                    <field name="is_partner" groups="base.group_no_one" invisible="1"/>
+                    <field name="is_candidate" groups="base.group_no_one" invisible="1"/>
+                </field>
+                <field name="categ_ids" position="after">
+                    <field name="reviewer_user_ids" widget="many2many_tags" required="True"
+                           options="{'no_create_edit': True,'no_create': True}"/>
+                    <field name="interviewers_ids" widget="many2many_tags" required="1"
+                           options="{'no_create_edit': True,'no_create': True}"/>
+                    <field name="referred_id" options="{'no_create_edit': True,'no_create': True}"/>
+                    <field name="total_exp_years" class="oe_edit_only"/>
+                    <field name="total_exp" class="oe_read_only"/>
+                    <field name="source_user" invisible="1"/>
+                    <field name="current_experience" readonly="1"/>
+                    <!-- <field name="interview"
+                           attrs="{'invisible': [('stage_status', '!=', 'Int')]}"/> -->
+                    <field name="offer"
+                           attrs="{'invisible': [('stage_status', '!=', 'O')], 'required':[('stage_status', '=', 'O')]}"/>
+                    <field name="offer"
+                           attrs="{'invisible': [('stage_status', '!=', 'Jo')], 'required':[('stage_status', '=', 'Jo')]}"/>
+                </field>
+                <xpath expr="//sheet/group/group[4]/label" position="before">
+                    <field name="current_ctc" attr="{'invisible':[('check_owner_and_current_user','=',False)]}"/> <!--groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"-->
+                </xpath>
+                <xpath expr="//field[@name='availability']" position="replace">
+                    <field name="availability2"/>
+                    <field name="expected_join_date" attrs="{'invisible': [('stage_status', '!=', 'O')]}"/>
+                    <field name="expected_hike" attr="{'invisible':[('check_owner_and_current_user','=',False)]}"/> <!--groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"-->
+                    <field name="proposed_hike" attr="{'invisible':[('check_owner_and_current_user','=',False)]}"/> <!--groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"-->
+                </xpath>
+                <xpath expr="//sheet/group" position="after">
+                    <separator string="Private Note"
+                               groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                    <field name="private_note" placeholder="Confidential information..."
+                           groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                </xpath>
+                <xpath expr="//form/sheet/group" position="after">
+                    <notebook>
+                        <page name="public" string="Interviews and Ratings"
+                              attrs="{'invisible': [('stage_status', 'not in', ('Int', 'Sel', 'O'))]}">
+                            <field nolabel="1" name="feedbacks_ids" string="Interviewers Feedbacks">
+                                <tree delete="0">
+                                    <field name="interviewer_id" options="{'no_create_edit': True,'no_create': True}"/>
+                                    <field name="comment"/>
+                                    <field name="interview"/>
+                                    <field name="status"/>
+                                    <field name="interview_date"/>
+                                    <field name="refuse_reason" string="Reason"/>
+                                </tree>
+                            </field>
+                            <div class="row">
+                                <div class="o_hr_skills_group o_group_skills col-lg-12 d-flex flex-column">
+                                    <field mode="tree" nolabel="1" name="applicant_skill_ids" widget="hr_skills"
+                                           readonly="1" force_save="1" options="{'no_open': True}">
+                                        <tree create="0" delete="0" edit="0" editable="bottom">
+                                            <field name="skill_type_id" invisible="1"/>
+                                            <field name="skill_id"/>
+                                            <field name="skill_level_id"/>
+                                            <field name="level_progress" widget="progressbar"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+
+                        </page>
+                        <page name="que" string="HR Questions"
+                              groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user">
+                            <field nolabel="1" name="questions_ids">
+                                <tree create="0" delete="0" update="0" editable="bottom">
+                                    <field name="name" readonly="1"/>
+                                    <field name="ans"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="feedback" string="Candidate Feedback"
+                              attrs="{'invisible': [('stage_status', '!=', 'O')]}"
+                              groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user">
+                            <!--<group>
+                                <field name="candidate_feedback" options="{'no_create_edit': True,'no_create': True}"/>
+                                <field name="rating" options="{'no_create_edit': True,'no_create': True}"/>
+                            </group>
+                            <group>
+                            </group>-->
+                            <group>
+                                <group>
+                                    <field name="que1" readonly="1" force_save="1"/>
+                                    <field name="que2" readonly="1" force_save="1"/>
+                                    <field name="que3" readonly="1" force_save="1"/>
+                                    <field name="que4" readonly="1" force_save="1"/>
+                                    <field name="que5" readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <field name="rating1" readonly="1" force_save="1"/>
+                                    <field name="rating2" readonly="1" force_save="1"/>
+                                    <field name="rating3" readonly="1" force_save="1"/>
+                                    <field name="rating4" readonly="1" force_save="1"/>
+                                    <field name="rating5" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="feedback_status" readonly="1"
+                                           options="{'no_create_edit': True,'no_create': True}"/>
+                                </group>
+                                <!--<group>
+                                    <field name="feedback_average" readonly="1"
+                                           options="{'no_create_edit': True,'no_create': True}"/>
+                                </group>-->
+                            </group>
+                        </page>
+                        <page name="applicant_activity" string="Application Activity"
+                              groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user">
+                            <div class="row">
+                                <div class="o_hr_skills_group o_group_skills col-lg-12 d-flex flex-column">
+                                    <field mode="tree" nolabel="1" name="applicant_activity_ids"
+                                           readonly="1" force_save="1" options="{'no_open': True}">
+                                        <tree create="0" delete="0" edit="0" editable="bottom">
+                                            <field name="activity"/>
+                                            <field name="user_id" string="Performed By"/>
+                                            <field name="track_date"/>
+                                            <field name="time_taken"/>
+                                            <!-- <field name="years" invisible="1"/>
+                                            <field name="months" invisible="1"/>
+                                            <field name="days" invisible="1"/>
+                                            <field name="hours" invisible="1"/>
+                                            <field name="minutes" invisible="1"/>
+                                            <field name="seconds" invisible="1"/> -->
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                        </page>
+
+                    </notebook>
+                </xpath>
+                <xpath expr="//form/sheet/notebook" position="before">
+                    <group string="Interview Details" attrs="{'invisible': True}">
+                        <group>
+                            <field name="telephonic"/>
+                            <field name="interview_type"/>
+                            <field name="interview_type_message"/>
+                            <field name="meeting_description"/>
+                        </group>
+                        <group>
+                            <field name="interview_date"/>
+                            <field name="interview_day"/>
+                            <field name="interview_time"/>
+                            <field name="stage_status"/>
+                        </group>
+                    </group>
+
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Applications Inherited Kanban View -->
+        <record id="view_hr_applicant_kanban_inherit" model="ir.ui.view">
+            <field name="name">hr.applicant.kanban.inherit</field>
+            <field name="model">hr.applicant</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="quick_create">0</attribute>
+                    <attribute name="create">0</attribute>
+                </xpath>
+                <xpath expr="//kanban/field[@name='job_id']" position="after">
+                    <field name="kanban_state" invisible="1"/>
+                    <field name="stage_status" invisible="1"/>
+                    <field name="offer"/>  
+                </xpath>
+                <xpath expr="//kanban/field[@name='activity_state']" position="after">
+                    <field name="offer"/>  
+                </xpath>
+                <xpath expr='//kanban/templates/t/div/div[2]/div/div' position="after">
+                    <div class="o_kanban_record_subtitle">
+                        <field name="job_opening_id"/>
+                    </div>
+                </xpath>
+                <xpath expr='//kanban/templates/t/div/div[2]' position="before">
+                    <widget name="web_ribbon" text="Selected" attrs="{'invisible': [('stage_status','!=','Sel')],'required':[('stage_status', '=', 'Sel')]}" />
+                    <widget name="web_ribbon" text="Offered" attrs="{'invisible': ['|',('offer', '!=', 'given'),('stage_status','!=','O')],'required':[('stage_status', '=', 'O')]}" />
+                    <widget name="web_ribbon" text="Accepted" attrs="{'invisible': ['|',('offer', '!=', 'accepted'),('stage_status','!=','O')],'required':[('stage_status', '=', 'O')]}" />
+                    <widget name="web_ribbon" text="Joined" attrs="{'invisible': ['|',('offer', '!=', 'joined'),('stage_status','!=','Jo')],'required':[('stage_status', '=', 'Jo')]}" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Applications Inherited Calendar View -->
+        <record id="view_hr_applicant_calendar_inherit" model="ir.ui.view">
+            <field name="name">Hr Applicants Calendar inherited</field>
+            <field name="model">hr.applicant</field>
+            <field name="priority" eval="2"/>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_calendar_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//calendar" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Applications Inherited Search View -->
+        <record id="view_hr_applicant_search_inherit" model="ir.ui.view">
+            <field name="name">Hr Applicants Search inherited</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='inactive']" position="before">
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--  Thank You Page for Applicant feedbacks-->
+        <template id="create_feedback" name="Recruitment Candidate Feedback">
+            <t t-call="website.layout">
+                <div class="container">
+                    <div id="wrap" class="oe_structure oe_empty">
+                        <section class="s_website_form pt16 pb16 o_colored_level" data-vcss="001"
+                                 data-snippet="s_website_form" data-name="Form" style="background-image: none;">
+                            <div class="container">
+                                <form role="form" method="POST" id="candidate_feedback_form">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <div class="s_website_form_rows row s_col_no_bgcolor">
+                                        <h3 t-esc='que1'
+                                            class="o_survey_title pb16"/>
+                                        <select name="rating1" id="rating1" class="form-control link-style"
+                                                required="1">
+                                            <option value="">None</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Good</option>
+                                            <option value="3">Very Good</option>
+                                            <option value="4">Excellent</option>
+                                        </select>
+                                        <h3 t-esc='que2'
+                                            class="o_survey_title pb16"/>
+                                        <select name="rating2" id="rating2" class="form-control link-style"
+                                                required="1">
+                                            <option value="">None</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Good</option>
+                                            <option value="3">Very Good</option>
+                                            <option value="4">Excellent</option>
+                                        </select>
+                                        <h3 t-esc='que3'
+                                            class="o_survey_title pb16"/>
+                                        <select name="rating3" id="rating3" class="form-control link-style"
+                                                required="1">
+                                            <option value="">None</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Good</option>
+                                            <option value="3">Very Good</option>
+                                            <option value="4">Excellent</option>
+                                        </select>
+                                        <h3 t-esc='que4'
+                                            class="o_survey_title pb16"/>
+                                        <select name="rating4" id="rating4" class="form-control link-style"
+                                                required="1">
+                                            <option value="">None</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Good</option>
+                                            <option value="3">Very Good</option>
+                                            <option value="4">Excellent</option>
+                                        </select>
+                                        <h3 t-esc='que5'
+                                            class="o_survey_title pb16"/>
+                                        <select name="rating5" id="rating5" class="form-control link-style"
+                                                required="1">
+                                            <option value="">None</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Good</option>
+                                            <option value="3">Very Good</option>
+                                            <option value="4">Excellent</option>
+                                        </select>
+
+                                        <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
+                                            <div style="width: 200px;" class="s_website_form_label"/>
+                                            <div class="clearfix_oe_login_buttons">
+                                                <button type="submit" class="btn btn-primary" id="feedback_btn">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </t>
+        </template>
+        <!--  Thank You Page for Applicant feedbacks-->
+        <record id="candidate_thanks" model="website.page">
+            <field name="name">Thanks</field>
+            <field name="type">qweb</field>
+            <field name="url">/thanks</field>
+            <field name="website_published">True</field>
+            <field name="key">aspl_hr_recruitment.candidate_thanks</field>
+            <field name="arch" type="xml">
+                <t name="Thanks" t-name="aspl_hr_recruitment.candidate_thanks">
+                    <t t-call="website.layout">
+                        <div id="wrap">
+                            <div class="container">
+                                <h3>Thanks for the feedback..</h3>
+                                <p>We will get back to you soon..</p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+        <!--  Thank You Page for Applicant feedbacks-->
+        <record id="already_submitted" model="website.page">
+            <field name="name">Already Submitted</field>
+            <field name="type">qweb</field>
+            <field name="url">/thank_you</field>
+            <field name="website_published">True</field>
+            <field name="key">aspl_hr_recruitment.already_submitted</field>
+            <field name="arch" type="xml">
+                <t name="Thanks" t-name="aspl_hr_recruitment.already_submitted">
+                    <t t-call="website.layout">
+                        <div id="wrap">
+                            <div class="container">
+                                <h3>You have already submitted the feedback..</h3>
+                                <p>Thank You!</p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+
+        <menuitem
+                id="hr_skill_type_menu_recruitment"
+                name="Skills"
+                action="hr_skills.hr_skill_type_action"
+                parent="hr_recruitment.menu_hr_recruitment_configuration"
+                sequence="3"
+                groups="base.group_no_one"/>
+
+        <!-- New Pivot report for source Per hire-->
+        <record id="hr_applicant_pivot_view_for_sph" model="ir.ui.view">
+            <field name="name">hr.applicant.report.pivot.view.for.sph</field>
+            <field name="model">hr.applicant</field>
+            <field name="arch" type="xml">
+                <pivot string="Source Per Hire" disable_linking="True">
+                    <field name="source_id" type="row"/>
+                    <field name="offer" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="hr_applicant_sph_act">
+            <field name="name">Source Per Hire</field>
+            <field name="res_model">hr.applicant</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" eval="hr_applicant_pivot_view_for_sph"/>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem
+                id="menu_hr_applicant_sph_report"
+                name="Source Per Hire Report"
+                parent="hr_recruitment.report_hr_recruitment"
+                sequence="112"
+                action="hr_applicant_sph_act"
+        />
+
+
+    </data>
+</odoo>

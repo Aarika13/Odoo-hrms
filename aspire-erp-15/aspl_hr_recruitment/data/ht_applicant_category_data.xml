@@ -1,0 +1,666 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="category_tag_1" model="hr.applicant.category">
+            <field name="name">.Net</field>
+        </record>
+        <record id="category_tag_2" model="hr.applicant.category">
+            <field name="name">ADO.net</field>
+        </record>
+        <record id="category_tag_3" model="hr.applicant.category">
+            <field name="name">AI</field>
+        </record>
+        <record id="category_tag_4" model="hr.applicant.category">
+            <field name="name">ASP.NET WEB API</field>
+        </record>
+        <record id="category_tag_5" model="hr.applicant.category">
+            <field name="name">ASP.Net MVC</field>
+        </record>
+        <record id="category_tag_6" model="hr.applicant.category">
+            <field name="name">Admin</field>
+        </record>
+        <record id="category_tag_7" model="hr.applicant.category">
+            <field name="name">Adobe Photoshop</field>
+        </record>
+        <record id="category_tag_8" model="hr.applicant.category">
+            <field name="name">Adobe illustrator CS6</field>
+        </record>
+        <record id="category_tag_9" model="hr.applicant.category">
+            <field name="name">Alfresco</field>
+        </record>
+        <record id="category_tag_10" model="hr.applicant.category">
+            <field name="name">Android</field>
+        </record>
+        <record id="category_tag_11" model="hr.applicant.category">
+            <field name="name">Angular</field>
+        </record>
+        <record id="category_tag_12" model="hr.applicant.category">
+            <field name="name">Angular2</field>
+        </record>
+        <record id="category_tag_13" model="hr.applicant.category">
+            <field name="name">Angular4</field>
+        </record>
+        <record id="category_tag_14" model="hr.applicant.category">
+            <field name="name">Angular6</field>
+        </record>
+        <record id="category_tag_15" model="hr.applicant.category">
+            <field name="name">Angular7</field>
+        </record>
+        <record id="category_tag_16" model="hr.applicant.category">
+            <field name="name">Angular9</field>
+        </record>
+        <record id="category_tag_17" model="hr.applicant.category">
+            <field name="name">AngularJS</field>
+        </record>
+        <record id="category_tag_18" model="hr.applicant.category">
+            <field name="name">Animation</field>
+        </record>
+        <record id="category_tag_19" model="hr.applicant.category">
+            <field name="name">Asp.Net</field>
+        </record>
+        <record id="category_tag_20" model="hr.applicant.category">
+            <field name="name">Automation Testing</field>
+        </record>
+        <record id="category_tag_21" model="hr.applicant.category">
+            <field name="name">Aws</field>
+        </record>
+        <record id="category_tag_22" model="hr.applicant.category">
+            <field name="name">Azure</field>
+        </record>
+        <record id="category_tag_23" model="hr.applicant.category">
+            <field name="name">Backbone Js</field>
+        </record>
+        <record id="category_tag_24" model="hr.applicant.category">
+            <field name="name">BigData</field>
+        </record>
+        <record id="category_tag_25" model="hr.applicant.category">
+            <field name="name">Bootstrap</field>
+        </record>
+        <record id="category_tag_26" model="hr.applicant.category">
+            <field name="name">Business Analyst</field>
+        </record>
+        <record id="category_tag_27" model="hr.applicant.category">
+            <field name="name">Business Developer</field>
+        </record>
+        <record id="category_tag_28" model="hr.applicant.category">
+            <field name="name">C</field>
+        </record>
+        <record id="category_tag_29" model="hr.applicant.category">
+            <field name="name">C++</field>
+        </record>
+        <record id="category_tag_30" model="hr.applicant.category">
+            <field name="name">CMS</field>
+        </record>
+        <record id="category_tag_31" model="hr.applicant.category">
+            <field name="name">Certified Scrum Master</field>
+        </record>
+        <record id="category_tag_32" model="hr.applicant.category">
+            <field name="name">Codeigniter</field>
+        </record>
+        <record id="category_tag_33" model="hr.applicant.category">
+            <field name="name">Content Writing</field>
+        </record>
+        <record id="category_tag_34" model="hr.applicant.category">
+            <field name="name">Coral Draw</field>
+        </record>
+        <record id="category_tag_35" model="hr.applicant.category">
+            <field name="name">Cordova</field>
+        </record>
+        <record id="category_tag_36" model="hr.applicant.category">
+            <field name="name">DBMS</field>
+        </record>
+        <record id="category_tag_37" model="hr.applicant.category">
+            <field name="name">Data Scientist</field>
+        </record>
+        <record id="category_tag_38" model="hr.applicant.category">
+            <field name="name">Dax</field>
+        </record>
+        <record id="category_tag_39" model="hr.applicant.category">
+            <field name="name">Designer</field>
+        </record>
+        <record id="category_tag_40" model="hr.applicant.category">
+            <field name="name">Digital Marketing</field>
+        </record>
+        <record id="category_tag_41" model="hr.applicant.category">
+            <field name="name">Django</field>
+        </record>
+        <record id="category_tag_42" model="hr.applicant.category">
+            <field name="name">Dreamweaver</field>
+        </record>
+        <record id="category_tag_43" model="hr.applicant.category">
+            <field name="name">Durandal JS</field>
+        </record>
+        <record id="category_tag_44" model="hr.applicant.category">
+            <field name="name">ERP</field>
+        </record>
+        <record id="category_tag_45" model="hr.applicant.category">
+            <field name="name">ETL</field>
+        </record>
+        <record id="category_tag_46" model="hr.applicant.category">
+            <field name="name">EXTjs</field>
+        </record>
+        <record id="category_tag_47" model="hr.applicant.category">
+            <field name="name">ExpressJs</field>
+        </record>
+        <record id="category_tag_48" model="hr.applicant.category">
+            <field name="name">Flash</field>
+        </record>
+        <record id="category_tag_49" model="hr.applicant.category">
+            <field name="name">Flex</field>
+        </record>
+        <record id="category_tag_50" model="hr.applicant.category">
+            <field name="name">Freelancer</field>
+        </record>
+        <record id="category_tag_51" model="hr.applicant.category">
+            <field name="name">Fresher</field>
+        </record>
+        <record id="category_tag_52" model="hr.applicant.category">
+            <field name="name">FullStack</field>
+        </record>
+        <record id="category_tag_53" model="hr.applicant.category">
+            <field name="name">Gosu</field>
+        </record>
+        <record id="category_tag_54" model="hr.applicant.category">
+            <field name="name">Graphics Designer</field>
+        </record>
+        <record id="category_tag_55" model="hr.applicant.category">
+            <field name="name">Guidewire</field>
+        </record>
+        <record id="category_tag_56" model="hr.applicant.category">
+            <field name="name">HCM</field>
+        </record>
+        <record id="category_tag_57" model="hr.applicant.category">
+            <field name="name">HDFS</field>
+        </record>
+        <record id="category_tag_58" model="hr.applicant.category">
+            <field name="name">HP-Vertica</field>
+        </record>
+        <record id="category_tag_59" model="hr.applicant.category">
+            <field name="name">HR Executive</field>
+        </record>
+        <record id="category_tag_60" model="hr.applicant.category">
+            <field name="name">HR Manager</field>
+        </record>
+        <record id="category_tag_61" model="hr.applicant.category">
+            <field name="name">HRIS</field>
+        </record>
+        <record id="category_tag_62" model="hr.applicant.category">
+            <field name="name">Hadoop</field>
+        </record>
+        <record id="category_tag_63" model="hr.applicant.category">
+            <field name="name">Hibernate</field>
+        </record>
+        <record id="category_tag_64" model="hr.applicant.category">
+            <field name="name">Hive</field>
+        </record>
+        <record id="category_tag_65" model="hr.applicant.category">
+            <field name="name">Hr</field>
+        </record>
+        <record id="category_tag_66" model="hr.applicant.category">
+            <field name="name">IOS</field>
+        </record>
+        <record id="category_tag_67" model="hr.applicant.category">
+            <field name="name">IOT</field>
+        </record>
+        <record id="category_tag_68" model="hr.applicant.category">
+            <field name="name">IT Admin</field>
+        </record>
+        <record id="category_tag_69" model="hr.applicant.category">
+            <field name="name">Illustrator</field>
+        </record>
+        <record id="category_tag_70" model="hr.applicant.category">
+            <field name="name">J2EE</field>
+        </record>
+        <record id="category_tag_71" model="hr.applicant.category">
+            <field name="name">JDBC</field>
+        </record>
+        <record id="category_tag_72" model="hr.applicant.category">
+            <field name="name">JMS</field>
+        </record>
+        <record id="category_tag_73" model="hr.applicant.category">
+            <field name="name">JQuery</field>
+        </record>
+        <record id="category_tag_74" model="hr.applicant.category">
+            <field name="name">JSTL</field>
+        </record>
+        <record id="category_tag_75" model="hr.applicant.category">
+            <field name="name">JUnit</field>
+        </record>
+        <record id="category_tag_76" model="hr.applicant.category">
+            <field name="name">Jasper</field>
+        </record>
+        <record id="category_tag_77" model="hr.applicant.category">
+            <field name="name">Java</field>
+        </record>
+        <record id="category_tag_78" model="hr.applicant.category">
+            <field name="name">Javascript</field>
+        </record>
+        <record id="category_tag_79" model="hr.applicant.category">
+            <field name="name">Jsp</field>
+        </record>
+        <record id="category_tag_80" model="hr.applicant.category">
+            <field name="name">Knime</field>
+        </record>
+        <record id="category_tag_81" model="hr.applicant.category">
+            <field name="name">LINQ</field>
+        </record>
+        <record id="category_tag_82" model="hr.applicant.category">
+            <field name="name">Laravel</field>
+        </record>
+        <record id="category_tag_83" model="hr.applicant.category">
+            <field name="name">Liferay DXP</field>
+        </record>
+        <record id="category_tag_84" model="hr.applicant.category">
+            <field name="name">Linux</field>
+        </record>
+        <record id="category_tag_85" model="hr.applicant.category">
+            <field name="name">Logo Design</field>
+        </record>
+        <record id="category_tag_86" model="hr.applicant.category">
+            <field name="name">MERN</field>
+        </record>
+        <record id="category_tag_87" model="hr.applicant.category">
+            <field name="name">MVC</field>
+        </record>
+        <record id="category_tag_88" model="hr.applicant.category">
+            <field name="name">Machine Learning</field>
+        </record>
+        <record id="category_tag_89" model="hr.applicant.category">
+            <field name="name">Magneto</field>
+        </record>
+        <record id="category_tag_90" model="hr.applicant.category">
+            <field name="name">Market Research</field>
+        </record>
+        <record id="category_tag_91" model="hr.applicant.category">
+            <field name="name">Marketing</field>
+        </record>
+        <record id="category_tag_92" model="hr.applicant.category">
+            <field name="name">Marketing Manager</field>
+        </record>
+        <record id="category_tag_93" model="hr.applicant.category">
+            <field name="name">Maven</field>
+        </record>
+        <record id="category_tag_94" model="hr.applicant.category">
+            <field name="name">Meteor.js</field>
+        </record>
+        <record id="category_tag_95" model="hr.applicant.category">
+            <field name="name">Microservices</field>
+        </record>
+        <record id="category_tag_96" model="hr.applicant.category">
+            <field name="name">MongoDB</field>
+        </record>
+        <record id="category_tag_97" model="hr.applicant.category">
+            <field name="name">Mssql</field>
+        </record>
+        <record id="category_tag_98" model="hr.applicant.category">
+            <field name="name">ODM</field>
+        </record>
+        <record id="category_tag_99" model="hr.applicant.category">
+            <field name="name">OGM</field>
+        </record>
+        <record id="category_tag_101" model="hr.applicant.category">
+            <field name="name">OLAP</field>
+        </record>
+        <record id="category_tag_102" model="hr.applicant.category">
+            <field name="name">Odoo</field>
+        </record>
+        <record id="category_tag_103" model="hr.applicant.category">
+            <field name="name">Oracle</field>
+        </record>
+        <record id="category_tag_104" model="hr.applicant.category">
+            <field name="name">PHP</field>
+        </record>
+        <record id="category_tag_105" model="hr.applicant.category">
+            <field name="name">PLSql</field>
+        </record>
+        <record id="category_tag_106" model="hr.applicant.category">
+            <field name="name">PM</field>
+        </record>
+        <record id="category_tag_107" model="hr.applicant.category">
+            <field name="name">Photoshop</field>
+        </record>
+        <record id="category_tag_108" model="hr.applicant.category">
+            <field name="name">Pig</field>
+        </record>
+        <record id="category_tag_109" model="hr.applicant.category">
+            <field name="name">PostgresSql</field>
+        </record>
+        <record id="category_tag_110" model="hr.applicant.category">
+            <field name="name">Project Leader</field>
+        </record>
+        <record id="category_tag_111" model="hr.applicant.category">
+            <field name="name">Project Coordinator</field>
+        </record>
+        <record id="category_tag_112" model="hr.applicant.category">
+            <field name="name">Python</field>
+        </record>
+        <record id="category_tag_113" model="hr.applicant.category">
+            <field name="name">Python3</field>
+        </record>
+        <record id="category_tag_114" model="hr.applicant.category">
+            <field name="name">QA</field>
+        </record>
+        <record id="category_tag_115" model="hr.applicant.category">
+            <field name="name">QMS</field>
+        </record>
+        <record id="category_tag_116" model="hr.applicant.category">
+            <field name="name">R</field>
+        </record>
+        <record id="category_tag_117" model="hr.applicant.category">
+            <field name="name">REST Services</field>
+        </record>
+        <record id="category_tag_118" model="hr.applicant.category">
+            <field name="name">Reporting</field>
+        </record>
+        <record id="category_tag_119" model="hr.applicant.category">
+            <field name="name">Require JS</field>
+        </record>
+        <record id="category_tag_120" model="hr.applicant.category">
+            <field name="name">Ruby on Rails</field>
+        </record>
+        <record id="category_tag_121" model="hr.applicant.category">
+            <field name="name">SAAS</field>
+        </record>
+        <record id="category_tag_122" model="hr.applicant.category">
+            <field name="name">SAP</field>
+        </record>
+        <record id="category_tag_123" model="hr.applicant.category">
+            <field name="name">SAS</field>
+        </record>
+        <record id="category_tag_124" model="hr.applicant.category">
+            <field name="name">SEM</field>
+        </record>
+        <record id="category_tag_125" model="hr.applicant.category">
+            <field name="name">SEO</field>
+        </record>
+        <record id="category_tag_126" model="hr.applicant.category">
+            <field name="name">SOAP</field>
+        </record>
+        <record id="category_tag_127" model="hr.applicant.category">
+            <field name="name">SQLite Database</field>
+        </record>
+        <record id="category_tag_128" model="hr.applicant.category">
+            <field name="name">SSAS</field>
+        </record>
+        <record id="category_tag_129" model="hr.applicant.category">
+            <field name="name">SSIS</field>
+        </record>
+        <record id="category_tag_130" model="hr.applicant.category">
+            <field name="name">SSRS</field>
+        </record>
+        <record id="category_tag_131" model="hr.applicant.category">
+            <field name="name">Sail.js</field>
+        </record>
+        <record id="category_tag_132" model="hr.applicant.category">
+            <field name="name">Salesforce</field>
+        </record>
+        <record id="category_tag_133" model="hr.applicant.category">
+            <field name="name">Sass</field>
+        </record>
+        <record id="category_tag_134" model="hr.applicant.category">
+            <field name="name">Scala</field>
+        </record>
+        <record id="category_tag_135" model="hr.applicant.category">
+            <field name="name">Selenium</field>
+        </record>
+        <record id="category_tag_136" model="hr.applicant.category">
+            <field name="name">Silverlight</field>
+        </record>
+        <record id="category_tag_137" model="hr.applicant.category">
+            <field name="name">Socket.IO</field>
+        </record>
+        <record id="category_tag_138" model="hr.applicant.category">
+            <field name="name">Spring Boot</field>
+        </record>
+        <record id="category_tag_139" model="hr.applicant.category">
+            <field name="name">Spring Reactive</field>
+        </record>
+        <record id="category_tag_140" model="hr.applicant.category">
+            <field name="name">Sql</field>
+        </record>
+        <record id="category_tag_141" model="hr.applicant.category">
+            <field name="name">Swing</field>
+        </record>
+        <record id="category_tag_142" model="hr.applicant.category">
+            <field name="name">T-SQL</field>
+        </record>
+        <record id="category_tag_143" model="hr.applicant.category">
+            <field name="name">Tableau</field>
+        </record>
+        <record id="category_tag_144" model="hr.applicant.category">
+            <field name="name">Tally</field>
+        </record>
+        <record id="category_tag_145" model="hr.applicant.category">
+            <field name="name">Techno Functional</field>
+        </record>
+        <record id="category_tag_146" model="hr.applicant.category">
+            <field name="name">Teradata</field>
+        </record>
+        <record id="category_tag_147" model="hr.applicant.category">
+            <field name="name">Testrail</field>
+        </record>
+        <record id="category_tag_148" model="hr.applicant.category">
+            <field name="name">Trainee</field>
+        </record>
+        <record id="category_tag_149" model="hr.applicant.category">
+            <field name="name">Typescript</field>
+        </record>
+        <record id="category_tag_150" model="hr.applicant.category">
+            <field name="name">UI</field>
+        </record>
+        <record id="category_tag_151" model="hr.applicant.category">
+            <field name="name">UI/UX</field>
+        </record>
+        <record id="category_tag_152" model="hr.applicant.category">
+            <field name="name">Underscore JS</field>
+        </record>
+        <record id="category_tag_153" model="hr.applicant.category">
+            <field name="name">VB.Net</field>
+        </record>
+        <record id="category_tag_154" model="hr.applicant.category">
+            <field name="name">VBA</field>
+        </record>
+        <record id="category_tag_155" model="hr.applicant.category">
+            <field name="name">VLSI Design</field>
+        </record>
+        <record id="category_tag_156" model="hr.applicant.category">
+            <field name="name">Visual Studio</field>
+        </record>
+        <record id="category_tag_157" model="hr.applicant.category">
+            <field name="name">VueJs</field>
+        </record>
+        <record id="category_tag_158" model="hr.applicant.category">
+            <field name="name">WCF</field>
+        </record>
+        <record id="category_tag_159" model="hr.applicant.category">
+            <field name="name">Web Designing</field>
+        </record>
+        <record id="category_tag_160" model="hr.applicant.category">
+            <field name="name">Web Scraping</field>
+        </record>
+        <record id="category_tag_161" model="hr.applicant.category">
+            <field name="name">Web Testing</field>
+        </record>
+        <record id="category_tag_162" model="hr.applicant.category">
+            <field name="name">Wordpress</field>
+        </record>
+        <record id="category_tag_163" model="hr.applicant.category">
+            <field name="name">Workday</field>
+        </record>
+        <record id="category_tag_164" model="hr.applicant.category">
+            <field name="name">Workday Security</field>
+        </record>
+        <record id="category_tag_165" model="hr.applicant.category">
+            <field name="name">Xamarin</field>
+        </record>
+        <record id="category_tag_166" model="hr.applicant.category">
+            <field name="name">Xml</field>
+        </record>
+        <record id="category_tag_167" model="hr.applicant.category">
+            <field name="name">angular11</field>
+        </record>
+        <record id="category_tag_168" model="hr.applicant.category">
+            <field name="name">angular8</field>
+        </record>
+        <record id="category_tag_169" model="hr.applicant.category">
+            <field name="name">blockchain</field>
+        </record>
+        <record id="category_tag_170" model="hr.applicant.category">
+            <field name="name">c#</field>
+        </record>
+        <record id="category_tag_171" model="hr.applicant.category">
+            <field name="name">css</field>
+        </record>
+        <record id="category_tag_172" model="hr.applicant.category">
+            <field name="name">data analyst</field>
+        </record>
+        <record id="category_tag_173" model="hr.applicant.category">
+            <field name="name">data warehouse</field>
+        </record>
+        <record id="category_tag_174" model="hr.applicant.category">
+            <field name="name">devops</field>
+        </record>
+        <record id="category_tag_175" model="hr.applicant.category">
+            <field name="name">drupal</field>
+        </record>
+        <record id="category_tag_176" model="hr.applicant.category">
+            <field name="name">entity framework</field>
+        </record>
+        <record id="category_tag_177" model="hr.applicant.category">
+            <field name="name">flask</field>
+        </record>
+        <record id="category_tag_178" model="hr.applicant.category">
+            <field name="name">flutter</field>
+        </record>
+        <record id="category_tag_179" model="hr.applicant.category">
+            <field name="name">ionic</field>
+        </record>
+        <record id="category_tag_180" model="hr.applicant.category">
+            <field name="name">jpa</field>
+        </record>
+        <record id="category_tag_181" model="hr.applicant.category">
+            <field name="name">kotlin</field>
+        </record>
+        <record id="category_tag_182" model="hr.applicant.category">
+            <field name="name">ldap</field>
+        </record>
+        <record id="category_tag_183" model="hr.applicant.category">
+            <field name="name">less.js</field>
+        </record>
+        <record id="category_tag_184" model="hr.applicant.category">
+            <field name="name">manual testing</field>
+        </record>
+        <record id="category_tag_185" model="hr.applicant.category">
+            <field name="name">mean</field>
+        </record>
+        <record id="category_tag_186" model="hr.applicant.category">
+            <field name="name">mysql</field>
+        </record>
+        <record id="category_tag_187" model="hr.applicant.category">
+            <field name="name">network</field>
+        </record>
+        <record id="category_tag_188" model="hr.applicant.category">
+            <field name="name">nextjs</field>
+        </record>
+        <record id="category_tag_189" model="hr.applicant.category">
+            <field name="name">node.js</field>
+        </record>
+        <record id="category_tag_190" model="hr.applicant.category">
+            <field name="name">perl</field>
+        </record>
+        <record id="category_tag_191" model="hr.applicant.category">
+            <field name="name">power BI</field>
+        </record>
+        <record id="category_tag_192" model="hr.applicant.category">
+            <field name="name">reactjs</field>
+        </record>
+        <record id="category_tag_193" model="hr.applicant.category">
+            <field name="name">recruiter</field>
+        </record>
+        <record id="category_tag_194" model="hr.applicant.category">
+            <field name="name">redhat certified</field>
+        </record>
+        <record id="category_tag_195" model="hr.applicant.category">
+            <field name="name">redux</field>
+        </record>
+        <record id="category_tag_196" model="hr.applicant.category">
+            <field name="name">sales</field>
+        </record>
+        <record id="category_tag_197" model="hr.applicant.category">
+            <field name="name">scc</field>
+        </record>
+        <record id="category_tag_198" model="hr.applicant.category">
+            <field name="name">scrum</field>
+        </record>
+        <record id="category_tag_199" model="hr.applicant.category">
+            <field name="name">scss</field>
+        </record>
+        <record id="category_tag_200" model="hr.applicant.category">
+            <field name="name">sharepoint</field>
+        </record>
+        <record id="category_tag_201" model="hr.applicant.category">
+            <field name="name">shopify</field>
+        </record>
+        <record id="category_tag_202" model="hr.applicant.category">
+            <field name="name">silk</field>
+        </record>
+        <record id="category_tag_203" model="hr.applicant.category">
+            <field name="name">spark</field>
+        </record>
+        <record id="category_tag_204" model="hr.applicant.category">
+            <field name="name">spring</field>
+        </record>
+        <record id="category_tag_205" model="hr.applicant.category">
+            <field name="name">ssms</field>
+        </record>
+        <record id="category_tag_206" model="hr.applicant.category">
+            <field name="name">surekhatech</field>
+        </record>
+        <record id="category_tag_207" model="hr.applicant.category">
+            <field name="name">svn</field>
+        </record>
+        <record id="category_tag_208" model="hr.applicant.category">
+            <field name="name">system admin</field>
+        </record>
+        <record id="category_tag_209" model="hr.applicant.category">
+            <field name="name">unix</field>
+        </record>
+        <record id="category_tag_210" model="hr.applicant.category">
+            <field name="name">vbscript</field>
+        </record>
+        <record id="category_tag_211" model="hr.applicant.category">
+            <field name="name">visual basic</field>
+        </record>
+        <record id="category_tag_212" model="hr.applicant.category">
+            <field name="name">wamp</field>
+        </record>
+        <record id="category_tag_213" model="hr.applicant.category">
+            <field name="name">web api</field>
+        </record>
+        <record id="category_tag_214" model="hr.applicant.category">
+            <field name="name">web service</field>
+        </record>
+        <record id="category_tag_215" model="hr.applicant.category">
+            <field name="name">xampp</field>
+        </record>
+        <record id="category_tag_216" model="hr.applicant.category">
+            <field name="name">xmarin</field>
+        </record>
+        <record id="category_tag_217" model="hr.applicant.category">
+            <field name="name">zoho</field>
+        </record>
+        <record id="category_tag_218" model="hr.applicant.category">
+            <field name="name">liferay 6.2</field>
+        </record>
+        <record id="category_tag_219" model="hr.applicant.category">
+            <field name="name">NativeJs</field>
+        </record>
+        <record id="category_tag_220" model="hr.applicant.category">
+            <field name="name">Tableau Server</field>
+        </record>
+        <record id="category_tag_221" model="hr.applicant.category">
+            <field name="name">ProductOwner</field>
+        </record>
+
+    </data>
+</odoo>

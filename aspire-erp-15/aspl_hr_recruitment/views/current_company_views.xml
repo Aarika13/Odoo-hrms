@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_current_company_candidates">
+            <field name="name">Candidates</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('current_company_id', '=', active_id)]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+               (0, 0, {'view_mode': 'tree', 'view_id': ref('aspl_hr_recruitment.view_candidate_tree')}),
+               (0, 0, {'view_mode': 'form', 'view_id': ref('aspl_hr_recruitment.view_candidate_form')})]"/>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_current_company_aspire_candidates">
+            <field name="name">Aspire Candidates</field>
+            <field name="res_model">candidate</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('current_company_id', '=', active_id)]</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+               (0, 0, {'view_mode': 'tree', 'view_id': ref('aspl_hr_recruitment.view_aspire_candidate_tree')}),
+               (0, 0, {'view_mode': 'form', 'view_id': ref('aspl_hr_recruitment.view_aspire_candidate_form')})]"/>
+        </record>
+
+        <!-- Current company Form View-->
+        <record id="current_company_view_form" model="ir.ui.view">
+            <field name="name">current.company.form</field>
+            <field name="model">current.company</field>
+            <field name="arch" type="xml">
+                <form string="Candidate Current Company">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                    icon="fa-pencil"
+                                    name="%(action_current_company_candidates)d"
+                                    type="action">
+                                <field name="all_candidates_count" widget="statinfo" string="Candidates"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Current company Form View-->
+        <record id="current_company_view_form" model="ir.ui.view">
+            <field name="name">current.company.form</field>
+            <field name="model">current.company</field>
+            <field name="arch" type="xml">
+                <form string="Candidate Current Company">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                    icon="fa-pencil"
+                                    name="%(action_current_company_aspire_candidates)d"
+                                    type="action">
+                                <field name="all_candidates_count" widget="statinfo" string="Candidates"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Current company List View-->
+        <record id="view_current_company_tree" model="ir.ui.view">
+            <field name="name">current.company.tree</field>
+            <field name="model">current.company</field>
+            <field name="arch" type="xml">
+                <tree string="Candidate Current Company">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_current_company" model="ir.actions.act_window">
+            <field name="name">Candidate Current Company</field>
+            <field name="res_model">current.company</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!--<menuitem
+            id="menu_current_company"
+            name="Candidate Current Company"
+            parent="hr_recruitment.menu_hr_recruitment_configuration"
+            action="action_current_company"
+        />-->
+
+        <record model="ir.ui.view" id="company_form_view_inherited">
+            <field name="name">company_form_view_inherited</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <field name="social_linkedin" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+                <xpath expr="//field[@name='favicon']" position="after">
+                    <field name="logo_url" groups="base.group_no_one"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ASPL HR Recruitment Degrees in Configuration -->
+        <record model="hr.recruitment.degree" id="employee_degree_mca">
+            <field name="name">M.C.A.(Master of Computer Application)</field>
+            <field name="sequence">5</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_bca">
+            <field name="name">B.C.A.(Bachelor of Computer Application)</field>
+            <field name="sequence">6</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_mba">
+            <field name="name">M.B.A.(Master of Business Administration)</field>
+            <field name="sequence">7</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_bba">
+            <field name="name">B.B.A.(Bachelor of Business Administration)</field>
+            <field name="sequence">8</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_ba">
+            <field name="name">B.A.(Bachelor of Arts)</field>
+            <field name="sequence">9</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_bcom">
+            <field name="name">B.Com.(Bachelor of Commerce)</field>
+            <field name="sequence">10</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_bsc">
+            <field name="name">B.Sc.(Bachelor of Science)</field>
+            <field name="sequence">11</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_be">
+            <field name="name">B.E.(Bachelor of Engineering)</field>
+            <field name="sequence">12</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_b_tech">
+            <field name="name">B.Tech.(Bachelor of Technology)</field>
+            <field name="sequence">13</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_me">
+            <field name="name">M.E.(Master of Engineering)</field>
+            <field name="sequence">14</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_m_tech">
+            <field name="name">M.Tech.(Master of Technology)</field>
+            <field name="sequence">15</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_ssc">
+            <field name="name">S.S.C.(Secondary School Certificate)</field>
+            <field name="sequence">16</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_m_com">
+            <field name="name">M.com</field>
+            <field name="sequence">17</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_pgdca">
+            <field name="name">PGDCA</field>
+            <field name="sequence">18</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_pgdhrm">
+            <field name="name">PGDHRM</field>
+            <field name="sequence">19</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_ma">
+            <field name="name">M.A ( Master of Arts)</field>
+            <field name="sequence">20</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_msc">
+            <field name="name">M.Sc</field>
+            <field name="sequence">21</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_pgdm">
+            <field name="name">PGDM</field>
+            <field name="sequence">22</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_iti">
+            <field name="name">I.T.I</field>
+            <field name="sequence">23</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_msw">
+            <field name="name">M.S.W</field>
+            <field name="sequence">24</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_fine_arts">
+            <field name="name">Fine Arts</field>
+            <field name="sequence">25</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_phd">
+            <field name="name">Ph. D</field>
+            <field name="sequence">26</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_diploma">
+            <field name="name">Diploma</field>
+            <field name="sequence">27</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_ca">
+            <field name="name">CA</field>
+            <field name="sequence">28</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_pg_diploma">
+            <field name="name">PG DIPLOMA</field>
+            <field name="sequence">29</field>
+        </record>
+        <record model="hr.recruitment.degree" id="employee_degree_hsc">
+            <field name="name">H.S.C.(Higher Secondary School Certificate)</field>
+            <field name="sequence">30</field>
+        </record>
+
+        <!-- Add employee tag data-->
+        <!--        <record model="hr.employee.category" id="employee_tag">-->
+        <!--            <field name="name">Employee</field>-->
+        <!--        </record>-->
+        <record model="hr.employee.category" id="tag1">
+            <field name="name">Delivery Manager / Head</field>
+        </record>
+        <record model="hr.employee.category" id="tag2">
+            <field name="name">Project Manager</field>
+        </record>
+        <record model="hr.employee.category" id="tag3">
+            <field name="name">Project Leader</field>
+        </record>
+        <record model="hr.employee.category" id="tag4">
+            <field name="name">Senior Software Engineer</field>
+        </record>
+        <record model="hr.employee.category" id="tag5">
+            <field name="name">Software Engineer</field>
+        </record>
+        <record model="hr.employee.category" id="tag6">
+            <field name="name">Associate Software Engineer</field>
+        </record>
+        <record model="hr.employee.category" id="tag7">
+            <field name="name">Hr</field>
+        </record>
+        <record model="hr.employee.category" id="tag8">
+            <field name="name">Business Developer</field>
+        </record>
+        <!-- End of employee tag data-->
+
+        <!-- Add employee department data-->
+        <record id="department_hr" model="hr.department">
+            <field name="name">HR</field>
+        </record>
+
+        <record id="department_software" model="hr.department">
+            <field name="name">Software</field>
+        </record>
+
+        <record id="department_marketing" model="hr.department">
+            <field name="name">Marketing</field>
+        </record>
+        <!-- End of employee department-->
+    </data>
+</odoo>

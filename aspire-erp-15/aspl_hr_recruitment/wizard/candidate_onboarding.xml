@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- HR Questions Skills Form wizard-->
+        <record id="candidate_onboarding_wiz_view_form" model="ir.ui.view">
+            <field name="name">candidate.onboarding.wiz.form</field>
+            <field name="model">candidate.onboarding.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Candidate On-boarding Link">
+                    <group>
+                        <field name="url" string="URL" widget="CopyClipboardChar" readonly="1"/>
+                    </group>    
+                    <footer>
+                            <button name="send_mail_onboarding" string="Send Mail" type="object" class="btn-primary"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="candidate_onboarding_wiz_view_form_action" model="ir.actions.act_window">
+            <field name="name">Candidate On-boarding Link</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">candidate.onboarding.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="candidate_onboarding_wiz_view_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+        <record id="candidate_onboarding_reprocess_wizard" model="ir.ui.view">
+            <field name="name">candidate.onboarding.reprocess.wizard</field>
+            <field name="model">candidate.onboarding.reprocess.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Candidate On-boarding Reprocess">
+                    <group>
+                        <field name="onboarding_changes" string="Description"/>
+                    </group>    
+                    <footer>
+                            <button name="send_mail_onboarding" string="Send Mail" type="object" class="btn-primary"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="candidate_onboarding_reprocess_wizard_action" model="ir.actions.act_window">
+            <field name="name">Candidate On-boarding Reprocess</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">candidate.onboarding.reprocess.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="candidate_onboarding_reprocess_wizard"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

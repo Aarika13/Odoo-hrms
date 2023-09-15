@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_my_profile_inherited" model="ir.ui.view">
+            <field name="name">my.profile.inherited.employee</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='personal_information']" position="replace">
+                    <page name="personal_information" string="Private Information">
+                    <notebook>
+                        <page name="personal_detail" string="General">
+                            <div style="position:relative;">
+                                <group col="2">
+                                    <group string="Citizenship">
+                                        <field name="employee_country_id" string="Nationality (Country)" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                        <field name="gender"/>
+                                        <field name="birthday"/>
+                                    </group>
+                                    <group string="Marital Status">
+                                        <field name="marital"/>
+                                        <field name="spouse_complete_name" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant', 'widower', 'divorced'])]}" groups="hr.group_hr_user"/>
+                                        <field name="spouse_birthdate" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant', 'widower', 'divorced'])]}" groups="hr.group_hr_user"/>
+                                    </group>
+                                    <group string="Dependant">
+                                        <field name="children" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant', 'widower', 'divorced'])]}" groups="hr.group_hr_user"/>
+                                    </group>
+                                    <group string="Emergency">
+                                        <field name="emergency_contact"/>
+                                        <field name="emergency_phone" class="o_force_ltr"/>
+                                    </group>
+                                    
+                                </group>
+                                <group string="Personal Details" col="2">
+                                    <group>
+                                        <field name="private_email" string="Personal Email"/>
+                                        <field name="blood_group"/>
+                                        <field name="religion"/>
+                                        <field name="marital" invisible="1"/>
+                                        <field name="marriage_date" attrs="{'invisible': [('marital', '!=', 'married')]}"/>
+                                    </group>
+
+                                    <group>   
+                                        <!-- <field name="international_employee"/> -->
+                                        <field name="physically_challenged"/>
+                                    </group>
+
+                                    <group string="Permanent Address">
+                                        <label for="private_street" string="Permanent Address"/>
+                                        <div>
+                                            <field name="private_street" placeholder="Street"/><check class="oe_read_only">, </check>
+                                            <field name="private_street2" placeholder="Landmark"/><check class="oe_read_only">, </check>
+                                            <field name="private_zip" placeholder="Pin code"/><check class="oe_read_only">, </check>
+                                            <field name="private_city" placeholder="City"/><check class="oe_read_only">, </check>
+                                            <field name="private_state_id" placeholder="State" domain="[('country_id', '=', private_country_id)]"/>
+                                            <field name="private_country_id" placeholder='Country'/>
+                                        </div>
+                                        <field name="employee_phone" string="Mobile no."/>
+                                        
+                                    </group>
+
+                                    <group string="Present Address">
+                                        <field name="isPresentAddSameAsPermanent"/>
+                                        <label for="pre_street" string="Present Address"/>
+                                        <div>
+                                            <field name="pre_street" placeholder="Street" 
+                                                    attrs="{'required': [('isPresentAddSameAsPermanent', '=', False)]}"/><check class="oe_read_only">, </check>
+                                            <field name="pre_landmark" placeholder="Landmark"/><check class="oe_read_only">, </check>
+                                            <field name="pre_pcode" placeholder="Pin code" 
+                                                    attrs="{'required': [('isPresentAddSameAsPermanent', '=', False)]}"/><check class="oe_read_only">, </check>
+                                            <field name="pre_city" placeholder="City" 
+                                                    attrs="{'required': [('isPresentAddSameAsPermanent', '=', False)]}"/><check class="oe_read_only">, </check>
+                                            <field name="pre_state" placeholder="State" 
+                                                    attrs="{'required': [('isPresentAddSameAsPermanent', '=', False)]}"/>
+                                            <field name="pre_county" placeholder='Country' 
+                                                    attrs="{'required': [('isPresentAddSameAsPermanent', '=', False)]}"/>
+                                        </div>
+                                    </group>
+                                </group> 
+
+                            </div>
+                        </page>
+
+                        <page name="family" string="Family">
+                            <group string="Family Member">
+                                <field name="family_member_id" nolabel="1">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="relation"/>
+                                        <field name="birth_date"/>
+                                        <field name="blood_group"/>
+                                        <field name="gender"/>
+                                        <field name="nationality"/>
+                                        <field name="profession"/>
+                                    </tree>
+                                    <form string="Family Member Information">
+                                        <sheet>
+                                            <group>
+                                                <group string="Personal Details">
+                                                    <field name="name"/>
+                                                    <field name="relation"/>
+                                                    <field name="birth_date"/>
+                                                    <field name="blood_group"/>
+                                                    <field name="gender"/>
+                                                    <field name="nationality" options="{'no_quick_create': True}"/>
+                                                    <field name="profession"/>
+                                                    <field name="home_phone"/>
+                                                    <field name="remarks"/>
+                                                </group>
+
+                                                <group string="Address">
+                                                    <field name="check_per_address"/>
+                                                    <field name="copy_address_from"
+                                                        attrs="{'invisible':[('check_per_address', '!=', True)] , 'required': [('check_per_address','=', True)]}"/>
+                                                    <field name="home_street"/>
+                                                    <field name="home_city"/>
+                                                    <field name="home_landmark"/>
+                                                    <field name="home_pcode"/>
+                                                    <field name="home_state" options="{'no_quick_create': True}"/>
+                                                    <field name="home_county" options="{'no_quick_create': True}"/>
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </group>  
+                        </page>
+
+                    </notebook>
+                    </page>
+                </xpath>
+            </field>
+        </record>  
+
+    </data>
+</odoo>          

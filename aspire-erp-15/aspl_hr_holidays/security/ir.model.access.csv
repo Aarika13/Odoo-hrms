@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_forward_leave,forward.leave,model_forward_leave,,1,1,1,1
+access_hr_leave_type,hr.leave.type,model_hr_leave_type,,1,1,1,1
+access_hr_leave_type,hr.leave.type,model_hr_leave_type,,1,1,1,1
+access_hr_leave_allocation,hr.leave.allocation,model_hr_leave_allocation,,1,1,1,1
+access_hr_leave,hr.leave,model_hr_leave,,1,1,1,1
+access_leave_wizard,leave.wizard,model_leave_wizard,,1,1,1,1
+
+
+
+resource.access_resource_calendar_leaves_user,resource.calendar.leaves,resource.model_resource_calendar_leaves,base.group_user,1,0,0,0
+resource.access_resource_calendar_leaves,resource.calendar.leaves,resource.model_resource_calendar_leaves,base.group_system,1,1,1,1
+
+project.access_resource_calendar_leaves_user,resource.calendar.leaves user,resource.model_resource_calendar_leaves,project.group_project_user,1,0,0,0
+hr_holidays.access_resource_calendar_leaves_user,resource_calendar_leaves_user,resource.model_resource_calendar_leaves,hr_holidays.group_hr_holidays_user,1,0,0,0

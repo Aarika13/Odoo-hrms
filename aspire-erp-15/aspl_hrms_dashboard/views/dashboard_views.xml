@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="hr_action_hr_dashboard" model="ir.actions.client">
+            <field name="name">HrDashboard</field>
+            <field name="tag">hr_dashboard</field>
+        </record>
+
+        <record id="hr_action_recruitment_dashboard" model="ir.actions.client">
+            <field name="name">RecruitmentDashboard</field>
+            <field name="tag">recruitment_dashboard</field>
+        </record>
+
+        <record id="hr_action_account_adminpanel_dashboard" model="ir.actions.client">
+            <field name="name">AccountDashboard</field>
+            <field name="tag">account_dashboard</field>
+        </record>
+
+        <menuitem id="menu_hrms_dashboard" name="Dashboard" web_icon="aspl_hrms_dashboard,static/description/dashboard_icon.png" sequence="-100" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user,account.group_account_manager"/>
+
+        <menuitem id="menu_hr_dashboard" name="HR Dashboard" sequence="0" 
+            parent = "menu_hrms_dashboard" action="hr_action_hr_dashboard" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+
+        <menuitem id="menu_recruitment_dashboard" name="Recruitment Dashboard" sequence="1" 
+            parent = "menu_hrms_dashboard" action="hr_action_recruitment_dashboard" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+
+        <menuitem id="menu_account_adminpanel_dashboard" name="Accounting Dashboard" sequence="2" 
+            parent = "menu_hrms_dashboard" action="hr_action_account_adminpanel_dashboard" groups="account.group_account_manager"/>
+
+    </data>
+
+</odoo>

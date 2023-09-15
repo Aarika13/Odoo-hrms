@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_identity_tree" model="ir.ui.view">
+            <field name="name">hr.employee.identity.tree</field>
+            <field name="model">employee.identity</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="complete_name" string="Employee Identity"/>
+                    <field name="document_name"/>
+                    <field name="document" filename="document_name" widget="binary"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_employee_family_form" model="ir.ui.view">
+            <field name="name">hr.employee.identity.form</field>
+            <field name="model">employee.identity</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group string="Type">
+                            <field name="employee_identity" widget="selection" class="oe_inline"/>
+                        </group>
+                        <group string="Details" attrs="{'invisible': [('employee_identity', '!=', 'aadhaar')]}">
+                            <field name="aadhaar_no" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'aadhaar')]}"/>
+                            <field name="aadhaar_name" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'aadhaar')]}"/>
+                            <field name="aadhaar_enrolno" class="oe_inline"/>
+                        </group>
+                        <group string="Details" attrs="{'invisible': [('employee_identity', '!=', 'election_card')]}">
+                            <field name="ec_no" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'election_card')]}"/>
+                            <field name="ec_name" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'election_card')]}"/>
+                        </group>
+                        <group string="Details" attrs="{'invisible': [('employee_identity', '!=', 'passport')]}">
+                            <field name="passport_no" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'passport')]}"/>
+                            <field name="passport_name" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'passport')]}"/>
+                            <field name="expire_date" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'passport')]}"/>
+                        </group>
+                        <group string="Details" attrs="{'invisible': [('employee_identity', '!=', 'account_number')]}">
+                            <field name="pan_no" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'account_number')]}"/>
+                            <field name="pan_name" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'account_number')]}"/>
+                        </group>
+                        <group string="Details" attrs="{'invisible': [('employee_identity', '!=', 'bank_account')]}">
+                            <field name="bank_acc" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'bank_account')]}"/>
+                            <field name="bank_ifsc" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'bank_account')]}"/>
+                            <field name="bank_acc_name" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'bank_account')]}"/>
+                        </group>
+                        <group string="Details" attrs="{'invisible': [('employee_identity', '!=', 'driving_license')]}">
+                            <field name="license_name" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'driving_license')]}"/>
+                            <field name="license_number" class="oe_inline"
+                                   attrs="{'required': [('employee_identity', '=', 'driving_license')]}"/>
+                        </group>
+                        <group string="Upload document" attrs="{'invisible': [('employee_identity','=', False)]}">
+                            <field name="complete_name" invisible="1"/>
+                            <field name="document_name" invisible="1"/>
+                            <field name="document" filename="document_name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

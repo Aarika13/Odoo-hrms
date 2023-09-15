@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/aspire/!svn/ver/2944/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repos/aspire/!svn/ver/2369/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/__init__.py
+END
+__openerp__.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repos/aspire/!svn/ver/2704/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/__openerp__.py
+END
+controllers.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repos/aspire/!svn/ver/1391/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/controllers.py
+END
+hr_holidays_data.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/repos/aspire/!svn/ver/2734/aspire_odoo/trunk/odoo9_modules/hr_holidays_aspire/hr_holidays_data.xml
+END

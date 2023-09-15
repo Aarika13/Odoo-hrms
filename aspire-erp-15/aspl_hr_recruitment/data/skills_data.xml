@@ -1,0 +1,999 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--Skill Types-->
+        <record id="hr_skill_type_dev" model="hr.skill.type">
+            <field name="name">Dev</field>
+        </record>
+        <record id="hr_skill_type_marketing" model="hr.skill.type">
+            <field name="name">Marketing</field>
+        </record>
+        <record id="hr_skill_type_lang" model="hr.skill.type">
+            <field name="name">Languages</field>
+        </record>
+        <!--End of Skill Types-->
+
+        <!--Skill Levels Dev-->
+        <record id="hr_skill_level_dev_na" model="hr.skill.level">
+            <field name="name">N/A</field>
+            <field name="level_progress">0</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_dev_beginner" model="hr.skill.level">
+            <field name="name">Beginner</field>
+            <field name="level_progress">25</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_dev_intermediate" model="hr.skill.level">
+            <field name="name">Intermediate</field>
+            <field name="level_progress">50</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_dev_advanced" model="hr.skill.level">
+            <field name="name">Advanced</field>
+            <field name="level_progress">75</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_level_dev_expert" model="hr.skill.level">
+            <field name="name">Expert</field>
+            <field name="level_progress">100</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+
+        <!--Skill Levels Marketing-->
+        <record id="hr_skill_level_mark_na" model="hr.skill.level">
+            <field name="name">N/A</field>
+            <field name="level_progress">0</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_level_mark_beginner" model="hr.skill.level">
+            <field name="name">Beginner</field>
+            <field name="level_progress">25</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_level_mark_intermediate" model="hr.skill.level">
+            <field name="name">Intermediate</field>
+            <field name="level_progress">50</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_level_mark_advanced" model="hr.skill.level">
+            <field name="name">Advanced</field>
+            <field name="level_progress">75</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_level_mark_expert" model="hr.skill.level">
+            <field name="name">Expert</field>
+            <field name="level_progress">100</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+
+        <!--Skill Levels Language-->
+        <record id="hr_skill_level_lang_na" model="hr.skill.level">
+            <field name="name">N/A</field>
+            <field name="level_progress">0</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <record id="hr_skill_level_lang_beginner" model="hr.skill.level">
+            <field name="name">Beginner</field>
+            <field name="level_progress">25</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <record id="hr_skill_level_lang_intermediate" model="hr.skill.level">
+            <field name="name">Intermediate</field>
+            <field name="level_progress">50</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <record id="hr_skill_level_lang_advanced" model="hr.skill.level">
+            <field name="name">Advanced</field>
+            <field name="level_progress">75</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <record id="hr_skill_level_lang_expert" model="hr.skill.level">
+            <field name="name">Expert</field>
+            <field name="level_progress">100</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <!--End of Skill Levels Language-->
+
+        <!-- **** Skills **** -->
+        <!-- Languages -->
+        <record id="hr_skill_eng" model="hr.skill">
+            <field name="name">English</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <record id="hr_skill_hindi" model="hr.skill">
+            <field name="name">Hindi</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+        <record id="hr_skill_gujarati" model="hr.skill">
+            <field name="name">Gujarati</field>
+            <field name="skill_type_id" ref="hr_skill_type_lang"/>
+        </record>
+
+        <!-- Dev -->
+        <record id="hr_skill_1" model="hr.skill">
+            <field name="name">.Net</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_2" model="hr.skill">
+            <field name="name">ADO.net</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_3" model="hr.skill">
+            <field name="name">AI</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_4" model="hr.skill">
+            <field name="name">ASP.NET WEB API</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_5" model="hr.skill">
+            <field name="name">ASP.Net MVC</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_6" model="hr.skill">
+            <field name="name">Admin</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_7" model="hr.skill">
+            <field name="name">Adobe Photoshop</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_8" model="hr.skill">
+            <field name="name">Adobe illustrator CS6</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_9" model="hr.skill">
+            <field name="name">Alfresco</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_10" model="hr.skill">
+            <field name="name">Android</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_11" model="hr.skill">
+            <field name="name">Angular</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_12" model="hr.skill">
+            <field name="name">Angular2</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_13" model="hr.skill">
+            <field name="name">Angular4</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_14" model="hr.skill">
+            <field name="name">Angular6</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_15" model="hr.skill">
+            <field name="name">Angular7</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_16" model="hr.skill">
+            <field name="name">Angular9</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_17" model="hr.skill">
+            <field name="name">AngularJS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_18" model="hr.skill">
+            <field name="name">Animation</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_19" model="hr.skill">
+            <field name="name">Asp.Net</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_20" model="hr.skill">
+            <field name="name">Automation Testing</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_21" model="hr.skill">
+            <field name="name">Aws</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_22" model="hr.skill">
+            <field name="name">Azure</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_23" model="hr.skill">
+            <field name="name">Backbone Js</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_24" model="hr.skill">
+            <field name="name">BigData</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_25" model="hr.skill">
+            <field name="name">Bootstrap</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_26" model="hr.skill">
+            <field name="name">Business Analyst</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_27" model="hr.skill">
+            <field name="name">Business Developer</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_28" model="hr.skill">
+            <field name="name">C</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_29" model="hr.skill">
+            <field name="name">C++</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_30" model="hr.skill">
+            <field name="name">CMS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_31" model="hr.skill">
+            <field name="name">Certified Scrum Master</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_32" model="hr.skill">
+            <field name="name">Codeigniter</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_33" model="hr.skill">
+            <field name="name">Content Writing</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_34" model="hr.skill">
+            <field name="name">Coral Draw</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_35" model="hr.skill">
+            <field name="name">Cordova</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_36" model="hr.skill">
+            <field name="name">DBMS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_37" model="hr.skill">
+            <field name="name">Data Scientist</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_38" model="hr.skill">
+            <field name="name">Dax</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_39" model="hr.skill">
+            <field name="name">Designer</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_41" model="hr.skill">
+            <field name="name">Django</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_42" model="hr.skill">
+            <field name="name">Dreamweaver</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_43" model="hr.skill">
+            <field name="name">Durandal JS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_44" model="hr.skill">
+            <field name="name">ERP</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_45" model="hr.skill">
+            <field name="name">ETL</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_46" model="hr.skill">
+            <field name="name">EXTjs</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_47" model="hr.skill">
+            <field name="name">ExpressJs</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_48" model="hr.skill">
+            <field name="name">Flash</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_49" model="hr.skill">
+            <field name="name">Flex</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_50" model="hr.skill">
+            <field name="name">Freelancer</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_51" model="hr.skill">
+            <field name="name">Fresher</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_52" model="hr.skill">
+            <field name="name">FullStack</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_53" model="hr.skill">
+            <field name="name">Gosu</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_54" model="hr.skill">
+            <field name="name">Graphics Designer</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_55" model="hr.skill">
+            <field name="name">Guidewire</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_56" model="hr.skill">
+            <field name="name">HCM</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_57" model="hr.skill">
+            <field name="name">HDFS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_58" model="hr.skill">
+            <field name="name">HP-Vertica</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_59" model="hr.skill">
+            <field name="name">HR Executive</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_60" model="hr.skill">
+            <field name="name">HR Manager</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_61" model="hr.skill">
+            <field name="name">HRIS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_62" model="hr.skill">
+            <field name="name">Hadoop</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_63" model="hr.skill">
+            <field name="name">Hibernate</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_64" model="hr.skill">
+            <field name="name">Hive</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_65" model="hr.skill">
+            <field name="name">Hr</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_66" model="hr.skill">
+            <field name="name">IOS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_67" model="hr.skill">
+            <field name="name">IOT</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_68" model="hr.skill">
+            <field name="name">IT Admin</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_69" model="hr.skill">
+            <field name="name">Illustrator</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_70" model="hr.skill">
+            <field name="name">J2EE</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_71" model="hr.skill">
+            <field name="name">JDBC</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_72" model="hr.skill">
+            <field name="name">JMS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_73" model="hr.skill">
+            <field name="name">JQuery</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_74" model="hr.skill">
+            <field name="name">JSTL</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_75" model="hr.skill">
+            <field name="name">JUnit</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_76" model="hr.skill">
+            <field name="name">Jasper</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_77" model="hr.skill">
+            <field name="name">Java</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_78" model="hr.skill">
+            <field name="name">Javascript</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_79" model="hr.skill">
+            <field name="name">Jsp</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_80" model="hr.skill">
+            <field name="name">Knime</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_81" model="hr.skill">
+            <field name="name">LINQ</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_82" model="hr.skill">
+            <field name="name">Laravel</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_83" model="hr.skill">
+            <field name="name">Liferay DXP</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_84" model="hr.skill">
+            <field name="name">Linux</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_85" model="hr.skill">
+            <field name="name">Logo Design</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_86" model="hr.skill">
+            <field name="name">MERN</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_87" model="hr.skill">
+            <field name="name">MVC</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_88" model="hr.skill">
+            <field name="name">Machine Learning</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_89" model="hr.skill">
+            <field name="name">Magneto</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_93" model="hr.skill">
+            <field name="name">Maven</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_94" model="hr.skill">
+            <field name="name">Meteor.js</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_95" model="hr.skill">
+            <field name="name">Microservices</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_96" model="hr.skill">
+            <field name="name">MongoDB</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_97" model="hr.skill">
+            <field name="name">Mssql</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_98" model="hr.skill">
+            <field name="name">ODM</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_99" model="hr.skill">
+            <field name="name">OGM</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_101" model="hr.skill">
+            <field name="name">OLAP</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_102" model="hr.skill">
+            <field name="name">Odoo</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_103" model="hr.skill">
+            <field name="name">Oracle</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_104" model="hr.skill">
+            <field name="name">PHP</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_105" model="hr.skill">
+            <field name="name">PLSql</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_106" model="hr.skill">
+            <field name="name">PM</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_107" model="hr.skill">
+            <field name="name">Photoshop</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_108" model="hr.skill">
+            <field name="name">Pig</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_109" model="hr.skill">
+            <field name="name">PostgresSql</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_110" model="hr.skill">
+            <field name="name">Project Leader</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_111" model="hr.skill">
+            <field name="name">Project Coordinator</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_112" model="hr.skill">
+            <field name="name">Python</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_113" model="hr.skill">
+            <field name="name">Python3</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_114" model="hr.skill">
+            <field name="name">QA</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_115" model="hr.skill">
+            <field name="name">QMS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_116" model="hr.skill">
+            <field name="name">R</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_117" model="hr.skill">
+            <field name="name">REST Services</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_118" model="hr.skill">
+            <field name="name">Reporting</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_119" model="hr.skill">
+            <field name="name">Require JS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_120" model="hr.skill">
+            <field name="name">Ruby on Rails</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_121" model="hr.skill">
+            <field name="name">SAAS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_122" model="hr.skill">
+            <field name="name">SAP</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_123" model="hr.skill">
+            <field name="name">SAS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_124" model="hr.skill">
+            <field name="name">SEM</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_125" model="hr.skill">
+            <field name="name">SEO</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_126" model="hr.skill">
+            <field name="name">SOAP</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_127" model="hr.skill">
+            <field name="name">SQLite Database</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_128" model="hr.skill">
+            <field name="name">SSAS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_129" model="hr.skill">
+            <field name="name">SSIS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_130" model="hr.skill">
+            <field name="name">SSRS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_131" model="hr.skill">
+            <field name="name">Sail.js</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_132" model="hr.skill">
+            <field name="name">Salesforce</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_133" model="hr.skill">
+            <field name="name">Sass</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_134" model="hr.skill">
+            <field name="name">Scala</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_135" model="hr.skill">
+            <field name="name">Selenium</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_136" model="hr.skill">
+            <field name="name">Silverlight</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_137" model="hr.skill">
+            <field name="name">Socket.IO</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_138" model="hr.skill">
+            <field name="name">Spring Boot</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_139" model="hr.skill">
+            <field name="name">Spring Reactive</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_140" model="hr.skill">
+            <field name="name">Sql</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_141" model="hr.skill">
+            <field name="name">Swing</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_142" model="hr.skill">
+            <field name="name">T-SQL</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_143" model="hr.skill">
+            <field name="name">Tableau</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_144" model="hr.skill">
+            <field name="name">Tally</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_145" model="hr.skill">
+            <field name="name">Techno Functional</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_146" model="hr.skill">
+            <field name="name">Teradata</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_147" model="hr.skill">
+            <field name="name">Testrail</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_148" model="hr.skill">
+            <field name="name">Trainee</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_149" model="hr.skill">
+            <field name="name">Typescript</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_150" model="hr.skill">
+            <field name="name">UI</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_151" model="hr.skill">
+            <field name="name">UI/UX</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_152" model="hr.skill">
+            <field name="name">Underscore JS</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_153" model="hr.skill">
+            <field name="name">VB.Net</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_154" model="hr.skill">
+            <field name="name">VBA</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_155" model="hr.skill">
+            <field name="name">VLSI Design</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_156" model="hr.skill">
+            <field name="name">Visual Studio</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_157" model="hr.skill">
+            <field name="name">VueJs</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_158" model="hr.skill">
+            <field name="name">WCF</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_159" model="hr.skill">
+            <field name="name">Web Designing</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_160" model="hr.skill">
+            <field name="name">Web Scraping</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_161" model="hr.skill">
+            <field name="name">Web Testing</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_162" model="hr.skill">
+            <field name="name">Wordpress</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_163" model="hr.skill">
+            <field name="name">Workday</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_164" model="hr.skill">
+            <field name="name">Workday Security</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_165" model="hr.skill">
+            <field name="name">Xamarin</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_166" model="hr.skill">
+            <field name="name">Xml</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_167" model="hr.skill">
+            <field name="name">angular11</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_168" model="hr.skill">
+            <field name="name">angular8</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_169" model="hr.skill">
+            <field name="name">blockchain</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_170" model="hr.skill">
+            <field name="name">c#</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_171" model="hr.skill">
+            <field name="name">css</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_172" model="hr.skill">
+            <field name="name">data analyst</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_173" model="hr.skill">
+            <field name="name">data warehouse</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_174" model="hr.skill">
+            <field name="name">devops</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_175" model="hr.skill">
+            <field name="name">drupal</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_176" model="hr.skill">
+            <field name="name">entity framework</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_177" model="hr.skill">
+            <field name="name">flask</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_178" model="hr.skill">
+            <field name="name">flutter</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_179" model="hr.skill">
+            <field name="name">ionic</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_180" model="hr.skill">
+            <field name="name">jpa</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_181" model="hr.skill">
+            <field name="name">kotlin</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_182" model="hr.skill">
+            <field name="name">ldap</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_183" model="hr.skill">
+            <field name="name">less.js</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_184" model="hr.skill">
+            <field name="name">manual testing</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_185" model="hr.skill">
+            <field name="name">mean</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_186" model="hr.skill">
+            <field name="name">mysql</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_187" model="hr.skill">
+            <field name="name">network</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_188" model="hr.skill">
+            <field name="name">nextjs</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_189" model="hr.skill">
+            <field name="name">node.js</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_190" model="hr.skill">
+            <field name="name">perl</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_191" model="hr.skill">
+            <field name="name">power BI</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_192" model="hr.skill">
+            <field name="name">reactjs</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_193" model="hr.skill">
+            <field name="name">recruiter</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_194" model="hr.skill">
+            <field name="name">redhat certified</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_195" model="hr.skill">
+            <field name="name">redux</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_196" model="hr.skill">
+            <field name="name">sales</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_197" model="hr.skill">
+            <field name="name">scc</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_198" model="hr.skill">
+            <field name="name">scrum</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_199" model="hr.skill">
+            <field name="name">scss</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_200" model="hr.skill">
+            <field name="name">sharepoint</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_201" model="hr.skill">
+            <field name="name">shopify</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_202" model="hr.skill">
+            <field name="name">silk</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_203" model="hr.skill">
+            <field name="name">spark</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_204" model="hr.skill">
+            <field name="name">spring</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_205" model="hr.skill">
+            <field name="name">ssms</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_206" model="hr.skill">
+            <field name="name">surekhatech</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_207" model="hr.skill">
+            <field name="name">svn</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_208" model="hr.skill">
+            <field name="name">system admin</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_209" model="hr.skill">
+            <field name="name">unix</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_210" model="hr.skill">
+            <field name="name">vbscript</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_211" model="hr.skill">
+            <field name="name">visual basic</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_212" model="hr.skill">
+            <field name="name">wamp</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_213" model="hr.skill">
+            <field name="name">web api</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_214" model="hr.skill">
+            <field name="name">web service</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_215" model="hr.skill">
+            <field name="name">xampp</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_216" model="hr.skill">
+            <field name="name">xmarin</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_217" model="hr.skill">
+            <field name="name">zoho</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_218" model="hr.skill">
+            <field name="name">liferay 6.2</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_219" model="hr.skill">
+            <field name="name">NativeJs</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_220" model="hr.skill">
+            <field name="name">Tableau Server</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+        <record id="hr_skill_221" model="hr.skill">
+            <field name="name">ProductOwner</field>
+            <field name="skill_type_id" ref="hr_skill_type_dev"/>
+        </record>
+
+        <!-- Marketing -->
+        <record id="hr_skill_mark" model="hr.skill">
+            <field name="name">Marketing</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_dig_mark" model="hr.skill">
+            <field name="name">Digital Marketing</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_mark_research" model="hr.skill">
+            <field name="name">Market Research</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+        <record id="hr_skill_mark_manager" model="hr.skill">
+            <field name="name">Marketing Manager</field>
+            <field name="skill_type_id" ref="hr_skill_type_marketing"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Job Opening Skills Form View-->
+        <record id="job_opening_report_template_form" model="ir.ui.view">
+            <field name="name">job.opening.report.template.form</field>
+            <field name="model">job.opening.report.template</field>
+            <field name="arch" type="xml">
+                <form string="Job Opening Report Template">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="job_opening_ids" widget="many2many_tags"
+                                       options="{'no_create_edit':True ,'no_create': True}"/>
+                                <field name="recruiter_id" options="{'no_create_edit':True ,'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="period"/>
+                                <field name="company_id" options="{'no_create_edit':True ,'no_create': True}"
+                                       groups="base.group_multi_company"/>
+                                <field name="state"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_job_opening_report_template_tree" model="ir.ui.view">
+            <field name="name">job.opening.report.template.tree</field>
+            <field name="model">job.opening.report.template</field>
+            <field name="arch" type="xml">
+                <tree string="Job Opening Report Template" sample="1">
+                    <field name="name"/>
+                    <field name="period"/>
+                    <field name="recruiter_id"/>
+                    <field name="job_opening_ids" widget="many2many_tags"/>
+                    <field name="state"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_job_opening_report_template" model="ir.actions.act_window">
+            <field name="name">Job Opening Report Template</field>
+            <field name="res_model">job.opening.report.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Ready to recruit more efficiently?
+                </p>
+                <p>
+                    Let's create a job Opening Report Templates.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                name="Job Opening Report Templates"
+                parent="hr_recruitment.menu_hr_recruitment_configuration"
+                id="menu_job_opening_report_template"
+                groups="hr_recruitment.group_hr_recruitment_user,aspl_hr_recruitment.group_recruiter_user"
+                action="action_job_opening_report_template"
+        />
+
+    </data>
+</odoo>

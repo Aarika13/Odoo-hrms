@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="approve_work_base_home_notify" model="mail.template">
+            <field name="name">Work Base Home Notification</field>
+            <field name="subject">Work From Home request awaiting your approval</field>
+            <field name="email_from">${object.employee_id.work_email}</field>
+            <field name="email_to">${object.employee_id.parent_id.work_email}</field>
+            <field name="model_id" ref="model_attendance_work_from_home"/>
+            <field name="user_signature" eval="0"/>
+            <field name="body_html"><![CDATA[<p>Hi ${object.employee_id.parent_id.name},</p>
+            <p>
+                ${object.employee_id.name} [${object.employee_id.employee_no}] had worked from home on ${object.start_date}. Following are the details: <br/>
+            </p>
+            <p>
+                Start Time:   ${object.start_date}<br/>
+                End Time:     ${object.end_date}<br/>
+                Work Summary: <br/>
+                ${object.work_summary}
+            </p>
+            <p>
+                Regards,<br/>
+                ${object.employee_id.name}
+            </p>
+            <p>
+                Note:This is an auto-generated mail.Please do not reply.
+            </p>
+            ]]></field>
+        </record>
+
+        <record id="sign_in_1" model="hr.action.reason">
+            <field name="name">Sign in</field>
+            <field name="sequence">1</field>
+            <field name="action_type">sign_in</field>
+        </record>
+
+        <record id="sign_out_1" model="hr.action.reason">
+            <field name="name">Sign out</field>
+            <field name="sequence">2</field>
+            <field name="action_type">sign_out</field>
+        </record>
+
+        <record id="sign_in_2" model="hr.action.reason">
+            <field name="name">WFH - Sign in</field>
+            <field name="sequence">3</field>
+            <field name="action_type">sign_in</field>
+        </record>
+
+        <record id="sign_out_2" model="hr.action.reason">
+            <field name="name">WFH - Sign out</field>
+            <field name="sequence">4</field>
+            <field name="action_type">sign_out</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="attendance_report_daywise_pivot" model="ir.ui.view">
+        <field name="name">Attendance Report</field>
+        <field name="model">attendance.report.daywise</field>
+        <field name="arch" type="xml">
+            <pivot string="Attendance Report" disable_linking="1" sample="1">
+                <field name="employee" type="row"/>
+                <field name="check_in" type="col"/>
+                <field name="difference_hours" type="measure" widget="float_time"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="attendance_report_daywise_graph" model="ir.ui.view">
+        <field name="name">Attendance Report</field>
+        <field name="model">attendance.report.daywise</field>
+        <field name="arch" type="xml">
+            <graph string="Attendance Report" stacked="0" disable_linking="1">
+                <field name="employee"/>
+                <field name="check_in"/>
+                <field name="difference_hours" type="measure" widget="float_time"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="attendance_report_daywise_search" model="ir.ui.view">
+        <field name="name">report01.view.search</field>
+        <field name="model">attendance.report.daywise</field>
+        <field name="arch" type="xml">
+            <search string="HR Attendance Search">
+                <field name="employee"/>
+                <filter name="check_in" string="Check In" date="check_in"/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" name="groupby_employee" context="{'group_by': 'employee'}"/>
+                    <filter string="Check In" name="groupby_check_in" context="{'group_by': 'check_in'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id='attendance_report_daywise_action' model='ir.actions.act_window'>
+        <field name="name">Attendance Report</field>
+        <field name="res_model">attendance.report.daywise</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="search_view_id" ref="attendance_report_daywise_search"/>
+        <field name="context">{'search_default_check_in': 1}</field>
+    </record>
+
+
+    <menuitem
+            id="hr_attendance.menu_hr_attendance_report"
+            name="Reporting"
+            sequence="30"
+            parent="hr_attendance.menu_hr_attendance_root"
+            groups="hr_attendance.group_hr_attendance_user"/>
+
+     <!-- action="hr_attendance_report_action" -->
+    <menuitem
+            id="menu_hr_attendance_report_base"
+            name="Attendance Analysis"
+            sequence="1"
+            parent="hr_attendance.menu_hr_attendance_report"
+            action="hr_attendance.hr_attendance_report_action"
+            groups="hr_attendance.group_hr_attendance_user"/>
+
+    <menuitem id="menu_my_attendance_report_daywise"
+              name="Attendance Report"
+              sequence="2"
+              parent="hr_attendance.menu_hr_attendance_report"
+              action="attendance_report_daywise_action"
+              groups="hr_attendance.group_hr_attendance_user"/>
+
+</odoo>

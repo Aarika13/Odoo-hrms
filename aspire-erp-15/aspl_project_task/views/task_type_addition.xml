@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="task_type_form_addition" model="ir.ui.view">
+            <field name="name">task.type.form.addition</field>
+            <field name="model">project.project</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='description']" position="after">
+                    <page name="task_type" string="Task Type">
+                        <field mode="tree" name="task_type">
+                                <tree create="1" delete="1" update="1" editable="bottom" force_save="1">
+                                    <field name="name"/>
+                                    <field name="color" widget="color"/>
+                                </tree>
+                        </field>
+                     </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

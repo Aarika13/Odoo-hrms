@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="stage_5" model="maintenance.stage">
+            <field name="name">Replaced</field>
+            <field name="sequence" eval="5"/>
+            <field name="fold" eval="False"/>
+        </record>
+
+        <record id="stage_6" model="maintenance.stage">
+            <field name="name">Cancel</field>
+            <field name="sequence" eval="6"/>
+            <field name="fold" eval="True"/>
+        </record>
+        <!-- Equipment Category Data -->
+        <!--<record id="equipment_category_1" model="maintenance.equipment.category">
+            <field name="name">Computers</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">COM</field>
+        </record>
+        <record id="equipment_category_2" model="maintenance.equipment.category">
+            <field name="name">Software</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">SW</field>
+        </record>
+        <record id="equipment_category_3" model="maintenance.equipment.category">
+            <field name="name">Printers</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">PR</field>
+        </record>
+        <record id="equipment_category_4" model="maintenance.equipment.category">
+            <field name="name">CPU</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">CPU</field>
+        </record>
+        <record id="equipment_category_5" model="maintenance.equipment.category">
+            <field name="name">Monitor</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">MO</field>
+        </record>
+        <record id="equipment_category_6" model="maintenance.equipment.category">
+            <field name="name">Keyboard</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">KB</field>
+        </record>
+        <record id="equipment_category_7" model="maintenance.equipment.category">
+            <field name="name">Mouse</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">MU</field>
+        </record>
+        <record id="equipment_category_8" model="maintenance.equipment.category">
+            <field name="name">Motherboard</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">MB</field>
+        </record>
+        <record id="equipment_category_9" model="maintenance.equipment.category">
+            <field name="name">RAM</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">RAM</field>
+        </record>
+        <record id="equipment_category_10" model="maintenance.equipment.category">
+            <field name="name">Laptop</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">LTP</field>
+        </record>
+        <record id="equipment_category_11" model="maintenance.equipment.category">
+            <field name="name">Hard Disk</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">HDD</field>
+        </record>
+        <record id="equipment_category_12" model="maintenance.equipment.category">
+            <field name="name">DVD Writer</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">DVD-EX</field>
+        </record>
+        <record id="equipment_category_13" model="maintenance.equipment.category">
+            <field name="name">Internal DVD Writer</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">DVD-RW</field>
+        </record>
+        <record id="equipment_category_14" model="maintenance.equipment.category">
+            <field name="name">Keyboard Mouse Set</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">KM</field>
+        </record>
+        <record id="equipment_category_15" model="maintenance.equipment.category">
+            <field name="name">Cabinet</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">CAB</field>
+        </record>
+        <record id="equipment_category_16" model="maintenance.equipment.category">
+            <field name="name">Graphics Card</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">GC</field>
+        </record>
+        <record id="equipment_category_17" model="maintenance.equipment.category">
+            <field name="name">Headphone</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">HP</field>
+        </record>
+        <record id="equipment_category_18" model="maintenance.equipment.category">
+            <field name="name">SMPS</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">SMPS</field>
+        </record>
+        <record id="equipment_category_19" model="maintenance.equipment.category">
+            <field name="name">UPS</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">UPS</field>
+        </record>
+        <record id="equipment_category_20" model="maintenance.equipment.category">
+            <field name="name">Switch</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">SWT</field>
+        </record>
+        <record id="equipment_category_21" model="maintenance.equipment.category">
+            <field name="name">SSD Drive</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">SSD</field>
+        </record>
+        <record id="equipment_category_22" model="maintenance.equipment.category">
+            <field name="name">LAN Card</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">LC</field>
+        </record>
+        <record id="equipment_category_23" model="maintenance.equipment.category">
+            <field name="name">Pen Drive</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">PD</field>
+        </record>
+        <record id="equipment_category_24" model="maintenance.equipment.category">
+            <field name="name">Network Switch</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">AS/AST/SW</field>
+        </record>
+        <record id="equipment_category_25" model="maintenance.equipment.category">
+            <field name="name">Network Switch</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">SW</field>
+        </record>
+
+        <record id="equipment_category_26" model="maintenance.equipment.category">
+            <field name="name">Router</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">RT/AST/ROT/001</field>
+        </record>
+        <record id="equipment_category_27" model="maintenance.equipment.category">
+            <field name="name">Laptop Battery</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">Laptop Battery</field>
+        </record>
+        <record id="equipment_category_28" model="maintenance.equipment.category">
+            <field name="name">Laptop LED Screen</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">AS/AST/LPTSCR/</field>
+        </record>
+        <record id="equipment_category_29" model="maintenance.equipment.category">
+            <field name="name">Ethernet Adapter</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">AST/EA/001</field>
+        </record>
+        <record id="equipment_category_30" model="maintenance.equipment.category">
+            <field name="name">VGAr</field>
+            <field name="technician_user_id">361</field>
+            <field name="short_code">VGA</field>
+        </record>-->
+        <!-- End of equipment category -->
+    </data>
+</odoo>

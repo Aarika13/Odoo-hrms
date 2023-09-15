@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="inherit_hr_employee_view_form" model="ir.ui.view">
+            <field name="name">Hr Employee Form View</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"></field>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="track_detailed_attendance"/>
+                </xpath> -->
+                
+                <xpath expr="//page[@name='hr_settings']//group//group[1]" position="inside">
+                    <field string="Biometric Code" name = "biometric_no"/>
+                </xpath>
+
+
+                <xpath expr="//page[@name='hr_settings']//group//group[@name='identification_group']" position="inside">
+                    <field name = "permanent_work_from_home"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

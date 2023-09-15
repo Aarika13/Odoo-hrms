@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="quick_create_task_form_inherit" model="ir.ui.view">
+            <field name="name">project.task.form.quick_create_inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.quick_create_task_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="before">
+                    <field name="project_id" domain="[('company_id', 'in', allowed_company_ids)]" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" required='True'/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>        
+

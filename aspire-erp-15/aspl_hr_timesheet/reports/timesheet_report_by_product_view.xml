@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_timesheet_activity_xls_form" model="ir.ui.view">
+            <field name="name">Timesheet Activity XLS form view</field>
+            <field name="model">timesheet.activity.xls</field>
+            <field name="arch" type="xml">
+                <form string="Timesheet Activity Xls">
+                    <group>
+                        <group>
+                            <field name="file_name" invisible="1"/>
+                            <field name="file" readonly="1" filename="file_name"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Close" special="cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_timesheet_activity_xls_report_form" model="ir.ui.view">
+            <field name="name">Timesheet Activity XLS Report form view</field>
+            <field name="model">timesheet.activity.xls.report</field>
+            <field name="arch" type="xml">
+                <form string="Generate Timesheet Xls Report">
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="project_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_timesheet_xls_report_view" model="ir.actions.act_window">
+            <field name="name">Generate Timesheet Xls Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">timesheet.activity.xls.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_timesheet_xls_report_view"
+                  name="XLS Timesheet Report"
+                  id="timesheet_activity_xls_report_menu_id"
+                  parent="hr_timesheet.menu_timesheets_reports"
+                  sequence="8"
+        />
+
+    </data>
+</odoo>

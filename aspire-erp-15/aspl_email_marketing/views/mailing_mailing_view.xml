@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="mailing_mailing_view_form_full_width">
+            <field name="model">mailing.mailing</field>
+            <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_clicked']" position="after">
+                <button name="action_view_clicked_list" string="Clicked Contact" type="object" class="oe_stat_button">
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='mail_server_id']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='source_id']" position="after">
+                <field name="mail_server_id" attrs="{'readonly': [('state', 'in', ('sending', 'done'))],
+                                         'invisible': [('mail_server_available', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

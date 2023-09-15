@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.rule" id="project_public_members_rule">
+            <field name="name">Project: employees: following required for follower-only projects</field>
+            <field name="model_id" ref="model_project_project"/>
+            <field name="domain_force">['|','|',
+                                            ('privacy_visibility', '!=', 'followers'),
+                                            ('message_partner_ids', 'in', [user.partner_id.id]), 
+                                            ('members_ids', 'in', [user.id])
+                                        ]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="ir.rule" id="task_visibility_rule">
+            <field name="name">Project/Task: employees: follow required for follower-only projects</field>
+            <field name="model_id" ref="model_project_task"/>
+            <field name="domain_force">['|','|',
+                                            ('privacy_visibility', '!=', 'followers'),
+                                            ('message_partner_ids', 'in', [user.partner_id.id]), 
+                                            ('members_ids', 'in', [user.id])
+                                        ]</field>
+            <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+    </data>
+</odoo>

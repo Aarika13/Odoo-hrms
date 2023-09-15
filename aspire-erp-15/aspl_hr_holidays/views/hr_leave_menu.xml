@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <menuitem
+                id="hr_holidays.menu_open_department_leave_approve"
+                name="Time Off"
+                parent="hr_holidays.menu_hr_holidays_approvals"
+                action="hr_holidays.hr_leave_action_action_approve_department"
+                sequence="2"/>
+        <menuitem
+                id="hr_holidays.hr_holidays_menu_manager_approve_allocations"
+                name="Allocations"
+                parent="hr_holidays.menu_hr_holidays_approvals"
+                action="hr_holidays.hr_leave_allocation_action_approve_department"
+                groups = "hr_holidays.group_hr_holidays_manager"
+                sequence="2"/>
+
+        <menuitem
+                id="hr_holidays.menu_hr_holidays_dashboard"
+                name="Overview"
+                parent="hr_holidays.menu_hr_holidays_root"
+                sequence="2" 
+                action="hr_holidays.action_hr_holidays_dashboard"
+                /><!--groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"-->
+        <menuitem
+                id="hr_holidays.menu_hr_holidays_approvals"
+                name="Approvals"
+                parent="hr_holidays.menu_hr_holidays_root"
+                sequence="3"
+                groups="hr_holidays.group_hr_holidays_responsible,hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_manager"/>
+        <menuitem
+                id="hr_holidays.menu_hr_holidays_report"
+                name="Reporting"
+                parent="hr_holidays.menu_hr_holidays_root"
+                groups="-hr_holidays.group_hr_holidays_user,hr_holidays.group_hr_holidays_manager"
+                sequence="4"/>
+        <menuitem id="hr_holidays.hr_holidays_public_time_off_menu_configuration"
+                  action="hr_holidays.open_view_public_holiday"
+                  name="Public Holidays"
+                  parent="hr_holidays.menu_hr_holidays_root"
+                  groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"/>
+</data>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_send_interview_form_wiz" model="ir.ui.view">
+        <field name="name">recruitment.send.interview.wizard.form</field>
+        <field name="model">recruitment.send.interview.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send Interview Invitation">
+                <group>
+                    <group>
+                        <field name="date_time" string="Interview Date"/>
+                        <field name="user_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="interview_round" options="{'no_create': True,'no_open':True}"/> 
+                        <field name="telephonic"/>
+
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="agenda" string="Comments for interviewer"/>
+                        <field name="description" string="Instructions for candidate"
+                               attrs="{'invisible': [('telephonic', '!=', True)]}"/>
+                        
+                    </group>
+                    <group>
+                        <field name="work_location_id" attrs="{'invisible': [('telephonic', '!=', False)],'required': [('telephonic', '=', False)]}" options="{'no_create': True,'no_open':True}"/>
+                        <field name="interview_type"
+                               attrs="{'invisible': [('telephonic', '!=', True)],'required': [('telephonic', '=', True)]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_schedule_interview" type="object" string="Save" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="aspl_hr_work_location_view_form_inherited" model="ir.ui.view">
+            <field name="name">hr.work.location.view.form.inherited</field>
+            <field name="model">hr.work.location</field>
+            <field name="inherit_id" ref="hr.hr_work_location_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_number']" position="after">
+                    <field name="gmap_url" widget="url" />
+                </xpath>
+            </field>
+    </record>
+
+    <record id="action_schedule_interview" model="ir.actions.act_window">
+        <field name="name">Interview Invitation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">recruitment.send.interview.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_send_interview_form_wiz"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

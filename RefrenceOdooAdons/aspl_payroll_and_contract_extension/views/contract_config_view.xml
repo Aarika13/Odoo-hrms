@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_contract_form_inherit_new" model="ir.ui.view">
+            <field name="name">hr.contract.form.inherit.new</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="load_salary_components" string="Load Salary Components" type="object" class="oe_highlight"/>
+                </xpath>    
+                <xpath expr="//group[@name='salary']" position="inside">       
+                        <field name="gratuity" string="Gratuity" widget='checkbox'/>
+                        <field name="pf" string="Provident Fund" widget='checkbox'/>
+                        <field name="pf_ceiling" string="PF Ceiling" widget='checkbox'/>
+                        <field name="esic" string="Esic" widget='checkbox'/>
+                </xpath>
+                <xpath expr="//page[@name='information']" position="after">  
+                    <page string="Applicable Salary Rule" name="applicable_salary">
+                        <field mode="tree" name="applicable_salary_rule_ids">
+                            <tree>
+                                <field name="rule_id" string="Rule"/>
+                                <field name="amount" string="Amount"/> 
+                            </tree>
+                        </field>
+                    </page>
+                </xpath> 
+            </field>
+        </record>
+    </data>
+</odoo>

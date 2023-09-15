@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="blocked_emails_main_form" model="ir.ui.view">
+            <field name="name">Blocked Emails</field>
+            <field name="model">blocked.emails</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="blocked_emails_main_tree" model="ir.ui.view">
+            <field name="name">Blocked Emails</field>
+            <field name="model">blocked.emails</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="blocked_emails_action" model="ir.actions.act_window">
+            <field name="name">Blocked Emails</field>
+            <field name="res_model">blocked.emails</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="blocked_emails_menu"
+                  name="Block Emails"
+                  action="blocked_emails_action"
+                  parent="hr_recruitment.menu_hr_recruitment_configuration"
+        />
+
+        <record id="source_form" model="ir.ui.view">
+            <field name="name">Source</field>
+            <field name="model">utm.source</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="source_tree" model="ir.ui.view">
+            <field name="name">Source</field>
+            <field name="model">utm.source</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="utm.source" id="email_origin">
+                <field name="name">Email</field>
+        </record>
+
+        <record id="source_action" model="ir.actions.act_window">
+            <field name="name">Source</field>
+            <field name="res_model">utm.source</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="source_menu"
+                  name="Source"
+                  action="source_action"
+                  parent="hr_recruitment.menu_hr_recruitment_configuration"
+        />
+    </data>
+</odoo>

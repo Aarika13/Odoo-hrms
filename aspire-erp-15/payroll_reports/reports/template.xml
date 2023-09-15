@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--template id="remover_header" inherit_id="web.external_layout_standard">
+        <xpath expr="//div" position="replace"/>
+        <xpath expr="//div[2]" position="replace"/>
+    </template-->
+
+    <template id="custom_header_original">
+        <t t-set="o" t-value="o.with_context(lang=lang)"/>
+
+        <div class="header">
+
+            <style type="text/css">
+                @font-face {
+                font-family: 'Poppins';
+                src: url(data:application/font-woff2;charset=utf-8;base64,..........)
+                font-weight: bold;
+                font-style: normal;
+                }
+
+            </style>
+
+            <div class="row" style="width:101%">
+                <div class="col-4"/>
+                <div class="col-3"/>
+                <div class="col-5"
+                     style="height: 15px; margin-top:0px; background:url('/payroll_reports/static/src/img/gradient-half.png')"/>
+            </div>
+
+            <div class="row">
+                <div class="col-5" style="margin-top: 10px;">
+                    <img alt="img"
+                         src="/payroll_reports/static/src/img/aspire-logo.png"
+                         style="max-height: 80px"/>
+                </div>
+                <div class="col-3"/>
+                <div class="col-4" style="font-size: 16px;margin-top: 10px;">
+                    <div style="margin-left: 30px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             style="height: 15px; width: 15px;">
+                            <path fill="#F15D3F"
+                                  d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
+                        </svg>
+                        <span class="pl-2">
+                            <t t-esc="o.company_id.phone"/>
+                        </span>
+                    </div>
+                    <div style="margin-left: 30px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             style="height: 15px; width: 15px;">
+                            <path fill="#F15D3F"
+                                  d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+                        </svg>
+                        <span class="pl-2">
+                            <t t-esc="o.company_id.email"/>
+                        </span>
+                    </div>
+                    <div style="margin-left: 30px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             style="height: 15px; width: 15px;">
+                            <path fill="#F15D3F"
+                                  d="M57.7 193l9.4 16.4c8.3 14.5 21.9 25.2 38 29.8L163 255.7c17.2 4.9 29 20.6 29 38.5v39.9c0 11 6.2 21 16 25.9s16 14.9 16 25.9v39c0 15.6 14.9 26.9 29.9 22.6c16.1-4.6 28.6-17.5 32.7-33.8l2.8-11.2c4.2-16.9 15.2-31.4 30.3-40l8.1-4.6c15-8.5 24.2-24.5 24.2-41.7v-8.3c0-12.7-5.1-24.9-14.1-33.9l-3.9-3.9c-9-9-21.2-14.1-33.9-14.1H257c-11.1 0-22.1-2.9-31.8-8.4l-34.5-19.7c-4.3-2.5-7.6-6.5-9.2-11.2c-3.2-9.6 1.1-20 10.2-24.5l5.9-3c6.6-3.3 14.3-3.9 21.3-1.5l23.2 7.7c8.2 2.7 17.2-.4 21.9-7.5c4.7-7 4.2-16.3-1.2-22.8l-13.6-16.3c-10-12-9.9-29.5 .3-41.3l15.7-18.3c8.8-10.3 10.2-25 3.5-36.7l-2.4-4.2c-3.5-.2-6.9-.3-10.4-.3C163.1 48 84.4 108.9 57.7 193zM464 256c0-36.8-9.6-71.4-26.4-101.5L412 164.8c-15.7 6.3-23.8 23.8-18.5 39.8l16.9 50.7c3.5 10.4 12 18.3 22.6 20.9l29.1 7.3c1.2-9 1.8-18.2 1.8-27.5zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/>
+                        </svg>
+                        <span class="pl-2">www.aspiresoftserv.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="width: 98%;">
+                <div class="col-12"
+                     style="height: 1px;margin-left: 22px;margin-top:15px;background-image:url('/payroll_reports/static/src/img/gradient-full.png')"/>
+            </div>
+
+
+        </div>
+    </template>
+
+    <template id="custom_footer_pdf">
+        <div class="footer o_standard_footer container">
+            <div class="row">
+                <div class="col-12"
+                     style="background-image:url('/payroll_reports/static/src/img/gradient-full.png'); color: white;height:45px">
+                    <div style="padding-top: 11px;text-align:center"><t t-esc="o.company_id.street"/>,<t
+                            t-esc="o.company_id.street2"/>,<t t-esc="o.company_id.city"/>,<t
+                            t-esc="o.company_id.state_id.name"/>,
+                        <t t-esc="o.company_id.zip"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="custom_employee_payroll">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <t style="page-break-before:always;"/>
+
+                    <style type="text/css">
+                        td, th {
+                        min-height: 44px;
+                        padding: 10px;
+                        }
+                    </style>
+
+                    <h2 class="text-center font-weight-bold"
+                        style="border: 1px solid black; margin-bottom: 0; padding: 10px;">
+                        <span t-esc="o.name"/>
+                    </h2>
+
+                    <div class="row" style="margin: 0; border-left: 1px solid black; border-right: 1px solid black;">
+                        <div class="col-6 mx-0" style="padding: 0; border-right: 1px solid black;">
+                            <table class="w-100">
+                                <tbody>
+                                    <tr>
+                                        <td style="min-width: 150px;">Employee No.</td>
+                                        <td t-esc="o.employee_id.employee_no"/>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 150px;">Employee Name</td>
+                                        <td t-esc="o.employee_id.name"/>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 150px;">Designation</td>
+                                        <td t-esc="o.employee_id.job_title"/>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 150px;">Joining Date</td>
+                                        <td t-esc="o.employee_id.first_contract_date"/>
+                                    </tr>
+                                   <!-- <tr>
+                                        <td style=min-width: 150px;>NPS No.</td>
+                                        <td t-esc="o.employee_id.<field_name>"/>
+                                        <td>100473419523</td>
+                                    </tr>
+                                    <tr>
+                                        <td style=min-width: 150px;>PAN No.</td>
+                                        <td t-esc="o.employee_id.<field_name>"/>
+                                        <td>ABCDE1234F</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6 mx-0" style="padding: 0;">
+                            <table class="w-100">
+                                <tbody>
+
+                                    <tr>
+                                        <td style="min-width: 150px;">Working Days</td>
+                                        <t t-set="total_days" t-value="0.0"/>
+                                        <t t-set="lop" t-value="0.0"/>
+                                        <t t-foreach="o.worked_days_line_ids" t-as="attendance">
+                                            <t t-if="attendance.code == 'WORK100'">
+                                                <t t-set="total_days" t-value="attendance.number_of_days"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="lop" t-value="attendance.number_of_days"/>
+                                            </t>
+                                            <t t-set="working_days" t-value="total_days + lop"/>
+                                        </t>
+                                        <td t-esc="working_days"/>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 150px;">Total Days</td>
+                                        <t t-foreach="o.worked_days_line_ids" t-as="attendance">
+                                            <t t-if="attendance.code == 'WORK100'">
+                                                <td t-esc="attendance.number_of_days"/>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                    <tr t-foreach="o.worked_days_line_ids" t-as="attendance">
+                                        <t t-if="attendance.name == 'LOP'">
+                                            <td style="min-width: 150px;">LOP</td>
+                                            <t t-if="attendance.number_of_days > 0">
+                                                <td t-esc="attendance.number_of_days * -1.0"/>
+                                            </t>
+                                            <t t-else="">
+                                                <td t-esc="attendance.number_of_days * 1.0"/>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <td style="min-width: 150px;">Bank A/C No.</td>
+                                        <td t-esc="o.employee_id.bank_account_no"/>
+                                    </tr>
+
+                                    <t t-set="pf_count" t-value="0"/>
+                                    <t t-foreach="o.line_ids" t-as="pf">
+                                        <t t-if="'PF' in pf.code  and pf.total != 0 and pf_count != 1">
+                                            <t t-set="pf_count" t-value="1"/>
+                                            <tr>
+                                                <td style="min-width: 150px;">UAN No.
+                                                </td>
+                                                <td t-esc="o.employee_id.uan"/>
+                                            </tr>
+                                            <tr>
+                                                <td style="min-width: 150px;">PF No.
+                                                </td>
+                                                <td t-esc="o.employee_id.pf_number"/>
+                                            </tr>
+                                        </t>
+                                    </t>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <t t-set="actual_earning_count" t-value="0"/>
+                        <t t-set="actual_deduction_count" t-value="0"/>
+                        <t t-set="earning_count" t-value="0"/>
+                        <t t-set="deduction_count" t-value="0"/>
+
+                        <tr t-foreach="o.line_ids" t-as="li">
+                            <t t-if="li.salary_rule_id.taxable and li.salary_rule_id.appears_on_payslip and li.category_id.name != 'Gross' and li.category_id.name != 'Net' and li.total != 0">
+                                <t t-set="actual_earning_count" t-value="actual_earning_count + 1"/>
+                            </t>
+                            <t t-if="li.salary_rule_id.is_deduction and li.salary_rule_id.appears_on_payslip and li.total != 0 and li.name != 'Total Deduction'">
+                                <t t-set="actual_deduction_count" t-value="actual_deduction_count + 1"/>
+
+                            </t>
+                        </tr>
+
+                        <t t-set="max_value" t-value="max(actual_earning_count,actual_deduction_count)"/>
+
+                        <!-- <b><td class="text-right" t-esc="max_value"/></b> -->
+                        
+                    </div>
+                    <div class="row" style="border: 1px solid black; margin: 0">
+
+                        <div class="col-6" style="padding: 0; border-right: 1px solid black;">
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="w-75"
+                                            style="border-right: 1px solid black; border-bottom: 1px solid black; color: black;">
+                                            Earning Component
+                                        </th>
+                                        <th class="w-25" style="text-align: right; border-bottom: 1px solid black; color: black;">
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.line_ids" t-as="li">
+                                        <t t-if="li.salary_rule_id.taxable and li.salary_rule_id.appears_on_payslip and li.category_id.name != 'Gross' and li.category_id.name != 'Net' and li.total != 0">
+                                            <t t-set="earning_count" t-value="earning_count + 1"/>
+                                            <td t-esc="li.name" style="border-right: 1px solid black;"/>
+                                            <td class="text-right" t-esc="li.total"/>
+                                        </t>
+                                    </tr>
+                                    <t t-foreach="range(max_value)" t-as="item">
+                                        <t t-if="max_value != earning_count">
+                                            <t t-set="earning_count" t-value="earning_count + 1"/>
+                                            <tr>
+                                                <td style="border-right: 1px solid black;min-height:44px;padding:22px"></td>
+                                                <td class="text-right;min-height:44px;padding:22px"></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6" style="padding: 0;">
+                            <table class="w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="w-75"
+                                            style="border-right: 1px solid black; border-bottom: 1px solid black; color: black;">
+                                            Deduction Component
+                                        </th>
+                                        <th class="w-25" style="text-align: right; border-bottom: 1px solid black; color: black;">
+                                            Amount
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.line_ids" t-as="li">
+                                        <!--Note: If you want to add any other category name in deduction then you just need to add 'and' operator and add it in t-if condition-->
+                                        <t t-if="li.salary_rule_id.is_deduction and li.salary_rule_id.appears_on_payslip and li.total != 0 and li.name != 'Total Deduction'">
+                                            <t t-set="deduction_count" t-value="deduction_count + 1"/>
+                                            <td t-esc="li.name" style="border-right: 1px solid black;"/>
+                                            <td class="text-right" t-esc="li.total"/>
+                                        </t>
+                                    </tr>
+
+                                    <t t-foreach="range(max_value)" t-as="item">
+                                        <t t-if="max_value != deduction_count">
+                                            <t t-set="deduction_count" t-value="deduction_count + 1"/>
+                                            <tr>
+                                                <td style="border-right: 1px solid black;min-height:44px;padding:22px"></td>
+                                                <td class="text-right;min-height:44px;padding:22px"></td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <!-- <t t-set="total_count" t-value="earning_count - deduction_count"/>
+                                    <tr t-foreach="range(total_count)" t-as="item">
+                                        <td style="border-right: 1px solid black; padding: 22.05px;"/>
+                                        <td/>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin: 0; border-left: 1px solid black;border-right: 1px solid black;">
+                        <div class="col-6" style="padding: 0; border-right: 1px solid black;">
+                            <table class="w-100">
+                                <tr>
+                                    <td class="w-75" style="width: 290px;">Total
+                                        Earnings
+                                    </td>
+                                    <t t-foreach="o.line_ids" t-as="line">
+                                        <t t-if="line.name == 'Gross'">
+                                            <td class="w-25 text-right" t-esc="line.total"/>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-6" style="padding: 0;">
+                            <table class="w-100">
+                                <tr>
+                                    <td class="w-75" style="width: 290px;">Total
+                                        Deductions
+                                    </td>
+                                    <t t-foreach="o.line_ids" t-as="line">
+                                        <t t-if="line.code == 'TOTAL_DED'">
+                                            <td class="w-25 text-right" t-esc="line.total"/>
+                                        </t>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="margin: 0; border: 1px solid black;">
+                        <table class="w-100">
+                            <tr class="font-weight-bold">
+                                <td>Net Amount: <span t-esc="net_salary_word"/>
+                                </td>
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <t t-if="line.name == 'Net Salary'">
+                                        <td class="text-right" t-esc="line.total"/>
+                                    </t>
+                                </t>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!--div style="border: 1px solid black; border-top: 0; margin: 0; padding: 10px;">
+                        <span style="font-weight: bold;">Net Amount in Words :</span>
+                        <t t-foreach="o.line_ids" t-as="line">
+                            <t t-if="line.name == 'Net Salary'">
+                                <t t-esc="line.total_in_words.title()"/>
+                            </t>
+                        </t>
+                    </div-->
+
+                    <div style="height: 100px; margin-top: 10px !important;">
+                        <div class="row" style="height: 100px;">
+                            <div class="col-6"/>
+                            <div class="col-6"
+                                 style="height: 50px; padding-left: 0 !important; margin-top: 15px !important;">For,
+                            </div>
+                        </div>
+                        <div class="row" style="height: 100px;">
+                            <div class="col-6"/>
+                            <div class="col-6"
+                                 style="height: 50px; padding-left: 0 !important; margin-top: 15px !important;">
+                                AUTHORISED SIGNATORY
+                            </div>
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+        <t t-call="payroll_reports.custom_footer_pdf"/>
+    </template>
+
+
+    <template id="report_payslip">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="payroll_reports.custom_header_original"/>
+                <t t-call="payroll_reports.custom_employee_payroll"/>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="form_view_forward_leave">
+            <field name="name">forward leave form</field>
+            <field name="model">forward.leave</field>
+            <field name="arch" type="xml">
+                <form string="Forward Employee Leave">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="forward_to" widget="selection"/>
+                                <field name="leave_id" invisible="1"/>
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="comment"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="forward" string="Save" type="object" class="oe_highlight"/>
+                        <label string=" or " style="padding-left: 10px;"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

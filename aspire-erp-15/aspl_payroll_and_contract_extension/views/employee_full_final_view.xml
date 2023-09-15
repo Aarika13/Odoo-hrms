@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_full_final_tree" model="ir.ui.view">
+            <field name="name">employee.full.final.tree</field>
+            <field name="model">employee.full.final</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id"/>
+                    <field name="resign_date"/>
+                    <field name="last_date"/>
+                    <field name="separation_mode"/>
+                    <field name="notice_period"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_employee_full_final_form" model="ir.ui.view">
+            <field name="name">employee.full.final.form</field>
+            <field name="model">employee.full.final</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Done" type="object" name="action_done" class="oe_highlight" attrs="{'invisible':[('state','!=', 'draft')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" domain="['|',('with_organization', '=', True),('emp_state', 'in', ['probation','confirmed'])]" required="True"/>
+                                <field name="resign_date" readonly="True"/>
+                                <field name="last_date" readonly="True"/>
+                            </group>
+                            <group>
+                                <field name="separation_mode" readonly="True"/>
+                                <field name="notice_period" readonly="True"/>
+                                <field name="company_id" readonly="True"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_employee_full_final" model="ir.actions.act_window">
+            <field name="name">Employee Full Final</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.full.final</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Employee Full&amp;Final"
+                  parent="hr_payroll_community.menu_hr_payroll_community_root"
+                  id="employee_full_final_menu"
+                  sequence="44"
+                  action="action_employee_full_final"/>
+
+    </data>
+</odoo>
